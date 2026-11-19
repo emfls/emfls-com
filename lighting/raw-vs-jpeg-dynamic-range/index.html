@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Lighting &amp; Optics</a> / <span aria-current="page">Dynamic Range Recovery in 14-Bit RAW Files Compared to In-Camera JPEG</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,377 words)</div>
           <p class="lead-callout">A camera can show a white patch as blown out in its JPEG while the paired RAW still holds the weave. The reverse problem appears in shadows, where a clean-looking JPEG may have smoothed away detail. Use one-third-stop brackets, channel readings, and repeated shadow frames to measure the remaining highlight margin and set a usable shadow limit for your lighting setup.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Studio target lit at 45 degrees from one metre. The example exposure grid shows first JPEG clipping at plus one third stop and first RAW clipping at plus one stop.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Studio target lit at 45 degrees from one metre. The example exposure grid shows first JPEG clipping at plus one third stop and first RAW clipping at plus one stop.">
   <rect x="0" y="0" width="720" height="320" fill="#f8fafc"/>
   <line x1="288" y1="20" x2="288" y2="298" stroke="#cbd5e1"/>
   <text x="22" y="36" fill="#141923" font-family="system-ui, sans-serif" font-size="17" font-weight="700">Target setup · top view</text>
@@ -82,6 +87,7 @@
   <text x="663" y="247" text-anchor="middle" fill="#141923" font-family="system-ui, sans-serif" font-size="14">+1</text>
   <text x="304" y="281" fill="#141923" font-family="system-ui, sans-serif" font-size="14">Gap between first clipped frames: ⅔ stop</text>
 </svg>
+            </div>
             <figcaption>The left panel shows the light angle relative to the camera axis and the light-to-target distance. On the right, each dot marks the first bracket that meets its format’s clipping criterion, so the last passing frame is one grid step to the left.</figcaption>
           </figure>
           <h2>What the code values measure</h2>
@@ -100,7 +106,7 @@
 <p>Repeat the pair calculation in a smooth dark patch beside the cloth to include photon noise. In this example the capped pair gives 4 counts of temporal noise. The −3-stop patch averages 48 counts above black with 7 counts of temporal noise, for a signal-to-noise ratio of about 6.9:1. At −4 stops, 24 counts with 6 counts of noise gives 4:1. With an illustrative acceptance threshold of 5:1, −3 passes the noise check and −4 fails. Inspect the cloth separately because a flat patch can pass while the weave still disappears under processing.</p>
 <p>Match both formats to the baseline gray brightness in a high-precision editor and view at the intended delivery size. Keep RAW denoising and sharpening off for the diagnostic pass. A JPEG may show less scatter because its processing smooths neighboring tones. Look for identical threads across repeated frames, along with colored blotches, flattened grain, or block edges. Record the deepest bracket that keeps the same recognizable texture and acceptable color in each format. Rendered JPEG code scatter measures the processed image and has different units from RAW sensor noise.</p>
 <h2>Use the measurements on set</h2>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Comparison for a paired capture with the same ISO and lighting</caption>
 <thead><tr><th scope="col">Check</th><th scope="col">Uncompressed 14-bit RAW</th><th scope="col">In-camera 8-bit JPEG</th></tr></thead>

@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Lighting &amp; Optics</a> / <span aria-current="page">How Focal Length and Subject Distance Change Perspective Compression</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,382 words)</div>
           <p class="lead-callout">A backdrop pattern can grow behind a portrait even when the face stays the same size in the frame. This guide separates the effect of moving the camera from the effect of changing focal length. With 35mm, 50mm, and 85mm lenses, you’ll match subject framing, measure two targets in pixels, and predict how their image sizes compare before moving the tripod.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Matched framing at 35, 50, and 85 millimeters. Camera distances of 1.40, 2.00, and 3.40 meters give background scale ratios of 41, 50, and 63 percent with a fixed 2 meter backdrop gap.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Matched framing at 35, 50, and 85 millimeters. Camera distances of 1.40, 2.00, and 3.40 meters give background scale ratios of 41, 50, and 63 percent with a fixed 2 meter backdrop gap.">
   <rect width="720" height="320" fill="#f8fafc"/>
   <g font-family="system-ui, sans-serif" fill="#141923">
     <text x="24" y="30" font-size="21" font-weight="700">Same subject framing, three camera positions</text>
@@ -91,6 +96,7 @@
     <text x="356" y="296" font-size="14">Ratio measured in image pixels</text>
   </g>
 </svg>
+            </div>
             <figcaption>Read each row from the camera dot to the subject and then to the backdrop. The backdrop stays 2.00 m behind the subject, and the percentage gives the projected height of its target relative to an equal-height subject target.</figcaption>
           </figure>
           <section>
@@ -107,7 +113,7 @@
 <section>
 <h2>Match framing at 35mm, 50mm, and 85mm</h2>
 <p>Use one camera in full-frame stills mode, with a 36 × 24 mm image area in landscape orientation. Start with the 50mm lens at 2.00 m. In the ideal projection, subject image height scales with focal length divided by subject distance. The 35mm starting mark is 2.00 × 35 / 50 = 1.40 m. The 85mm mark is 2.00 × 85 / 50 = 3.40 m. All three have the same nominal 0.025 image-to-object scale at the subject plane. A 20 cm target then projects to about 5 mm on the sensor, or 500 pixels in a 2,400-pixel-high export. The angles in the figure are nominal horizontal fields of view, calculated as twice the arctangent of 18 mm divided by focal length. Real coverage can shift at closer focus.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Predicted target sizes with matched subject framing and a fixed 2.00 m gap</caption>
 <thead><tr><th scope="col">Lens</th><th scope="col">Camera to subject</th><th scope="col">Camera to backdrop</th><th scope="col">Size ratio</th><th scope="col">Backdrop target at 500 px subject height</th></tr></thead>

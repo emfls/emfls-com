@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,389 words)</div>
           <p class="lead-callout">A red that separates cleanly on a Display P3 monitor can flatten on an sRGB screen and lose a different set of distinctions on matte paper. This EMFLS Studio Journal field guide shows how to locate the first clipped channel, verify the two CSS color paths, and use measured color differences on a print strip to choose a rendering intent.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Linear sRGB red crosses its ceiling at Display P3 red 0.835. An illustrative matte proof shows neighboring patches 0.7 Delta E 00 apart with relative colorimetric and 2.8 apart with perceptual rendering.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Linear sRGB red crosses its ceiling at Display P3 red 0.835. An illustrative matte proof shows neighboring patches 0.7 Delta E 00 apart with relative colorimetric and 2.8 apart with perceptual rendering.">
   <rect width="720" height="320" fill="#f8fafc"/>
   <path d="M432 18V302" stroke="#cbd5e1"/>
   <text x="24" y="30" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#141923">Display P3 to sRGB</text>
@@ -89,13 +94,14 @@
   <text x="677" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">4</text>
   <text x="577" y="275" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Illustrative readings</text>
 </svg>
+            </div>
             <figcaption>On the left, the linear red channel hits the sRGB ceiling at a Display P3 red value of about 0.835, with green and blue held at 0.10. On the right, compare the illustrative difference between two matte proof patches with a studio target of 2.0 ΔE₀₀.</figcaption>
           </figure>
           <section>
 <h2>Set up a strip you can reuse</h2>
 <p>Build one reference strip in a tagged Display P3 master. Include a red ramp, a saturated green or cyan from the artwork, a neutral ramp, and one project color whose appearance must stay close to an approved reference. Add a crop that uses those colors at their real sizes. A boundary that looks clear in a row of swatches can disappear in a thin rule or small label.</p>
 <p>Make the print patches 15 mm square with 4 mm gutters, adjusting the patch size if your instrument requires a larger target. Label the patches outside the measurement area and leave a blank patch for the paper white. Save the source coordinates with each patch ID. For the red ramp, sample linear Display P3 red from 0.50 to 1.00 in steps of 0.05, with linear green and blue both at 0.10. Add samples at 0.83 and 0.84 to bracket the first crossing shown in the diagram.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Reference checks for the same studio strip</caption>
 <thead><tr><th scope="col">Output</th><th scope="col">What sets the boundary</th><th scope="col">What to verify</th></tr></thead>

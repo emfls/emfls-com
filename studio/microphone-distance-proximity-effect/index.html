@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Studio Workflow</a> / <span aria-current="page">Balancing Microphone Distance, Polar Patterns, and Proximity Effect</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,357 words)</div>
           <p class="lead-callout">A close cardioid vocal can gain useful weight on held notes and still lose a take to one hard P. Record the same phrase on a dynamic and a condenser from 10 to 35 cm, then match playback levels and measure vowel bass and plosive peaks separately. The aim is a placement you can repeat that keeps the vocal full and the room in check.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Plan view of a microphone with mouth positions at 10, 15, 20, 25 and 35 centimetres on axis, and an alternate mouth position 20 centimetres away at a 20 degree angle.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Plan view of a microphone with mouth positions at 10, 15, 20, 25 and 35 centimetres on axis, and an alternate mouth position 20 centimetres away at a 20 degree angle.">
   <rect width="720" height="320" rx="12" fill="#f8fafc"/>
   <rect x="12" y="12" width="696" height="296" rx="8" fill="none" stroke="#cbd5e1"/>
   <g font-family="system-ui, sans-serif" fill="#141923">
@@ -76,6 +81,7 @@
     <text x="34" y="285" font-size="15">Capsule reference at 0 cm · dots mark mouth positions</text>
   </g>
 </svg>
+            </div>
             <figcaption>Read the teal dots along the front axis as the five mouth-to-capsule distances. The orange dot shows a second 20 cm placement, measured on the slanted line, with the mouth 20° off the microphone’s front axis.</figcaption>
           </figure>
           <section>
@@ -98,7 +104,7 @@
 <section>
 <h2>Compare the two cardioids and listen for the room</h2>
 <p>Cardioid describes directionality. Dynamic and condenser describe how the transducer works. Both cardioids can add bass up close, and their grilles, tuning, and off-axis response can lead to different preferred placements. A true pressure omni has essentially no proximity bass rise. If a condenser offers an omni setting, treat it as a separate comparison because the pattern switch can change both the tone and the amount of room sound.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>What to compare at matched playback levels</caption>
 <thead><tr><th scope="col">Distance</th><th scope="col">Cardioid dynamic</th><th scope="col">Cardioid condenser</th></tr></thead>

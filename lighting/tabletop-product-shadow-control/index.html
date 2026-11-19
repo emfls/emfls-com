@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Lighting &amp; Optics</a> / <span aria-current="page">Controlling Specular Reflections and Soft Shadows on Tabletop Surfaces</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,437 words)</div>
           <p class="lead-callout">A scrim can soften a tabletop shadow and still leave a distracting white patch on the product. Use a mirror to locate the reflection, then adjust scrim distance and black card spacing in measured steps. This setup gives you a way to log shadow transition width, control the width of a metal highlight, and keep clear glass edges visible.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Side view of a 45 degree tabletop reflection and overhead view of dark cards flanking a backlit glass">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Side view of a 45 degree tabletop reflection and overhead view of dark cards flanking a backlit glass">
   <rect width="720" height="320" fill="#f8fafc"/>
   <path d="M360 16V304 M20 48H340 M380 48H700" fill="none" stroke="#cbd5e1"/>
   <g font-family="system-ui, sans-serif" fill="#141923" font-size="14">
@@ -86,6 +91,7 @@
   <circle cx="540" cy="181" r="22" fill="none" stroke="#0f4c5c" stroke-width="2.5"/>
   <circle cx="540" cy="224" r="4" fill="#141923"/>
 </svg>
+            </div>
             <figcaption>Read the left panel from the scrim center to the flat test patch and back toward the lens, with both angles measured from the dashed normal. The right panel shows a starting bright-field layout, with card gaps measured from the glass walls.</figcaption>
           </figure>
           <h2>Map the reflection before moving the light</h2>
@@ -109,7 +115,7 @@
 <p>If a black edge swallows the engraving or makes the rim look broken, back that card away or try a narrower card. Look for tonal separation at the rim, both walls, and the heel at delivery size. If a pale rectangle remains across the front, cover the suspected room surface with a dark card and compare one frame before changing the backlight. For a heel that disappears against the table, try a small diffused side source behind the glass and feather it until the base reads. Check the frame for a second bright stripe before increasing its power.</p>
 
 <h2>Starting settings by surface</h2>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <thead><tr><th scope="col">Surface</th><th scope="col">First placement</th><th scope="col">Read the test frame</th><th scope="col">Next move</th></tr></thead>
 <tbody>

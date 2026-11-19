@@ -141,6 +141,11 @@ def main() -> int:
             article_count += 1
             assert p.visible_words >= 1100, f"{rel}: visible_words={p.visible_words} < 1100"
             assert p.svg >= 1, f"{rel}: missing inline <svg>"
+            assert '<input type="checkbox" id="diagram-full-size"' in raw, f"{rel}: missing diagram size control"
+            assert '<label for="diagram-full-size">' in raw, f"{rel}: missing label for diagram size control"
+            assert '<div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">' in raw, f"{rel}: missing keyboard-scrollable diagram"
+            assert 'viewBox="0 0 720 320"' in raw, f"{rel}: diagram size differs from the full-size display"
+            assert '<figcaption>' in raw, f"{rel}: missing readable diagram caption"
             assert p.table >= 1, f"{rel}: missing <table>"
             assert p.h2 >= 4, f"{rel}: h2={p.h2} < 4"
             assert len(p.json_ld) == 2, f"{rel}: expected Article + BreadcrumbList JSON-LD"
@@ -149,6 +154,10 @@ def main() -> int:
                 assert token not in low, f"{rel}: forbidden token '{token}'"
 
     assert article_count == 18, f"Expected 18 article pages, audited {article_count}"
+    privacy = (ROOT / "privacy-policy/index.html").read_text(encoding="utf-8")
+    assert 'href="https://policies.google.com/technologies/partner-sites"' in privacy, "Missing Google partner data disclosure link"
+    contact = (ROOT / "contact/index.html").read_text(encoding="utf-8")
+    assert 'href="https://github.com/emfls/emfls-com/issues"' in contact, "Missing public corrections link"
     print(f"QA_SITE_PASS: {len(html_files)} HTML pages ({article_count} deep articles, 27 sitemap URLs), 0 errors.")
     return 0
 

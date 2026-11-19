@@ -18,7 +18,7 @@ CATEGORIES = {
     "lighting": {
         "label": "Lighting & Optics",
         "eyebrow": "Photography Lighting & Exposure",
-        "description": "Measured window-light ratios, Kelvin color balance, focal compression geometry, and dynamic-range workflows for practical studio shooting.",
+        "description": "How to measure window-light ratios, balance Kelvin color, predict focal compression, and check dynamic range in a studio setup.",
     },
     "design": {
         "label": "Design & Color",
@@ -194,8 +194,9 @@ def wrap_page(
             include_adsense=include_adsense,
         )
         + f"\n<body{data_attr}>\n"
+        + '  <a class="skip-link" href="#main-content">Skip to main content</a>\n'
         + header_html(depth, active_rel=active_rel, dynamic_nav=dynamic_nav)
-        + f"\n  <main>\n    <div class=\"container\">\n{body_html}\n    </div>\n  </main>\n"
+        + f'\n  <main id="main-content" tabindex="-1">\n    <div class="container">\n{body_html}\n    </div>\n  </main>\n'
         + footer_html(depth, dynamic_nav=dynamic_nav)
         + script_tag
         + "\n</body>\n</html>\n"
@@ -244,9 +245,9 @@ def build_home(articles: list[dict]) -> str:
     body = f"""      <section class="hero">
         <p class="eyebrow">Independent Technical Reference · Updated {PUB_LABEL}</p>
         <h1>EMFLS Studio Journal</h1>
-        <p class="lead">Clear, measurement-backed field guides on natural and artificial lighting, accessible design typography and color spaces, and quiet workspace acoustics. Every guide pairs real distances, ratios, and verification checklists with custom schematic diagrams.</p>
+        <p class="lead">Practical field guides on lighting, accessible typography and color, and studio acoustics. Each guide uses a schematic, worked examples, and a checklist to help you apply and verify the technique in your own setup.</p>
         <form id="studio-search-form" class="search-box" role="search">
-          <input id="studio-search-input" type="search" aria-label="Search field guides" placeholder="Search guides (e.g., kelvin, histogram, wcag, acoustic, svg)...">
+          <input id="studio-search-input" type="search" aria-label="Search field guides" placeholder="Try WCAG or acoustic">
           <button type="submit">Search</button>
         </form>
         <div id="studio-search-results" class="search-results" role="region" aria-live="polite" aria-label="Search results"></div>
@@ -268,7 +269,7 @@ def build_home(articles: list[dict]) -> str:
 
       <section class="trust-strip" aria-labelledby="standards-title">
         <h2 id="standards-title" style="margin-top:0">Editorial Verification &amp; Independence</h2>
-        <p>Every guide in EMFLS Studio Journal is structured around repeatable desk checks—spectrometer and incident light readings, contrast ratio math, and physical room geometry—rather than sponsored product roundups. Read our <a href="editorial-policy/">Editorial Policy</a> or <a href="contact/">submit a technical correction</a>.</p>
+        <p>Check light levels, calculate contrast ratios, or measure room geometry with the steps in each guide. Read our <a href="editorial-policy/">Editorial Policy</a> or <a href="contact/">report a technical issue</a>.</p>
       </section>"""
 
     ld = [
@@ -282,7 +283,7 @@ def build_home(articles: list[dict]) -> str:
     ]
     return wrap_page(
         title="EMFLS Studio Journal — Lighting, Design & Studio Craft Field Guides",
-        description="Practical measurement-backed field guides on photography lighting, accessible design typography, SVG diagrams, and small-room studio acoustics.",
+        description="Practical field guides with worked examples, diagrams, and checks for photography lighting, accessible design, and small-room acoustics.",
         canonical_path="",
         depth=0,
         body_html=body,
@@ -341,6 +342,10 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
     slug = article["slug"]
     cat_label = CATEGORIES[cat]["label"]
     siblings = [a for a in all_articles if a["category"] == cat and a["slug"] != slug][:3]
+    sections = article["sections_html"].replace(
+        '<div class="table-wrap">',
+        '<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">',
+    )
     related_cards = "\n".join(
         f"""          <article class="card">
             <div>
@@ -362,10 +367,15 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published {PUB_LABEL} · {article['reading_minutes']} min read ({article['word_count']:,} words)</div>
           <p class="lead-callout">{html.escape(article['lead_summary'])}</p>
           <figure class="diagram-figure">
-            {article['svg_diagram']}
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              {article['svg_diagram']}
+            </div>
             <figcaption>{html.escape(article['svg_caption'])}</figcaption>
           </figure>
-          {article['sections_html']}
+          {sections}
         </div>
         <aside class="related-panel" aria-labelledby="related-heading">
           <h2 id="related-heading" style="margin-top:0">Related {html.escape(cat_label)} Guides</h2>
@@ -415,7 +425,7 @@ def build_trust_pages() -> dict[str, tuple[str, str, str]]:
 
     pages["about"] = (
         "About EMFLS Studio Journal",
-        "Learn about the mission, documentation focus, and independent studio testing principles behind EMFLS Studio Journal.",
+        "Learn who publishes EMFLS Studio Journal and how to use its photography, design, and studio reference guides.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">About</span></nav>
       <article class="article-shell">
         <div class="article-body">
@@ -424,7 +434,7 @@ def build_trust_pages() -> dict[str, tuple[str, str, str]]:
           <p class="lead-callout">EMFLS Studio Journal is an independent technical publication dedicated to practical photography lighting geometry, accessible digital typography and vector diagramming, and ergonomic desk studio engineering.</p>
           <h2>Why We Focus on Physical &amp; Visual Fundamentals</h2>
           <p>Modern creative workspaces sit at the intersection of light, color perception, typography, and acoustics. Too often, creators run into subtle technical obstacles—clipped highlights in window portraits, muddy print exports, vibrating low-end voice recordings, or low-contrast web diagrams—that can be resolved quickly with clear numbers and first-principles diagrams.</p>
-          <p>Rather than publishing product roundups or speculative industry commentary, our editors maintain focused reference guides tested against repeatable measurements: incident light meter checks, WCAG luminance ratios, sRGB and Display P3 color boundaries, and calibrated room geometry.</p>
+          <p>Our guides explain how to check incident light with a meter, calculate WCAG contrast ratios, compare sRGB and Display P3, and measure a room or desk layout. Worked examples show how to apply each method. Use your own equipment and conditions to verify the result.</p>
           <h2>Core Sections Maintained Here</h2>
           <ul>
             <li><a href="../lighting/">Lighting &amp; Optics</a>: Directional window diffusion, Kelvin color reconciliation, perspective compression, histogram reading, and RAW headroom.</li>
@@ -432,57 +442,56 @@ def build_trust_pages() -> dict[str, tuple[str, str, str]]:
             <li><a href="../studio/">Studio Workflow</a>: First-reflection acoustic treatment, microphone proximity control, bias lighting calibration, and long-term plain-text archiving.</li>
           </ul>
           <h2>Publisher Information</h2>
-          <p>EMFLS Studio Journal is independently published by the EMFLS Editorial Desk in Seoul. Questions, technical feedback, and errata notices can be sent to <a href="mailto:contact@emfls.com">contact@emfls.com</a> or submitted through our <a href="../contact/">Contact page</a>.</p>
+          <p>The EMFLS Editorial Desk independently publishes EMFLS Studio Journal. See the <a href="../contact/">Contact page</a> for technical corrections and accessibility feedback.</p>
         </div>
       </article>""",
     )
 
     pages["editorial-policy"] = (
         "Editorial Policy & Verification Standards",
-        "How EMFLS Studio Journal researches, diagrams, verifies, and updates every technical guide prior to publication.",
+        "How EMFLS Studio Journal presents worked examples, technical diagrams, and reader corrections.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">Editorial Policy</span></nav>
       <article class="article-shell">
         <div class="article-body">
           <p class="eyebrow">Standards &amp; Accountability</p>
           <h1>Editorial Policy</h1>
-          <p class="lead-callout">Every reference guide on EMFLS Studio Journal follows a structured verification standard designed to prioritize clarity, safety, reproducibility, and zero promotional bias.</p>
+          <p class="lead-callout">Our reference guides explain how to check a calculation or technique so readers can reproduce it in their own setup.</p>
           <h2>1. Measurement &amp; Technical Accuracy</h2>
-          <p>Angles, contrast ratios, luminance levels, acoustic absorption thicknesses, and file-handling recommendations are stated with explicit ranges and boundary assumptions. Whenever different hardware environments yield different tolerances, our reference tables document those margins directly.</p>
+          <p>Worked examples illustrate calculations and measurement procedures. Results depend on the equipment, room, and settings used. Check the assumptions in each example before using its numbers as a target.</p>
           <h2>2. Independence &amp; Conflict Prevention</h2>
           <p>EMFLS Studio Journal accepts no paid placement, undisclosed sponsorships, or commercial review exchanges. Product categories and tools mentioned in our lighting or studio setup notes serve purely as technical examples illustrating physics, optics, or software behavior.</p>
           <h2>3. Original Technical Diagrams</h2>
-          <p>Inline vector diagrams are drawn natively as scalable SVG figures to ensure sharp legibility across desktop displays and narrow mobile viewports without external image compression artifacts.</p>
-          <h2>4. Corrections &amp; Revision Logging</h2>
-          <p>If a reader identifies a broken calculation, unclear diagram label, or outdated technical standard, please notify us via <a href="mailto:contact@emfls.com">contact@emfls.com</a>. Verified corrections are applied promptly to the affected article with an updated publication date.</p>
+          <p>Article figures use scalable SVGs and text captions. Choose “Show full-size diagram” when labels are too small in the preview.</p>
+          <h2>4. Corrections</h2>
+          <p>See the <a href="../contact/">Contact page</a> to report a calculation error, unclear diagram label, or outdated reference. Include the article URL and the specific passage or label.</p>
         </div>
       </article>""",
     )
 
     pages["privacy-policy"] = (
         "Privacy Policy",
-        "How EMFLS Studio Journal handles server logs, cookies, third-party Google AdSense advertising cookies, and user opt-out rights.",
+        "What GitHub Pages and Google AdSense collect when you visit EMFLS Studio Journal and where to manage ad personalization.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">Privacy Policy</span></nav>
       <article class="article-shell">
         <div class="article-body">
           <p class="eyebrow">Effective Date: {PUB_LABEL}</p>
           <h1>Privacy Policy</h1>
-          <p class="lead-callout">Your privacy matters to EMFLS Studio Journal. This document explains what limited technical data is collected when you visit www.emfls.com, how cookies and Google AdSense operate, and how you can manage or opt out of personalized advertising.</p>
-          <h2>1. Log Files &amp; Technical Requests</h2>
-          <p>EMFLS Studio Journal is served as a static website. Like standard web hosting providers, our static hosting infrastructure may temporarily log non-identifying request headers such as browser type, referring URL, requested path, timestamp, and Internet Protocol (IP) address solely to maintain uptime, diagnose routing issues, and prevent abuse.</p>
-          <h2>2. Cookies &amp; Web Beacons</h2>
-          <p>This website itself does not set account logins or proprietary tracking databases. Static client-side features such as in-page article search execute locally within your browser without uploading personal profiles.</p>
-          <h2>3. Google AdSense &amp; Third-Party Advertising Cookies</h2>
-          <p>EMFLS Studio Journal participates in <strong>Google AdSense</strong> to support ongoing independent editorial documentation. Third-party vendors, including Google, use cookies—including the <strong>DoubleClick / Google advertising (DART) cookie</strong>—to serve ads based on a user's prior visits to this website or other websites across the Internet.</p>
+          <p class="lead-callout">This policy explains how our host and advertising providers process data when you visit www.emfls.com.</p>
+          <h2>1. Hosting &amp; Site Search</h2>
+          <p>GitHub Pages hosts this static site. GitHub logs and stores visitors’ Internet Protocol (IP) addresses for security, including visits by people who are signed out of GitHub. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">GitHub Pages data collection</a> and the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a>.</p>
+          <p>Reading the site requires no account. The site search downloads an article index and matches your search terms in your browser.</p>
+          <h2>2. Google AdSense &amp; Third-Party Advertising</h2>
+          <p>This site loads <strong>Google AdSense</strong>. Your browser shares information with Google when its advertising services load, including the page URL and your IP address. Third parties, including Google, can place or read cookies in your browser and use web beacons, IP addresses, or other identifiers to collect information as a result of serving ads.</p>
+          <p>Google uses this information to deliver ads, measure performance, and prevent fraud or abuse. Depending on your settings, Google and its partners may use information about previous visits to this site and other sites to personalize ads. Read <a href="https://policies.google.com/technologies/partner-sites">how Google uses data from sites and apps that use its services</a>.</p>
+          <h2>3. Advertising Choices</h2>
           <ul>
-            <li>Google's use of advertising cookies enables it and its partners to serve advertisements to visitors based on their visit to www.emfls.com and other sites on the web.</li>
-            <li>You may opt out of personalized advertising at any time by visiting <a href="https://www.google.com/settings/ads" rel="noopener noreferrer" target="_blank">Google Ads Settings</a>.</li>
-            <li>You can review how Google uses information from sites that use its services at <a href="https://policies.google.com/technologies/ads" rel="noopener noreferrer" target="_blank">Google Advertising Policies &amp; Technologies</a>.</li>
-            <li>Alternatively, users can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" rel="noopener noreferrer" target="_blank">aboutads.info</a>.</li>
+            <li>Manage Google ad personalization in <a href="https://adssettings.google.com/">Google Ad Settings</a>.</li>
+            <li>Manage personalized advertising from participating vendors through <a href="https://www.aboutads.info/choices/">YourAdChoices</a>.</li>
           </ul>
           <h2>4. Children's Information</h2>
           <p>EMFLS Studio Journal is a general technical reference resource intended for creative practitioners and does not knowingly collect personally identifiable information from children under the age of 13.</p>
-          <h2>5. Consent &amp; Contact</h2>
-          <p>By using www.emfls.com, you acknowledge the practices described in this Privacy Policy. If you have privacy questions or requests regarding data handling, contact <a href="mailto:contact@emfls.com">contact@emfls.com</a>.</p>
+          <h2>5. Privacy Requests</h2>
+          <p>For data handled by our host or ad provider, see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a> or <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. This site does not currently offer a private contact channel. Keep personal information out of the public technical issue tracker linked on the <a href="../contact/">Contact page</a>.</p>
         </div>
       </article>""",
     )
@@ -503,28 +512,24 @@ def build_trust_pages() -> dict[str, tuple[str, str, str]]:
           <h2>3. External Links</h2>
           <p>Links to external reference standards or privacy settings pages are provided for reader convenience. We do not control or assume responsibility for the ongoing availability or content of third-party websites.</p>
           <h2>4. Contact Regarding Terms</h2>
-          <p>Questions about permissions, citations, or these Terms of Use may be directed to <a href="mailto:contact@emfls.com">contact@emfls.com</a>.</p>
+          <p>The <a href="../contact/">Contact page</a> lists the public route for technical issues. A private channel for permissions requests is currently unavailable.</p>
         </div>
       </article>""",
     )
 
     pages["contact"] = (
         "Contact EMFLS Editorial Desk",
-        "Reach EMFLS Studio Journal for technical corrections, accessibility feedback, privacy inquiries, or editorial questions.",
+        "Report technical corrections, diagram accessibility problems, or broken links for EMFLS Studio Journal.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">Contact</span></nav>
       <article class="article-shell">
         <div class="article-body">
           <p class="eyebrow">Reader Support &amp; Corrections</p>
           <h1>Contact Us</h1>
-          <p class="lead-callout">We welcome technical corrections, diagram accessibility suggestions, broken-link reports, and reader questions regarding any guide published on EMFLS Studio Journal.</p>
-          <h2>Direct Editorial Email</h2>
-          <p>Please write to our editorial inbox at <a href="mailto:contact@emfls.com">contact@emfls.com</a>. Including the exact page URL and a short note on your hardware setup or browser viewport helps us reproduce and verify any issue quickly.</p>
-          <h2>Response Guidelines</h2>
-          <ul>
-            <li><strong>Technical Errata &amp; Diagram Fixes:</strong> Reviewed within 2 business days.</li>
-            <li><strong>Privacy &amp; Legal Inquiries:</strong> Addressed within 3 business days.</li>
-            <li><strong>Policy Links:</strong> You can also review our <a href="../privacy-policy/">Privacy Policy</a>, <a href="../editorial-policy/">Editorial Policy</a>, and <a href="../terms/">Terms of Use</a>.</li>
-          </ul>
+          <p class="lead-callout">Report a technical correction, inaccessible diagram, or broken link in the <a href="https://github.com/emfls/emfls-com/issues">public EMFLS Studio Journal GitHub issue tracker</a>. Posting requires a GitHub account.</p>
+          <h2>What to Include</h2>
+          <p>Include the article URL, the relevant passage or diagram label, and what you expected to see. For a layout problem, include your browser and approximate screen width.</p>
+          <h2>Private Inquiries</h2>
+          <p>GitHub issues are public. Keep personal information, privacy requests, and other confidential matters out of the tracker. A private contact channel is currently unavailable. See our <a href="../privacy-policy/">Privacy Policy</a> for information on how GitHub and Google handle data.</p>
         </div>
       </article>""",
     )
@@ -537,7 +542,7 @@ def build_404(style_text: str) -> str:
         <h1>This URL has moved or been retired</h1>
         <p class="lead">EMFLS Studio Journal was rebuilt from the ground up with organized technical guides covering Lighting &amp; Optics, Design &amp; Color, and Studio Workflow. Use the search below or browse any section directly.</p>
         <form id="studio-search-form" class="search-box" role="search">
-          <input id="studio-search-input" type="search" aria-label="Search current field guides" placeholder="Search current guides (e.g., lighting, color, desk, contrast, raw)...">
+          <input id="studio-search-input" type="search" aria-label="Search current field guides" placeholder="Try lighting or contrast">
           <button type="submit">Search</button>
         </form>
         <div id="studio-search-results" class="search-results" role="region" aria-live="polite" aria-label="Search results"></div>
@@ -626,6 +631,7 @@ def main() -> int:
             "category_label": CATEGORIES[a["category"]]["label"],
             "reading_minutes": a["reading_minutes"],
             "summary": a["lead_summary"],
+            "description": a["meta_description"],
         }
         for a in articles
     ]

@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Lighting &amp; Optics</a> / <span aria-current="page">Understanding Kelvin Color Temperature and Mixed-Light White Balance</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,322 words)</div>
           <p class="lead-callout">A daylight window, a tungsten lamp, and an LED practical can put three different casts on the same subject. Use a gray card at the subject plane to measure each source, then match or contain the spill before setting the final white balance. The worked setup keeps the lamp visibly warm while bringing both subject checkpoints within three RGB code values.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Overhead lighting plan with a 45 degree window key, a 90 degree LED fill, a flagged tungsten practical, and two gray-card sampling marks">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Overhead lighting plan with a 45 degree window key, a 90 degree LED fill, a flagged tungsten practical, and two gray-card sampling marks">
   <rect width="720" height="320" fill="#f8fafc"/>
   <rect x="16" y="16" width="688" height="288" fill="none" stroke="#cbd5e1"/>
   <path d="M32 112H688 M32 180H688 M32 248H688 M230 32V288 M340 32V288 M500 32V288" fill="none" stroke="#cbd5e1" stroke-dasharray="4 5"/>
@@ -82,6 +87,7 @@
   <text x="549" y="129" font-family="system-ui, sans-serif" font-size="14" fill="#141923">Flag</text>
   <text x="365" y="275" font-family="system-ui, sans-serif" font-size="15" fill="#141923">Camera axis</text>
 </svg>
+            </div>
             <figcaption>Read the plan from the camera axis. The window and LED contribute 400 and 100 lux respectively at the center of the subject plane, while a flag keeps the tungsten practical on the background and gray-card marks A and B reveal any remaining spill across the subject.</figcaption>
           </figure>
           <section>
@@ -93,7 +99,7 @@
 <h2>Measure the window, lamp, and LED separately</h2>
 <p>Put a matte white-balance gray card at the subject position and hold it parallel to the important surface. Mark the stand, height, and angle so the target can return to the same plane. If the card shows a sheen, tilt it just enough to lose the reflection and retain that angle for the whole series. Avoid fingers, frame edges, or the card holder casting shadows on the sample area. Lock camera position, exposure, picture profile, and white balance for the comparison. Use RAW if available.</p>
 <p>Start with the window alone, switch to the lamp alone, then the LED alone. Use an opaque blind or a blackout panel to isolate the electric sources from the window. With a lux meter centered where the card sat, keep the sensor facing the same way as the card for every reading. Log lux at the working position and fixture output. If a source-only camera frame is too dark to sample cleanly, shoot a labeled brighter reference and keep that frame out of the exposure comparison. Use a color meter for physical CCT and green–magenta readings if you have one. Otherwise, log the RAW eyedropper's temperature and tint as camera-specific correction settings.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Example source-only readings at the center of the subject plane</caption>
 <thead><tr><th scope="col">Source</th><th scope="col">Incident light</th><th scope="col">RAW card correction</th><th scope="col">Action</th></tr></thead>

@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,402 words)</div>
           <p class="lead-callout">An editorial layout can fit its cards at 320 px and still fail when a long caption widens the page or a sticky header covers a heading. Use CSS Grid to size cards from the space they actually have, Flexbox to wrap reading controls, and local scrolling for wide reference material. The test layout leaves a 288 px grid and zero page-level horizontal overflow.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Three viewport widths show one, two, and three editorial card tracks. Each frame reserves two 16 pixel gutters. The reading header sticks at a zero pixel top inset.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Three viewport widths show one, two, and three editorial card tracks. Each frame reserves two 16 pixel gutters. The reading header sticks at a zero pixel top inset.">
 <rect width="720" height="320" rx="12" fill="#f8fafc"/>
 <g font-family="system-ui, sans-serif" fill="#141923">
 <text x="24" y="33" font-size="23" font-weight="700">Editorial grid at its column thresholds</text>
@@ -92,6 +97,7 @@
 </g>
 </g>
 </svg>
+            </div>
             <figcaption>Read down the diagram to see one track at 320 px, two at 528 px, and three at 784 px with enough cards. The gray frames include the side gutters, the teal blocks show track widths, and the orange bar marks the sticky header.</figcaption>
           </figure>
           <h2>Measure the card grid where it actually sits</h2>

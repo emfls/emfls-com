@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">Designing Crisp Technical SVG Diagrams with Consistent Stroke and Grid Rules</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,362 words)</div>
           <p class="lead-callout">An SVG can look sharp in the drawing tool and still lose thin connectors, arrow direction, or small labels when it lands in a mobile article. This EMFLS Studio Journal field guide builds a 720-unit schematic you can check at 320 CSS pixels, with three measured stroke weights, repeatable arrowhead geometry, and at least 4.5:1 contrast for labels.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="A flow arrow runs 240 units from a circular port to a triangular tip on a 40-unit grid. The arrowhead is 32 units long and wide with a 53-degree tip. Three strokes measure 4, 3, and 2 units. Dark labels have 16.82 to 1 contrast on the canvas.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="A flow arrow runs 240 units from a circular port to a triangular tip on a 40-unit grid. The arrowhead is 32 units long and wide with a 53-degree tip. Three strokes measure 4, 3, and 2 units. Dark labels have 16.82 to 1 contrast on the canvas.">
   <rect width="720" height="320" fill="#f8fafc"/>
   <text x="40" y="48" font-family="system-ui, sans-serif" font-size="32" font-weight="650" fill="#141923">40-unit grid</text>
   <path d="M40 84H360 M40 124H360 M40 164H360 M40 204H360 M40 84V204 M80 84V204 M120 84V204 M160 84V204 M200 84V204 M240 84V204 M280 84V204 M320 84V204 M360 84V204" fill="none" stroke="#cbd5e1" stroke-width="2"/>
@@ -67,6 +72,7 @@
   <text x="416" y="227" font-family="system-ui, sans-serif" font-size="28" fill="#141923">Head 32 × 32 · 53°</text>
   <text x="416" y="276" font-family="system-ui, sans-serif" font-size="28" fill="#141923">Labels 16.82:1</text>
 </svg>
+            </div>
             <figcaption>Read the grid at left from the center of the circular port to the triangular tip. The bracket measures the 240-unit span between those points, while the right column gives the stroke widths in user units, the arrowhead length and full width, the included tip angle, and the label contrast.</figcaption>
           </figure>
           <section>
@@ -78,7 +84,7 @@
 <section>
 <h2>Give each stroke weight a job</h2>
 <p>Use 4 units for primary flow, 3 for secondary connections, and 2 for leaders and dimensions. Carry a second cue where a change in weight could be missed. A primary route can be the only continuous path with a filled arrowhead, while a leader ends at an annotation and approaches from a different direction. At phone size the primary and secondary widths differ by only 0.44 CSS pixels.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Reference sizes for a proportionally scaled 720-unit viewBox</caption>
 <thead><tr><th scope="col">Element</th><th scope="col">User units</th><th scope="col">CSS px at 720 wide</th><th scope="col">CSS px at 320 wide</th></tr></thead>
@@ -103,7 +109,7 @@
 </section>
 <section>
 <h2>Measure labels against their immediate background</h2>
-<p>Set 4.5:1 as the minimum contrast for small labels and 12 CSS pixels as a studio minimum font size at the narrowest supported width. The 28-unit labels here compute to 12.44 CSS pixels at 320 wide. That value describes the font size, so check the lettering itself. In coordinate labels the differences between a zero and a capital O, or between a one and a lowercase l, can disappear before the rest of the word becomes hard to read. <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">WCAG minimum text contrast</a></p>
+<p>Set 4.5:1 as the minimum contrast for small labels and 12 CSS pixels as a studio minimum font size at the narrowest supported width. The 28-unit labels compute to 12.44 CSS pixels when the SVG itself is 320 CSS pixels wide. The preview in this article can be narrower. Choose Show full-size diagram to read it at 720 CSS pixels wide, then scroll sideways through the figure. Those values describe font size, so check the lettering itself. In coordinate labels the differences between a zero and a capital O, or between a one and a lowercase l, can disappear before the rest of the word becomes hard to read. <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">WCAG minimum text contrast</a></p>
 <p>On the opaque <code>#f8fafc</code> canvas, <code>#141923</code> measures 16.82:1 and <code>#0f4c5c</code> measures 9.09:1. The orange <code>#b85c28</code> measures 4.36:1 on the same canvas, so it serves as the filled arrowhead. The pale <code>#cbd5e1</code> grid measures 1.42:1 and serves as a drafting aid. The dark bracket and its label carry the measurement. Aim for at least 3:1 against adjacent colors where a graphic boundary is necessary to understand the diagram. Recalculate against the actual adjacent fill if an essential mark crosses a tinted panel. <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">WCAG non-text contrast</a></p>
 <p>Leave 12 user units around text where space allows, about 5.3 CSS pixels at the mobile width. Check the rendered bounds in the browser because a shared baseline says little about descenders or fallback font widths. Give a crowded label its own line or its own opaque backing and retest contrast against that backing.</p>
 </section>

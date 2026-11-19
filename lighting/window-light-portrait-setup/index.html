@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Lighting &amp; Optics</a> / <span aria-current="page">Window Light Direction, Diffusion, and Fill Angles for Small Rooms</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,385 words)</div>
           <p class="lead-callout">A window can give you a bright cheek, a dark eye socket, and a hot strip on the nose within the same half metre of floor space. Mark the chair against the window, measure the light lost through a sheer, then move a white foam-core board until the cheek-to-cheek brightness gap lands around one to one and a half stops.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Portrait lighting plan showing a window 0.90 metres from the face measured perpendicular to the wall, a 30 degree feather angle, a 60 degree window bearing from the camera axis, and a white fill board at 50 centimetres. Example curtain loss is one stop and cheek contrast is two to one.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Portrait lighting plan showing a window 0.90 metres from the face measured perpendicular to the wall, a 30 degree feather angle, a 60 degree window bearing from the camera axis, and a white fill board at 50 centimetres. Example curtain loss is one stop and cheek contrast is two to one.">
   <rect width="720" height="320" fill="#f8fafc"/>
   <rect x="16" y="16" width="402" height="288" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
   <rect x="434" y="16" width="270" height="288" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
@@ -88,7 +93,8 @@
     <text x="450" y="232">Board at 50 cm · 1.0 stop (2 to 1)</text>
   </g>
 </svg>
-            <figcaption>Read the angles in plan view from the window normal and the subject-to-camera axis. The panel at right shows an example curtain loss and the measured cheek contrast with the board 50 cm from the face.</figcaption>
+            </div>
+            <figcaption>Read the angles in plan view from the window normal and the subject-to-camera axis. The panel at right shows example readings for curtain loss and cheek contrast with the board 50 cm from the face.</figcaption>
           </figure>
           <h2>Lay out the room before metering</h2>
 <p>Start with a seated head-and-shoulders portrait in a room about 2.4 by 3 metres. The example uses a window with a 70 cm illuminated width and a height of about 1.2 m. Turn off ceiling lights and block any second window spilling onto the shadow cheek. If the main window throws a stripe of sun across the chair, move the chair out of the stripe or wait until the sheer covers the entire sunlit area before setting exposure.</p>
@@ -109,7 +115,7 @@
 <p>Stand the board on the shadow side, forward of the ear toward the camera, with its centre at cheek height. Start about 60° off the camera line on that side and 75 cm from the centre of the face to the centre of the board. Turn the white face until it sees both the window and the subject. If it sits almost edge-on to either, move or rotate it before judging distance. Keep the lower edge supported so the board can hold its angle by itself.</p>
 <p>Lock the portrait exposure. Meter two cheek areas with similar reflectance, avoiding specular highlights, eye sockets, hair, and makeup transitions. If the meter spot is too broad, use two matching matte gray patches held in the cheek planes and meter from the camera direction. Subtract the shadow reading from the lit reading in EV. A gap of 1.5 stops corresponds to a brightness ratio of about 2.8 to 1 because 2 raised to 1.5 is 2.8. Each side reading includes all the light that reaches that surface.</p>
 <p>Run the distances below in order and watch both readings. Move the board along the same bearing, then recheck its aim. At close range a large board covers much of the cheek's view, so halving the distance has no reliable fixed gain. If the window-side reading also rises, compare the new gap before deciding which distance works.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Example cheek readings with the same window, sheer, and pose</caption>
 <thead><tr><th scope="col">Board distance</th><th scope="col">Cheek gap</th><th scope="col">Lit to shadow</th><th scope="col">What to inspect</th></tr></thead>

@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Studio Workflow</a> / <span aria-current="page">Reducing First Reflections and Flutter Echo in Small Desk Rooms</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,323 words)</div>
           <p class="lead-callout">A small desk room can send a speaker reflection back to your ears within a few milliseconds, ring between bare walls, and bounce your voice off the desktop into the mic. Mark each path, calculate a panel gap that fits the room, then compare reflection levels in decibels and record dry voice takes to hear what changed.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Plan view of a 34-degree sidewall reflection that arrives 2.4 milliseconds after the direct sound, and a section through a 100 millimeter porous panel with a 70 millimeter air gap">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Plan view of a 34-degree sidewall reflection that arrives 2.4 milliseconds after the direct sound, and a section through a 100 millimeter porous panel with a 70 millimeter air gap">
   <rect width="720" height="320" fill="#f8fafc"/>
   <path d="M428 19V301" stroke="#cbd5e1"/>
   <text x="22" y="34" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#141923">Sidewall reflection</text>
@@ -87,6 +92,7 @@
   <text x="447" y="277" font-family="system-ui, sans-serif" font-size="14" fill="#141923">Near a quarter wavelength</text>
   <text x="447" y="299" font-family="system-ui, sans-serif" font-size="14" fill="#141923">at 500 Hz in air</text>
 </svg>
+            </div>
             <figcaption>The plan traces the direct path in teal and the reflected path in orange. The section shows how a 70 mm gap and a 100 mm porous core put the panel face 170 mm from the wall.</figcaption>
           </figure>
           <h2>Find out which sound you are hearing</h2>
@@ -98,7 +104,7 @@
 <h2>Calculate the rear gap from your depth budget</h2>
 <p>Measure the clear gap from the back of the porous core to the wall. Total acoustic depth is core thickness plus that gap. Allow separately for anything proud of the front face, such as a frame lip. Keep the face and the rear open to airflow with breathable fabric over the core. A solid rear board can block the core from the cavity you intended to use.</p>
 <p>For a first layout, use the quarter wavelength in air as a depth reference. Against a rigid wall, air particle velocity for a normally incident standing wave reaches its first maximum a quarter wavelength out. Putting some porous material farther from the wall can improve absorption at longer wavelengths. For a front-face reference at 500 Hz, calculate 343 ÷ (4 × 500) = 0.1715 m. Subtract a 100 mm core from 171.5 mm to get about 72 mm of gap. A 70 mm spacer gives 170 mm total. The material occupies a range of depths, so use this arithmetic to size the assembly. Predicting absorption requires the material’s airflow resistivity, layer thickness, backing and angle of incidence. <a href="https://strutt.arup.com/help/Building_Acoustics/PorousAbsorber.htm">Arup’s porous absorber model</a>.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Three layouts for a rigid wall</caption>
 <thead><tr><th scope="col">Porous core</th><th scope="col">Clear rear gap</th><th scope="col">Total depth</th><th scope="col">Placement trade-off</th></tr></thead>

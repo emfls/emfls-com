@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">Building Accessible Light and Dark Color Palettes with Luminance Ratios</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,426 words)</div>
           <p class="lead-callout">A caption can pass on a white canvas and fail when it moves into a tinted panel. Build light and dark palettes by measuring each ink against every surface it can touch. This guide shows how to calculate those ratios, set three legible ink levels, and give quiet dividers and functional borders different jobs.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Contrast matrix for two panel surfaces. Muted ink measures 7.24 to 1 on the light panel and 5.71 to 1 on the dark panel. Control edges measure 3.98 and 3.07 to 1, respectively.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Contrast matrix for two panel surfaces. Muted ink measures 7.24 to 1 on the light panel and 5.71 to 1 on the dark panel. Control edges measure 3.98 and 3.07 to 1, respectively.">
 <rect width="720" height="320" fill="#f8fafc"/>
 <rect x="192" y="48" width="238" height="243" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
 <rect x="446" y="48" width="238" height="243" rx="8" fill="#1e293b"/>
@@ -72,6 +77,7 @@
 <text x="248" y="251" font-family="system-ui, sans-serif" font-size="16" fill="#141923">#737D8C · 3.98:1</text>
 <text x="502" y="251" font-family="system-ui, sans-serif" font-size="16" fill="#f8fafc">#64748B · 3.07:1</text>
 </svg>
+            </div>
             <figcaption>Read across each row to compare the same role on both panel surfaces. Each ratio uses the dot or outlined square and its own panel fill, with the rightmost panel showing where dark-mode muted ink and the control edge have the least margin.</figcaption>
           </figure>
           <section>
@@ -96,7 +102,7 @@
 <h2>Give quiet separators and control edges distinct tokens</h2>
 <p>A decorative separator can sit close to its background when spacing or headings already communicate the grouping. The same faint line becomes a problem if it is the only cue that locates an empty text field. Keep a decorative separator token and a control edge token. Reserve the stronger edge for places where the boundary supplies information the user needs.</p>
 <p>For an input with a white fill sitting on the light panel, measure the stroke against both adjacent fills. The example light edge, <code>#737D8C</code>, reaches 4.17:1 against white and 3.98:1 against the panel. In dark mode, <code>#64748B</code> reaches 3.70:1 against the canvas and 3.07:1 against the panel. That second result has little headroom. If the border looks weak at its shipped width, test <code>#78879A</code>, which reaches 3.99:1 against the dark panel, or use a wider stroke. Align the stroke to the pixel grid where the layout permits and inspect it at normal viewing size.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Example token pairs for light and dark canvases and panels</caption>
 <thead><tr><th scope="col">Role</th><th scope="col">Light token</th><th scope="col">Light canvas</th><th scope="col">Light panel</th><th scope="col">Dark token</th><th scope="col">Dark canvas</th><th scope="col">Dark panel</th></tr></thead>

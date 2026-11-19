@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Studio Workflow</a> / <span aria-current="page">Setting Desk Monitor Brightness and Bias Lighting for Accurate Color Work</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,347 words)</div>
           <p class="lead-callout">A bright screen against a dark wall makes your eyes repeatedly adapt, while light reflected off the panel can hide shadow detail. Set SDR screen white to 100–120 cd/m², then measure the neutral D65 wall glow at about one tenth of that value. Check a near-black pattern from your editing seat before making exposure or black-point decisions.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Desk side view with a 20 centimeter monitor-to-wall gap and 70 centimeter viewing distance, plus a five-point wall measurement grid targeting 11 candelas per square meter for 110 screen white">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Desk side view with a 20 centimeter monitor-to-wall gap and 70 centimeter viewing distance, plus a five-point wall measurement grid targeting 11 candelas per square meter for 110 screen white">
   <rect width="720" height="320" fill="#f8fafc"/>
   <rect x="16" y="16" width="420" height="288" rx="9" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
   <rect x="452" y="16" width="252" height="288" rx="9" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
@@ -87,12 +92,13 @@
   <text x="578" y="269" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#141923">11 cd/m² ÷ 110 cd/m²</text>
   <text x="578" y="289" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">10% wall-to-white ratio</text>
 </svg>
+            </div>
             <figcaption>The side view shows a starting geometry that hides the light source behind the monitor. From the editing seat, sample wall points A–E just outside the screen silhouette and compare the reflected glow with the measured screen white.</figcaption>
           </figure>
           <h2>Choose the white level for the job</h2>
 <p>Start at 100 cd/m² for SDR video review in a dim room, or 120 cd/m² for SDR photo and web editing at a desk with controlled room light. Use 110 cd/m² if you need one everyday setting and have no delivery specification. Those numbers describe a white test patch. A brightness slider at 60% tells you only where the control sits, and the same slider position can yield different luminance after a preset change.</p>
 <p>Hold the viewing conditions steady before judging a file. A bright white canvas followed by a glance into darkness makes your eyes adapt to very different light levels. A dim, neutral halo makes the transition less abrupt and gives you a consistent surround for judging dark tones. Excessive wall light can swing the problem the other way, particularly when it reaches the panel and veils dark detail.</p>
-<div class="table-wrap"><table>
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0"><table>
 <caption>Starting points for D65 SDR desk setups</caption>
 <thead><tr><th scope="col">Work</th><th scope="col">Screen white</th><th scope="col">Wall at 10%</th><th scope="col">Tone response</th></tr></thead>
 <tbody>

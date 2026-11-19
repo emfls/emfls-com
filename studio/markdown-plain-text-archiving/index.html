@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Studio Workflow</a> / <span aria-current="page">Structuring Long-Term Project Notes in Portable Plain-Text Markdown</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 8 min read (1,391 words)</div>
           <p class="lead-callout">A project archive can survive a move and still lose the trail from a decision to its supporting photograph. Build a folder that keeps that trail intact with six frontmatter fields, sortable dates, relative image links, and a plain-text index. Then copy the folder and spend ten minutes checking three notes, every path they cite, and the recorded decision behind one measurement.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Archive path schematic: the root index links down into notes, and the note path goes up one folder then into assets to reach the photograph.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Archive path schematic: the root index links down into notes, and the note path goes up one folder then into assets to reach the photograph.">
   <rect width="720" height="320" fill="#f8fafc"/>
   <text x="24" y="34" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#141923">Paths inside lamp-study/</text>
   <rect x="24" y="56" width="672" height="216" rx="8" fill="none" stroke="#cbd5e1" stroke-width="2"/>
@@ -76,6 +81,7 @@
   <text x="270" y="301" font-family="system-ui, sans-serif" font-size="14" fill="#141923">Note to photograph</text>
   <text x="475" y="301" font-family="system-ui, sans-serif" font-size="14" fill="#141923">90° turns mark folder changes</text>
 </svg>
+            </div>
             <figcaption>Follow the teal line from the root index to the fit-check note inside the notes folder. The orange route starts at the note and uses one parent step and one child step to reach the photograph in the sibling assets folder.</figcaption>
           </figure>
           <section>
@@ -115,7 +121,7 @@ status: "closed"
 <h2>Maintain an index that opens as text</h2>
 <p>Use one line per note in <code>index.md</code>. Put the creation date first for predictable sorting, then the ID, link, and a short result that helps you choose the right entry. This link starts from the root index, so its destination begins with <code>notes/</code>.</p>
 <pre><code>- 2026-04-09 | ls-014 | [Hinge fit check](notes/2026-04-09-fit-check.md) | 2.0 mm gauge passed</code></pre>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Reference choices for a folder that will move</caption>
 <thead><tr><th scope="col">Reference</th><th scope="col">Resolves from</th><th scope="col">Migration consequence</th></tr></thead>

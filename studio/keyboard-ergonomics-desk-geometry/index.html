@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Studio Workflow</a> / <span aria-current="page">Measuring Chair Height, Monitor Angle, and Wrist Alignment for Long Sessions</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,442 words)</div>
           <p class="lead-callout">A chair can feel right until the desk lifts your shoulders, the keyboard bends your wrists, or the screen makes you crane your neck. Use a tape measure to set loaded seat height and knee clearance, check elbow and wrist angles while typing, and align the monitor&#x27;s top bezel with seated eye level. Record the measurements so you can restore the setup after someone moves it.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Example side view showing a 450 mm loaded seat, a 50 mm knee gap, a 100 degree elbow angle, a top bezel 5 mm below the eye line, and a wrist inset showing 4 degrees of extension">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Example side view showing a 450 mm loaded seat, a 50 mm knee gap, a 100 degree elbow angle, a top bezel 5 mm below the eye line, and a wrist inset showing 4 degrees of extension">
   <rect width="720" height="320" fill="#f8fafc"/>
   <rect x="16" y="16" width="688" height="288" rx="4" fill="none" stroke="#cbd5e1"/>
   <line x1="485" y1="28" x2="485" y2="292" stroke="#cbd5e1"/>
@@ -91,6 +96,7 @@
   </g>
   <circle cx="579" cy="146" r="4" fill="#141923"/>
 </svg>
+            </div>
             <figcaption>Read the side view from the floor upward, then use the dashed eye line to compare the top bezel with seated eye height. The wrist inset exaggerates the rise so you can see where to measure it against the extended forearm line.</figcaption>
           </figure>
           <section>
@@ -117,7 +123,7 @@
 <section>
 <h2>Compare the readings before and after</h2>
 <p>This example starts with a chair that sits low under load, a deep pan setting, and a keyboard perched on a high desktop. The final readings illustrate the changes you might measure after fitting the chair and lowering the input surface. Record your own baseline and final values in the same units so you can reproduce the setup on a shared bench.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Example measurements from one seated setup</caption>
 <thead><tr><th scope="col">Measurement</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>

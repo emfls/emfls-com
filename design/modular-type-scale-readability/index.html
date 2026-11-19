@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">Choosing Modular Type Scales, Line Height, and Measure for Long-Form Reading</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,353 words)</div>
           <p class="lead-callout">A type scale can look orderly in a specimen and still interrupt reading when headings wrap or the column gets too wide. Start with one body size, derive adjacent heading steps between 1.200 and 1.333, and tune the column to 60 to 72 characters on roomy layouts. Then adjust baseline spacing using the actual typeface and copy.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="An 18 pixel body grows to 22.50 and 28.13 pixel headings at a ratio of 1.250. A 560 pixel column yields about 67 characters in the worked example. Body baselines are 28 pixels apart.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="An 18 pixel body grows to 22.50 and 28.13 pixel headings at a ratio of 1.250. A 560 pixel column yields about 67 characters in the worked example. Body baselines are 28 pixels apart.">
   <rect width="720" height="320" fill="#f8fafc"/>
   <rect x="20" y="16" width="680" height="288" fill="none" stroke="#cbd5e1"/>
   <path d="M40 113H680 M40 211H680" fill="none" stroke="#cbd5e1"/>
@@ -70,6 +75,7 @@
   <path d="M40 177l9 -4v8z M600 177l-9 -4v8z" fill="#0f4c5c"/>
   <path d="M393 260H409 M393 288H409 M401 260V288" fill="none" stroke="#b85c28" stroke-width="2"/>
 </svg>
+            </div>
             <figcaption>Read the size ladder from left to right, multiplying each size by 1.250. The horizontal ruler marks the 560 px column width, and the vertical bracket spans the 28 px between successive body baselines.</figcaption>
           </figure>
           <h2>Set the body size on real copy</h2>
@@ -78,7 +84,7 @@
 <p>Use the production font assets and weight in the specimen. If the face has automatic optical sizing, keep the production setting during the comparison. A size change can also change glyph shapes and widths when an optical-size axis is active. Record the chosen settings before working out the heading sizes.</p>
 <h2>Derive the ladder from the headings you need</h2>
 <p>For body size <var>B</var>, adjacent multiplier <var>r</var>, and step <var>n</var>, calculate the size as <var>B</var> × <var>r</var><sup><var>n</var></sup>. Put the body at step zero, H3 at step one, and H2 at step two. With an 18 px body and a 1.250 multiplier, H3 is 22.50 px and H2 is 28.125 px. The H2 is 1.5625 times the body size because it sits two steps above it. Round for display after calculating each step from the body.</p>
-<div class="table-wrap"><table>
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0"><table>
 <caption>Two heading steps from an 18 px body</caption>
 <thead><tr><th scope="col">Adjacent ratio</th><th scope="col">H3, step 1</th><th scope="col">H2, step 2</th><th scope="col">A reason to try it</th></tr></thead>
 <tbody>

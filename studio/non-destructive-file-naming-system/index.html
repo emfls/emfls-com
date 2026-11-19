@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Studio Workflow</a> / <span aria-current="page">Practical Date-First File Naming and Folder Trees for Creative Assets</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,375 words)</div>
           <p class="lead-callout">A folder full of final-v2 files leaves the next editor guessing which source and edit produced a delivery. Give each asset a date-first ID, protect the master, and put each export under its working revision. On a 240-file intake, you can verify zero duplicate destination paths and trace a delivered JPEG to its master in under two minutes.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Date-first file naming and folder tree. Asset sequence 017 links a read-only master, work revision 003, and a 1600 by 1200 pixel export at a four-to-three ratio." font-family="system-ui, sans-serif">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Date-first file naming and folder tree. Asset sequence 017 links a read-only master, work revision 003, and a 1600 by 1200 pixel export at a four-to-three ratio." font-family="system-ui, sans-serif">
   <rect x="0" y="0" width="720" height="320" fill="#f8fafc"/>
   <text x="24" y="31" font-size="19" font-weight="700" fill="#141923">One asset ID across three folders</text>
   <rect x="24" y="47" width="672" height="45" rx="5" fill="#0f4c5c"/>
@@ -71,6 +76,7 @@
   <text x="394" y="280" font-size="13" fill="#141923">1600 × 1200 px · 4:3</text>
   <rect x="640" y="247" width="48" height="36" fill="none" stroke="#b85c28" stroke-width="2"/>
 </svg>
+            </div>
             <figcaption>Read the shared asset ID at the top, then follow the branches to the protected master, layered revision, and web derivative. Append the suffix shown at right to form the filename in each folder.</figcaption>
           </figure>
           <h2>Choose a date that stays with the asset</h2>
@@ -80,7 +86,7 @@
 <h2>Give assets, revisions, and exports separate counters</h2>
 <p>Use the three digits in <code>s017</code> for asset identity, <code>r003</code> for a saved working revision, and <code>e001</code> for the first rendition of a particular export specification from that revision. Use lowercase ASCII letters, digits, and hyphens inside project codes. Reserve underscores for token boundaries, and keep the extension that matches the file format. If a project routinely imports more than 999 objects on one date, choose four sequence digits before intake so every asset in that group sorts consistently.</p>
 <p>For a two-camera session with 240 files, reserve <code>s001</code> through <code>s120</code> for card A and <code>s121</code> through <code>s240</code> for card B before both operators start. Log each card identifier and its original filename against the assigned ID. Two files named <code>IMG_0042.DNG</code> can then coexist with distinct IDs. Leave a gap when a file is rejected after assignment so old notes still point to the intended asset. Give one person control of reservations, or assign nonoverlapping blocks in advance for offline work.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <caption>Filenames for one source, its third edit, and its first web export</caption>
 <thead><tr><th scope="col">Stage</th><th scope="col">Filename</th><th scope="col">When to issue a new name</th></tr></thead>

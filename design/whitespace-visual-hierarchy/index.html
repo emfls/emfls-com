@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">Using Spacing Tokens and Grouping Ratios to Clarify Complex Pages</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,337 words)</div>
           <p class="lead-callout">When a procedure, warning, and reference table sit close together, readers can lose track of which instructions belong to which heading. Start with a 4 px spacing grid, give a heading 8 px to its body, and use 32 px between peer sections. Measure the rendered gaps and test the grouping at narrow widths with real content.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Spacing diagram on a 4 pixel grid. Left: 8 pixels from heading to body and 32 pixels between sections, a 4 to 1 ratio. Right: 16 pixels of inner padding and 32 pixels between panel edges, a 2 to 1 ratio.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Spacing diagram on a 4 pixel grid. Left: 8 pixels from heading to body and 32 pixels between sections, a 4 to 1 ratio. Right: 16 pixels of inner padding and 32 pixels between panel edges, a 2 to 1 ratio.">
   <rect width="720" height="320" fill="#f8fafc"/>
   <path d="M363 22v250 M28 277h664" fill="none" stroke="#cbd5e1"/>
   <g fill="#141923">
@@ -91,6 +96,7 @@
     </g>
   </g>
 </svg>
+            </div>
             <figcaption>Read the brackets from edge to edge. The left ratio compares two gaps in a text stack, while the right ratio compares the clear space between panels with the inset from a panel’s reference edge to its content box.</figcaption>
           </figure>
           <h2>Measure where the page changes subject</h2>
@@ -99,7 +105,7 @@
 
 <h2>Assign a spacing token to each relationship</h2>
 <p>Use a 4 px module with values of 4, 8, 12, 16, 24, and 32 px. Treat these as starting values at the default root text size. Name tokens by their job, such as <code>--space-heading-body</code> and <code>--space-section</code>. Give each stack one owner for the gap between its children. A grid or flex stack can apply <code>gap</code>, with default block margins reset on its direct children. A stack that needs multiple distances can nest a heading and body inside one group, then apply the section gap between groups.</p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
   <table>
     <caption>Reference values for a dense documentation page</caption>
     <thead><tr><th scope="col">Relationship</th><th scope="col">Start at</th><th scope="col">Measure between</th><th scope="col">Adjust when</th></tr></thead>

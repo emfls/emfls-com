@@ -18,6 +18,10 @@
       .replace(/"/g, "&quot;");
   }
 
+  function words(text) {
+    return text.toLowerCase().match(/[\p{L}\p{N}]+/gu) || [];
+  }
+
   function initSearch() {
     var base = resolveBasePrefix();
     var navLinks = document.querySelectorAll("[data-nav-rel]");
@@ -31,31 +35,57 @@
     var resultsBox = document.getElementById("studio-search-results");
     if (!form || !input || !resultsBox) return;
 
-    var cache = null;
+    var indexRequest = null;
 
     function loadIndex() {
-      if (cache) return Promise.resolve(cache);
-      return fetch(base + "search-index.json")
-        .then(function (r) {
-          if (!r.ok) throw new Error("Index fetch failed");
-          return r.json();
-        })
-        .then(function (data) {
-          cache = Array.isArray(data) ? data : [];
-          return cache;
-        });
+      if (!indexRequest) {
+        indexRequest = fetch(base + "search-index.json")
+          .then(function (response) {
+            if (!response.ok) throw new Error("Index fetch failed");
+            return response.json();
+          })
+          .then(function (items) {
+            if (!Array.isArray(items) || !items.every(function (item) {
+              return item && typeof item.title === "string" && typeof item.path === "string"
+                && /^[a-z0-9-]+\/[a-z0-9-]+\/$/.test(item.path);
+            })) {
+              throw new Error("Invalid search index");
+            }
+            return items;
+          })
+          .catch(function (error) {
+            indexRequest = null;
+            throw error;
+          });
+      }
+      return indexRequest;
     }
 
     function renderMatches(items, query) {
-      var q = String(query || "").trim().toLowerCase();
-      if (!q) {
+      var terms = words(query);
+      if (!terms.length) {
         resultsBox.innerHTML = "";
         return;
       }
-      var terms = q.split(/\s+/).filter(Boolean);
-      var matched = items.filter(function (item) {
-        var hay = (item.title + " " + item.category_label + " " + item.summary).toLowerCase();
-        return terms.every(function (t) { return hay.indexOf(t) !== -1; });
+      var matched = items.map(function (item) {
+        var primary = words(item.title + " " + item.path);
+        var secondary = words([item.category_label, item.summary, item.description].join(" "));
+        var score = 0;
+        for (var i = 0; i < terms.length; i++) {
+          var term = terms[i];
+          if (primary.some(function (word) { return word.startsWith(term); })) {
+            score += 2;
+          } else if (secondary.some(function (word) { return word.startsWith(term); })) {
+            score += 1;
+          } else {
+            return { item: item, score: 0 };
+          }
+        }
+        return { item: item, score: score };
+      }).filter(function (match) {
+        return match.score > 0;
+      }).sort(function (a, b) {
+        return b.score - a.score;
       }).slice(0, 8);
 
       if (!matched.length) {
@@ -64,7 +94,7 @@
       }
       var html = '<div class="grid-2">';
       for (var j = 0; j < matched.length; j++) {
-        var item = matched[j];
+        var item = matched[j].item;
         html +=
           '<article class="card">' +
           '<div><div class="card-meta">' + escapeHtml(item.category_label) + ' · ' + escapeHtml(item.reading_minutes) + ' min read</div>' +
@@ -78,15 +108,17 @@
 
     function runQuery() {
       var q = input.value;
-      if (!String(q || "").trim()) {
+      if (!q.trim()) {
         resultsBox.innerHTML = "";
         return;
       }
-      loadIndex()
-        .then(function (items) { renderMatches(items, q); })
-        .catch(function () {
-          resultsBox.innerHTML = '<p style="margin:8px 0 0;color:#4a5568">Browse categories above to read all 18 guides.</p>';
-        });
+      loadIndex().then(function (items) {
+        if (input.value === q) renderMatches(items, q);
+      }, function () {
+        if (input.value === q) {
+          resultsBox.textContent = "Search is temporarily unavailable. Browse the guide categories on this page or try again.";
+        }
+      });
     }
 
     form.addEventListener("submit", function (e) {

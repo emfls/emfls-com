@@ -19,6 +19,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../../">
@@ -35,7 +36,7 @@
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">Lighting &amp; Optics</a> / <span aria-current="page">Reading Luminance and RGB Histograms Without Clipping Highlights</span>
@@ -47,7 +48,11 @@
           <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,364 words)</div>
           <p class="lead-callout">A bright strip on glazed ceramic or a fold of saturated fabric can lose texture while the camera’s brightness histogram still shows room on the right. Use the RGB display to spot the first channel at risk, then bracket in one-third-stop steps and verify the critical patch in the raw file. Record the brightest clean frame and a repeatable working margin.</p>
           <figure class="diagram-figure">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Rendered brightness stops short of code 255 while red reaches it. In a separate raw bracket, first clip occurs at plus two thirds EV and the working exposure is zero EV.">
+            <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
+            <label for="diagram-full-size">Show full-size diagram</label>
+            <p id="diagram-scroll-hint">Scroll horizontally or focus the diagram and use the arrow keys to see all labels.</p>
+            <div class="diagram-view" role="region" aria-label="Diagram" tabindex="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Rendered brightness stops short of code 255 while red reaches it. In a separate raw bracket, first clip occurs at plus two thirds EV and the working exposure is zero EV.">
 <rect width="720" height="320" fill="#f8fafc"/>
 <g font-family="system-ui, sans-serif" fill="#141923">
   <text x="24" y="29" font-size="18" font-weight="700">Rendered histogram</text>
@@ -98,6 +103,7 @@
   <path d="M507 180V193H589V180" fill="none" stroke="#0f4c5c" stroke-width="2"/>
 </g>
 </svg>
+            </div>
             <figcaption>The red preview channel piles up at code 255 while the brightness trace ends short of the boundary. The separate raw bracket uses a one-third-stop reserve below the brightest verified clean frame.</figcaption>
           </figure>
           <section>
@@ -110,7 +116,7 @@
 <h2>Find the first channel that loses texture</h2>
 <p>Switch to RGB playback whenever the subject contains saturated color or a colored light strikes a highlight. A composite brightness value combines contributions from multiple channels. For example, a rendered pixel at R 255, G 110, B 75 would land near code 138 in an illustrative weighted mix using 0.213 red, 0.715 green, and 0.072 blue. Red is already at the ceiling while the combined value sits near the middle. Those coefficients illustrate the effect. Consult your camera’s display when evaluating an actual frame.</p>
 <p>On scarlet cloth, inspect the bright folds where the weave should survive. A flat red plateau in the preview may show up as a shift in hue or a loss of separation between adjacent threads. Compare a frame one-third stop darker at the same magnification. A crisp return of the weave identifies a useful bracket direction. Check the raw channel data to determine where the loss occurred. The camera preview can hit its ceiling because white balance and the picture style change the rendered values. A quiet preview also leaves small patches easy to miss. <a href="https://www.rawdigger.com/howtouse/beware-histogram">RawDigger’s preview and raw comparison</a></p>
-<div class="table-wrap">
+<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">
 <table>
 <thead><tr><th scope="col">Readout</th><th scope="col">What to look for</th><th scope="col">Studio check</th></tr></thead>
 <tbody>
