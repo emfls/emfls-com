@@ -106,7 +106,8 @@ def main() -> int:
     for req in (".nojekyll", "ads.txt", "robots.txt", "sitemap.xml", "search-index.json", "404.html"):
         assert (ROOT / req).is_file(), f"Missing required root file: {req}"
     assert "pub-8830524482034754" in (ROOT / "ads.txt").read_text(encoding="utf-8")
-    assert not (ROOT / "CNAME").exists(), "CNAME must not exist during staging preview before Gabia DNS change"
+    assert (ROOT / "CNAME").is_file(), "Missing CNAME for www.emfls.com production binding"
+    assert (ROOT / "CNAME").read_text(encoding="utf-8").strip() == "www.emfls.com", "Unexpected CNAME content"
 
     sm_root = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
     sm_locs = [el.text or "" for el in sm_root.iter() if el.tag.endswith("loc")]
