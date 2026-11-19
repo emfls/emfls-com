@@ -55,6 +55,7 @@ def head_block(
     extra_style: str = "",
     json_ld: list[dict] | None = None,
     noindex: bool = False,
+    include_adsense: bool = True,
 ) -> str:
     prefix = rel_prefix(depth)
     canon_url = f"{SITE_ORIGIN}/{canonical_path}"
@@ -66,6 +67,16 @@ def head_block(
             for obj in json_ld
         )
     css_link = f'  <link rel="stylesheet" href="{prefix}assets/style.css">' if not extra_style else f'  <style>{extra_style}</style>'
+    adsense_meta = (
+        f'\n  <meta name="google-adsense-account" content="{ADSENSE_PUB}">'
+        if include_adsense
+        else ""
+    )
+    adsense_script = (
+        f'\n  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_PUB}" crossorigin="anonymous"></script>'
+        if include_adsense
+        else ""
+    )
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,8 +84,7 @@ def head_block(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(title)}</title>
   <meta name="description" content="{html.escape(description)}">
-  <meta name="robots" content="{robots}">
-  <meta name="google-adsense-account" content="{ADSENSE_PUB}">
+  <meta name="robots" content="{robots}">{adsense_meta}
   <link rel="canonical" href="{html.escape(canon_url)}">
   <meta property="og:type" content="{og_type}">
   <meta property="og:site_name" content="EMFLS Studio Journal">
@@ -82,8 +92,7 @@ def head_block(
   <meta property="og:description" content="{html.escape(description)}">
   <meta property="og:url" content="{html.escape(canon_url)}">
 {css_link}
-{ld_tags}
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_PUB}" crossorigin="anonymous"></script>
+{ld_tags}{adsense_script}
 </head>"""
 
 
@@ -155,6 +164,7 @@ def wrap_page(
     dynamic_nav: bool = False,
     extra_style: str = "",
     noindex: bool = False,
+    include_adsense: bool = True,
 ) -> str:
     prefix = rel_prefix(depth)
     data_attr = "" if dynamic_nav else f' data-root="{html.escape(prefix)}"'
@@ -181,6 +191,7 @@ def wrap_page(
             json_ld=json_ld,
             extra_style=extra_style,
             noindex=noindex,
+            include_adsense=include_adsense,
         )
         + f"\n<body{data_attr}>\n"
         + header_html(depth, active_rel=active_rel, dynamic_nav=dynamic_nav)
@@ -558,6 +569,7 @@ def build_404(style_text: str) -> str:
         dynamic_nav=True,
         extra_style=style_text,
         noindex=True,
+        include_adsense=False,
     )
 
 

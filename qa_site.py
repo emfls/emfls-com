@@ -119,8 +119,13 @@ def main() -> int:
     article_count = 0
     for f in html_files:
         raw = f.read_text(encoding="utf-8")
-        assert f'<meta name="google-adsense-account" content="{ADSENSE_PUB}">' in raw, f"Missing AdSense meta in {f}"
-        assert f"pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_PUB}" in raw, f"Missing AdSense loader in {f}"
+        if f.name == "404.html":
+            assert "adsbygoogle.js" not in raw, f"Forbidden adsbygoogle.js runtime in {f}"
+            assert "pagead2.googlesyndication.com" not in raw, f"Forbidden pagead runtime host in {f}"
+            assert "google-adsense-account" not in raw, f"Forbidden AdSense meta in {f}"
+        else:
+            assert f'<meta name="google-adsense-account" content="{ADSENSE_PUB}">' in raw, f"Missing AdSense meta in {f}"
+            assert f"pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_PUB}" in raw, f"Missing AdSense loader in {f}"
 
         p = PageInspector()
         p.feed(raw)
