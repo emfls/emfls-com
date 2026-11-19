@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — EMFLS Studio Journal</title>
+  <meta name="description" content="Explore current EMFLS Studio Journal guides on lighting, design, and studio workflow.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="google-adsense-account" content="ca-pub-8830524482034754">
+  <link rel="canonical" href="https://www.emfls.com/404.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EMFLS Studio Journal">
+  <meta property="og:title" content="Page Not Found — EMFLS Studio Journal">
+  <meta property="og:description" content="Explore current EMFLS Studio Journal guides on lighting, design, and studio workflow.">
+  <meta property="og:url" content="https://www.emfls.com/404.html">
+  <style>/* EMFLS Studio Journal — Editorial Field Guide Stylesheet */
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --surface-muted: #f2efe9;
+  --ink: #141923;
+  --ink-muted: #4a5568;
+  --border: #ddd6ca;
+  --accent: #0f4c5c;
+  --accent-soft: #e6f0f2;
+  --warm: #9a4419;
+  --shadow: 0 2px 10px rgba(20, 25, 35, 0.05);
+  --radius: 10px;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  overflow-wrap: break-word;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--warm);
+}
+
+.container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 16px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-mark {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brand-sub {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.main-nav a[aria-current="page"],
+.main-nav a:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+main {
+  padding: 28px 0 48px;
+}
+
+.hero {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  box-shadow: var(--shadow);
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin: 0 0 8px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  color: var(--ink);
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+}
+
+h2 {
+  margin: 30px 0 12px;
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+}
+
+h3 {
+  margin: 22px 0 8px;
+  font-size: 1.12rem;
+}
+
+.lead {
+  font-size: 1.08rem;
+  color: var(--ink-muted);
+  max-width: 68ch;
+  margin: 0;
+}
+
+.search-box {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.search-box input[type="search"] {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.96rem;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.search-box button {
+  padding: 11px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.94rem;
+  cursor: pointer;
+}
+
+.search-results {
+  margin-top: 14px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin: 18px 0 32px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 18px;
+  margin: 18px 0 32px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card h3,
+.card h2 {
+  margin: 0;
+  font-size: 1.14rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.93rem;
+  color: var(--ink-muted);
+}
+
+.card-meta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.breadcrumbs {
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.article-shell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  box-shadow: var(--shadow);
+}
+
+.article-body {
+  max-width: 72ch;
+}
+
+.byline {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.lead-callout {
+  background: var(--surface-muted);
+  border-left: 4px solid var(--accent);
+  padding: 16px 18px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 24px;
+  font-size: 1.02rem;
+}
+
+.diagram-figure {
+  margin: 24px 0 28px;
+  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.diagram-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.87rem;
+  color: var(--ink-muted);
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 22px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  min-width: 460px;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: var(--surface-muted);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+ul,
+ol {
+  padding-left: 22px;
+}
+
+li {
+  margin-bottom: 7px;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--surface-muted);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.related-panel {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.trust-strip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-top: 28px;
+}
+
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 24px 0 36px;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px 24px;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.footer-links a {
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 14px;
+  }
+  .hero,
+  .article-shell {
+    padding: 20px 16px;
+  }
+  .diagram-figure {
+    padding: 10px;
+  }
+}
+</style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" data-nav-rel="">
+        <span class="brand-mark">EMFLS Studio Journal</span>
+        <span class="brand-sub">Field Craft &amp; Reference</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="/" data-nav-rel="">Home</a>
+        <a href="/lighting/" data-nav-rel="lighting/">Lighting</a>
+        <a href="/design/" data-nav-rel="design/">Design</a>
+        <a href="/studio/" data-nav-rel="studio/">Studio</a>
+        <a href="/about/" data-nav-rel="about/">About</a>
+        <a href="/contact/" data-nav-rel="contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <section class="hero">
+        <p class="eyebrow">Page Not Found (404)</p>
+        <h1>This URL has moved or been retired</h1>
+        <p class="lead">EMFLS Studio Journal was rebuilt from the ground up with organized technical guides covering Lighting &amp; Optics, Design &amp; Color, and Studio Workflow. Use the search below or browse any section directly.</p>
+        <form id="studio-search-form" class="search-box" role="search">
+          <input id="studio-search-input" type="search" aria-label="Search current field guides" placeholder="Search current guides (e.g., lighting, color, desk, contrast, raw)...">
+          <button type="submit">Search</button>
+        </form>
+        <div id="studio-search-results" class="search-results" role="region" aria-live="polite" aria-label="Search results"></div>
+      </section>
+      <section aria-labelledby="recover-title">
+        <h2 id="recover-title">Browse Current Sections</h2>
+        <div class="grid-3">
+          <article class="card">
+            <div><div class="card-meta">6 Guides</div><h3><a href="/lighting/" data-nav-rel="lighting/">Lighting &amp; Optics</a></h3></div>
+            <p>Window diffusion angles, Kelvin balance, focal length geometry, and RAW dynamic range.</p>
+          </article>
+          <article class="card">
+            <div><div class="card-meta">6 Guides</div><h3><a href="/design/" data-nav-rel="design/">Design &amp; Color</a></h3></div>
+            <p>Modular type scales, WCAG contrast pairs, clean SVG diagramming, and responsive CSS grids.</p>
+          </article>
+          <article class="card">
+            <div><div class="card-meta">6 Guides</div><h3><a href="/studio/" data-nav-rel="studio/">Studio Workflow</a></h3></div>
+            <p>Room acoustic treatment, mic placement, bias lighting, plain-text archiving, and ergonomics.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>EMFLS Studio Journal</strong> · Independent reference notes on lighting, design systems, and studio workflow.
+      </div>
+      <nav class="footer-links" aria-label="Editorial &amp; Legal Links">
+        <a href="/about/" data-nav-rel="about/">About</a>
+        <a href="/editorial-policy/" data-nav-rel="editorial-policy/">Editorial Policy</a>
+        <a href="/privacy-policy/" data-nav-rel="privacy-policy/">Privacy Policy</a>
+        <a href="/terms/" data-nav-rel="terms/">Terms</a>
+        <a href="/contact/" data-nav-rel="contact/">Contact</a>
+      </nav>
+    </div>
+  </footer>
+  <script>(function(){var p=window.location.pathname||"/";var b=(p==="/emfls-com"||p.indexOf("/emfls-com/")===0)?"/emfls-com/":"/";var s=document.createElement("script");s.src=b+"assets/search.js";s.defer=true;document.head.appendChild(s);})();</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices — EMFLS Studio Journal</title>
+  <meta name="description" content="Locate sRGB clipping in a Display P3 ramp, test CSS fallbacks on two displays, and use measured color differences to approve a matte paper proof.">
+  <meta name="robots" content="index, follow">
+  <meta name="google-adsense-account" content="ca-pub-8830524482034754">
+  <link rel="canonical" href="https://www.emfls.com/design/print-vs-screen-color-spaces/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="EMFLS Studio Journal">
+  <meta property="og:title" content="sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices — EMFLS Studio Journal">
+  <meta property="og:description" content="Locate sRGB clipping in a Display P3 ramp, test CSS fallbacks on two displays, and use measured color differences to approve a matte paper proof.">
+  <meta property="og:url" content="https://www.emfls.com/design/print-vs-screen-color-spaces/">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices", "description": "Locate sRGB clipping in a Display P3 ramp, test CSS fallbacks on two displays, and use measured color differences to approve a matte paper proof.", "datePublished": "2026-11-19", "dateModified": "2026-11-19", "author": {"@type": "Organization", "name": "EMFLS Editorial Desk"}, "publisher": {"@type": "Organization", "name": "EMFLS Studio Journal"}, "mainEntityOfPage": "https://www.emfls.com/design/print-vs-screen-color-spaces/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.emfls.com/"}, {"@type": "ListItem", "position": 2, "name": "Design & Color", "item": "https://www.emfls.com/design/"}, {"@type": "ListItem", "position": 3, "name": "sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices", "item": "https://www.emfls.com/design/print-vs-screen-color-spaces/"}]}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
+</head>
+<body data-root="../../">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../">
+        <span class="brand-mark">EMFLS Studio Journal</span>
+        <span class="brand-sub">Field Craft &amp; Reference</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="../../">Home</a>
+        <a href="../../lighting/">Lighting</a>
+        <a href="../../design/" aria-current="page">Design</a>
+        <a href="../../studio/">Studio</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices</span>
+      </nav>
+      <article class="article-shell">
+        <div class="article-body">
+          <p class="eyebrow">Typography, Color Spaces &amp; Vector Craft</p>
+          <h1>sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices</h1>
+          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,389 words)</div>
+          <p class="lead-callout">A red that separates cleanly on a Display P3 monitor can flatten on an sRGB screen and lose a different set of distinctions on matte paper. This EMFLS Studio Journal field guide shows how to locate the first clipped channel, verify the two CSS color paths, and use measured color differences on a print strip to choose a rendering intent.</p>
+          <figure class="diagram-figure">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Linear sRGB red crosses its ceiling at Display P3 red 0.835. An illustrative matte proof shows neighboring patches 0.7 Delta E 00 apart with relative colorimetric and 2.8 apart with perceptual rendering.">
+  <rect width="720" height="320" fill="#f8fafc"/>
+  <path d="M432 18V302" stroke="#cbd5e1"/>
+  <text x="24" y="30" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#141923">Display P3 to sRGB</text>
+  <text x="24" y="53" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Linear sRGB red channel</text>
+  <path d="M82 64H402 M82 121.33H402 M82 178.67H402 M242 64V236 M402 64V236" fill="none" stroke="#cbd5e1"/>
+  <path d="M82 64V236H402" fill="none" stroke="#141923"/>
+  <path d="M296.23 121.33V236" stroke="#141923" stroke-dasharray="4 4"/>
+  <path d="M82 215.37L296.23 121.33H402" fill="none" stroke="#0f4c5c" stroke-width="3"/>
+  <path d="M296.23 121.33L402 74.9" stroke="#b85c28" stroke-width="3" stroke-dasharray="6 4"/>
+  <circle cx="296.23" cy="121.33" r="4" fill="#141923"/>
+  <text x="69" y="69" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" fill="#141923">1.25</text>
+  <text x="69" y="126" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" fill="#141923">1.00</text>
+  <text x="69" y="183" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" fill="#141923">0.75</text>
+  <text x="69" y="241" text-anchor="end" font-family="system-ui, sans-serif" font-size="13" fill="#141923">0.50</text>
+  <text x="82" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">0.50</text>
+  <text x="242" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">0.75</text>
+  <text x="296.23" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#141923">0.835</text>
+  <text x="402" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">1.00</text>
+  <text x="242" y="275" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Linear Display P3 red (G = B = 0.10)</text>
+  <line x1="82" y1="299" x2="105" y2="299" stroke="#0f4c5c" stroke-width="3"/>
+  <text x="112" y="303" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Hard clamp</text>
+  <line x1="230" y1="299" x2="253" y2="299" stroke="#b85c28" stroke-width="3" stroke-dasharray="6 4"/>
+  <text x="260" y="303" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Raw overrun</text>
+  <text x="453" y="30" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#141923">Matte CMYK proof</text>
+  <text x="453" y="53" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Neighbor separation (ΔE₀₀)</text>
+  <text x="477" y="78" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Example target ≥ 2.0</text>
+  <path d="M577 84V92 M577 115V155 M577 175V236" stroke="#141923" stroke-dasharray="4 4"/>
+  <text x="477" y="106" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Relative colorimetric</text>
+  <rect x="477" y="115" width="35" height="18" fill="#b85c28"/>
+  <text x="519" y="129" font-family="system-ui, sans-serif" font-size="13" fill="#141923">0.7</text>
+  <text x="477" y="166" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Perceptual</text>
+  <rect x="477" y="175" width="140" height="18" fill="#0f4c5c"/>
+  <text x="624" y="189" font-family="system-ui, sans-serif" font-size="13" fill="#141923">2.8</text>
+  <path d="M477 230V236H677V230 M527 230V236 M577 230V236 M627 230V236" fill="none" stroke="#141923"/>
+  <text x="477" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">0</text>
+  <text x="527" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">1</text>
+  <text x="577" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">2</text>
+  <text x="627" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">3</text>
+  <text x="677" y="254" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">4</text>
+  <text x="577" y="275" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#141923">Illustrative readings</text>
+</svg>
+            <figcaption>On the left, the linear red channel hits the sRGB ceiling at a Display P3 red value of about 0.835, with green and blue held at 0.10. On the right, compare the illustrative difference between two matte proof patches with a studio target of 2.0 ΔE₀₀.</figcaption>
+          </figure>
+          <section>
+<h2>Set up a strip you can reuse</h2>
+<p>Build one reference strip in a tagged Display P3 master. Include a red ramp, a saturated green or cyan from the artwork, a neutral ramp, and one project color whose appearance must stay close to an approved reference. Add a crop that uses those colors at their real sizes. A boundary that looks clear in a row of swatches can disappear in a thin rule or small label.</p>
+<p>Make the print patches 15 mm square with 4 mm gutters, adjusting the patch size if your instrument requires a larger target. Label the patches outside the measurement area and leave a blank patch for the paper white. Save the source coordinates with each patch ID. For the red ramp, sample linear Display P3 red from 0.50 to 1.00 in steps of 0.05, with linear green and blue both at 0.10. Add samples at 0.83 and 0.84 to bracket the first crossing shown in the diagram.</p>
+<div class="table-wrap">
+<table>
+<caption>Reference checks for the same studio strip</caption>
+<thead><tr><th scope="col">Output</th><th scope="col">What sets the boundary</th><th scope="col">What to verify</th></tr></thead>
+<tbody>
+<tr><th scope="row">sRGB</th><td>All three converted linear channels must fit within 0–1.</td><td>Check the fallback and preserve neighboring steps where they convey information.</td></tr>
+<tr><th scope="row">Display P3</th><td>P3 primaries define the source gamut. The actual display and its profile govern reproduction.</td><td>Check that the enhanced rule wins and inspect the ramp on a profiled wide-gamut screen.</td></tr>
+<tr><th scope="row">Matte CMYK</th><td>The output ICC profile describes the printing condition, including the chosen stock.</td><td>Compare both intents and measure the selected patches on a dry proof.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section>
+<h2>Locate the first channel crossing</h2>
+<p>Convert the test ramp without gamut mapping. Linearize encoded RGB values first if the tool starts with CSS or image values. Transform linear Display P3 to XYZ with a D65 white, then transform XYZ to linear sRGB. Both RGB spaces in this conversion use D65, so the calculation needs no white-point adaptation. Keep the signed results before rounding, clamping, or applying the destination transfer curve. <a href="https://www.w3.org/TR/css-color-4/#color-conversion-code">W3C sample conversion code</a>.</p>
+<p>For this strip the linear sRGB red channel is approximately 1.22494 times the linear P3 red minus 0.02249. Solving for an sRGB red of 1 gives a P3 red of about 0.83473. At P3 red 0.83, the converted red is about 0.994. At 0.84 it is about 1.006. At 0.90 the converted triplet is approximately (1.080, 0.066, 0.084). Green and blue stay within range across this strip. Run the same channel test on the green or cyan sample, where the first failure may be a negative value.</p>
+<p>A hard clamp makes every red value beyond the crossing equal to 1 while green and blue still move. That plateau explains why a nominally even source ramp can lose visible separation. The dashed line in the diagram is the raw conversion, and the solid line shows a simple clamp for diagnosis. Browsers can apply gamut mapping, so the plotted clamp is a controlled comparison. For a ramp that carries meaning, inspect the entire sRGB version and reduce chroma before export where the steps bunch together.</p>
+</section>
+
+<section>
+<h2>Give CSS an explicit sRGB fallback</h2>
+<p>Set the fallback as a complete property value, then enable the enhancement when the browser understands P3 syntax and reports a suitable output gamut. This example uses the encoded P3 value for the 0.90 patch. The fallback comes from the 0.75 patch converted to sRGB and rounded to eight bits. That gives a reproducible candidate to assess beside neighboring colors and text. <a href="https://www.w3.org/TR/mediaqueries-4/#color-gamut">W3C color-gamut media feature</a>.</p>
+<pre><code>.sample { background-color: #f34c53; }
+
+@media (color-gamut: p3) {
+  @supports (background-color: color(display-p3 0.95469 0.34919 0.34919)) {
+    .sample { background-color: color(display-p3 0.95469 0.34919 0.34919); }
+  }
+}</code></pre>
+<p>Open the same test page on a standard-gamut display and a profiled wide-gamut display. Record the result of <code>matchMedia('(color-gamut: p3)').matches</code> and inspect the winning declaration in developer tools. Force the fallback by disabling the enhanced rule and compare both versions on the wide-gamut display as well. The query describes approximate capability. A winning declaration proves cascade selection, while a physical display check reveals whether the chosen colors retain their separation. Check text contrast against each background actually used, including hover and focus states.</p>
+<p>Export raster assets with their matching embedded profile and inspect the served files after any image optimization. When creating an sRGB derivative, convert the image before export. Assigning sRGB to existing P3 numbers changes how those numbers are interpreted. If the CSS chip looks right but the adjacent image shifts, check the actual delivered image for a missing or incorrect profile before editing either color.</p>
+</section>
+
+<section>
+<h2>Soft-proof the matte condition with two intents</h2>
+<p>Get the ICC profile for the exact matte stock and press condition or the printer, ink, and media settings in use. Record the profile filename and version, and agree with the provider on who makes the final conversion. One party should own that transform. Keep the tagged RGB master so both intent trials start from the same values.</p>
+<p>Profile the monitor with an instrument, turn off adaptive white and brightness, and use a neutral surround. For SDR proofing, start around 100 cd/m² and adjust the proof viewing setup if the screen white overwhelms the lit paper. Use a D50 viewing booth for print comparisons. Give your eyes time to adapt, then compare the paper under the booth and the simulation without letting booth light spill onto the display.</p>
+<p>In the proof setup, select the output profile and disable Preserve RGB Numbers if the option is available, so the preview simulates conversion from the master. Compare relative colorimetric with black point compensation enabled against the profile’s perceptual transform. Record the compensation setting for both presets where available. For the appearance check, enable paper white and black ink simulation as supported. Keep simulation settings identical between the two intent trials. <a href="https://helpx.adobe.com/ca/photoshop/using/proofing-colors.html">Adobe proof setup controls</a>.</p>
+<p>Relative colorimetric maps source white to destination white and generally preserves in-gamut relationships in colorimetric terms, with black point compensation helping to fit shadows. Perceptual mapping can change in-gamut colors to retain relationships across a wider range, and the result depends on the profile. ICC-absolute colorimetric can retain the target paper tint when simulating one print condition on another. Compare white, near-black steps, and the approved project color alongside the saturated pair. <a href="https://www.color.org/specifications/ICC.1-2022-05.pdf">ICC specification for rendering intents</a>.</p>
+</section>
+
+<section>
+<h2>Measure the proof and record the release settings</h2>
+<p>Print both intent variants side by side using the same stock and agreed conversion workflow. Follow the provider’s drying or stabilization interval. Measure patch centers with a spectrophotometer, using the same backing and measurement condition for the proof and reference. Record the condition, such as M1 if it matches the supplied characterization data, and save the Lab values. Repeat close calls after lifting and reseating the instrument. Inspect the crop under D50 to confirm the separations still work at final size.</p>
+<p>Use CIEDE2000 to score two different pairs of readings. For separation, compare adjacent patches on the same proof. For accuracy, compare the project color with its approved physical target measured under the same conditions. In the illustrative trial, the saturated pair measures 0.7 ΔE₀₀ apart under relative colorimetric and 2.8 under perceptual. The project color is 2.6 from target under relative and 4.4 under perceptual. With studio limits of at least 2.0 for the pair and at most 3.0 for the target, each proof misses one requirement. Reduce chroma in the troublesome print ramp, rebuild its spacing, and repeat the strip before approving either intent.</p>
+<ul>
+<li>Save the tagged master, swatch IDs, and the coordinates of the first sRGB crossing.</li>
+<li>Verify both CSS paths, delivered image profiles, and contrast in the rendered layout.</li>
+<li>Record the matte stock, ICC profile, rendering intent, compensation setting, and conversion owner.</li>
+<li>File the dry proof readings with the agreed limits and confirm the crop passes a D50 visual check.</li>
+</ul>
+</section>
+        </div>
+        <aside class="related-panel" aria-labelledby="related-heading">
+          <h2 id="related-heading" style="margin-top:0">Related Design &amp; Color Guides</h2>
+          <div class="grid-3">
+          <article class="card">
+            <div>
+              <div class="card-meta">Design &amp; Color · 7 min read</div>
+              <h3><a href="../modular-type-scale-readability/">Choosing Modular Type Scales, Line Height, and Measure for Long-Form Reading</a></h3>
+            </div>
+            <p>A type scale can look orderly in a specimen and still interrupt reading when headings wrap or the column gets too wide. Start with one body size, derive adjacent heading steps between 1.200 and 1.333, and tune the column to 60 to 72 characters on roomy layouts. Then adjust baseline spacing using the actual typeface and copy.</p>
+          </article>
+          <article class="card">
+            <div>
+              <div class="card-meta">Design &amp; Color · 7 min read</div>
+              <h3><a href="../responsive-css-grid-editorial-layouts/">Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px</a></h3>
+            </div>
+            <p>An editorial layout can fit its cards at 320 px and still fail when a long caption widens the page or a sticky header covers a heading. Use CSS Grid to size cards from the space they actually have, Flexbox to wrap reading controls, and local scrolling for wide reference material. The test layout leaves a 288 px grid and zero page-level horizontal overflow.</p>
+          </article>
+          <article class="card">
+            <div>
+              <div class="card-meta">Design &amp; Color · 7 min read</div>
+              <h3><a href="../svg-diagram-clarity-principles/">Designing Crisp Technical SVG Diagrams with Consistent Stroke and Grid Rules</a></h3>
+            </div>
+            <p>An SVG can look sharp in the drawing tool and still lose thin connectors, arrow direction, or small labels when it lands in a mobile article. This EMFLS Studio Journal field guide builds a 720-unit schematic you can check at 320 CSS pixels, with three measured stroke weights, repeatable arrowhead geometry, and at least 4.5:1 contrast for labels.</p>
+          </article>
+          </div>
+        </aside>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>EMFLS Studio Journal</strong> · Independent reference notes on lighting, design systems, and studio workflow.
+      </div>
+      <nav class="footer-links" aria-label="Editorial &amp; Legal Links">
+        <a href="../../about/">About</a>
+        <a href="../../editorial-policy/">Editorial Policy</a>
+        <a href="../../privacy-policy/">Privacy Policy</a>
+        <a href="../../terms/">Terms</a>
+        <a href="../../contact/">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

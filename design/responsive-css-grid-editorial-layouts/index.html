@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px — EMFLS Studio Journal</title>
+  <meta name="description" content="Build a CSS editorial grid that fits 320 px, adds columns at measured widths, keeps the reading header sticky, and contains horizontal overflow.">
+  <meta name="robots" content="index, follow">
+  <meta name="google-adsense-account" content="ca-pub-8830524482034754">
+  <link rel="canonical" href="https://www.emfls.com/design/responsive-css-grid-editorial-layouts/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="EMFLS Studio Journal">
+  <meta property="og:title" content="Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px — EMFLS Studio Journal">
+  <meta property="og:description" content="Build a CSS editorial grid that fits 320 px, adds columns at measured widths, keeps the reading header sticky, and contains horizontal overflow.">
+  <meta property="og:url" content="https://www.emfls.com/design/responsive-css-grid-editorial-layouts/">
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px", "description": "Build a CSS editorial grid that fits 320 px, adds columns at measured widths, keeps the reading header sticky, and contains horizontal overflow.", "datePublished": "2026-11-19", "dateModified": "2026-11-19", "author": {"@type": "Organization", "name": "EMFLS Editorial Desk"}, "publisher": {"@type": "Organization", "name": "EMFLS Studio Journal"}, "mainEntityOfPage": "https://www.emfls.com/design/responsive-css-grid-editorial-layouts/"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.emfls.com/"}, {"@type": "ListItem", "position": 2, "name": "Design & Color", "item": "https://www.emfls.com/design/"}, {"@type": "ListItem", "position": 3, "name": "Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px", "item": "https://www.emfls.com/design/responsive-css-grid-editorial-layouts/"}]}</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
+</head>
+<body data-root="../../">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../../">
+        <span class="brand-mark">EMFLS Studio Journal</span>
+        <span class="brand-sub">Field Craft &amp; Reference</span>
+      </a>
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="../../">Home</a>
+        <a href="../../lighting/">Lighting</a>
+        <a href="../../design/" aria-current="page">Design</a>
+        <a href="../../studio/">Studio</a>
+        <a href="../../about/">About</a>
+        <a href="../../contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../../">Home</a> / <a href="../">Design &amp; Color</a> / <span aria-current="page">Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px</span>
+      </nav>
+      <article class="article-shell">
+        <div class="article-body">
+          <p class="eyebrow">Typography, Color Spaces &amp; Vector Craft</p>
+          <h1>Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px</h1>
+          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published November 19, 2026 · 7 min read (1,402 words)</div>
+          <p class="lead-callout">An editorial layout can fit its cards at 320 px and still fail when a long caption widens the page or a sticky header covers a heading. Use CSS Grid to size cards from the space they actually have, Flexbox to wrap reading controls, and local scrolling for wide reference material. The test layout leaves a 288 px grid and zero page-level horizontal overflow.</p>
+          <figure class="diagram-figure">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img" aria-label="Three viewport widths show one, two, and three editorial card tracks. Each frame reserves two 16 pixel gutters. The reading header sticks at a zero pixel top inset.">
+<rect width="720" height="320" rx="12" fill="#f8fafc"/>
+<g font-family="system-ui, sans-serif" fill="#141923">
+<text x="24" y="33" font-size="23" font-weight="700">Editorial grid at its column thresholds</text>
+<text x="24" y="57" font-size="15">16 px side gutters · 16 px gaps · 240 px preferred minimum</text>
+<g fill="#cbd5e1">
+<rect x="244" y="76" width="176" height="56" rx="4"/>
+<rect x="244" y="149" width="290.4" height="56" rx="4"/>
+<rect x="244" y="222" width="431.2" height="56" rx="4"/>
+</g>
+<g fill="#0f4c5c">
+<rect x="252.8" y="99" width="158.4" height="25" rx="2"/>
+<rect x="252.8" y="172" width="132" height="25" rx="2"/>
+<rect x="393.6" y="172" width="132" height="25" rx="2"/>
+<rect x="252.8" y="245" width="132" height="25" rx="2"/>
+<rect x="393.6" y="245" width="132" height="25" rx="2"/>
+<rect x="534.4" y="245" width="132" height="25" rx="2"/>
+</g>
+<g fill="#b85c28">
+<rect x="252.8" y="82" width="158.4" height="10" rx="2"/>
+<rect x="252.8" y="155" width="272.8" height="10" rx="2"/>
+<rect x="252.8" y="228" width="413.6" height="10" rx="2"/>
+<rect x="24" y="295" width="16" height="10" rx="2"/>
+</g>
+<g font-size="19" font-weight="700">
+<text x="24" y="99">320 px viewport</text>
+<text x="24" y="172">528 px viewport</text>
+<text x="24" y="245">784 px viewport</text>
+</g>
+<g font-size="15">
+<text x="24" y="122">288 px grid · 1 column</text>
+<text x="24" y="195">496 px grid · 2 columns</text>
+<text x="24" y="268">752 px grid · 3 columns</text>
+<text x="49" y="305">Sticky header · 0 px top inset</text>
+</g>
+<g fill="#f8fafc" font-size="14" font-weight="650" text-anchor="middle">
+<text x="332" y="117">288 px</text>
+<text x="318.8" y="190">240 px</text>
+<text x="459.6" y="190">240 px</text>
+<text x="318.8" y="263">240 px</text>
+<text x="459.6" y="263">240 px</text>
+<text x="600.4" y="263">240 px</text>
+</g>
+</g>
+</svg>
+            <figcaption>Read down the diagram to see one track at 320 px, two at 528 px, and three at 784 px with enough cards. The gray frames include the side gutters, the teal blocks show track widths, and the orange bar marks the sticky header.</figcaption>
+          </figure>
+          <h2>Measure the card grid where it actually sits</h2>
+<p>Start with the narrowest reading surface in the EMFLS Studio Journal layout. In a 320 px viewport with 16 px gutters, the grid gets 288 px. A card with 16 px padding on each side leaves 256 px for the headline and caption, before borders. Put a real headline, a landscape photograph, and the longest metadata label in that card. Check how they wrap before choosing a track minimum. A card that fits its grid line can still be hard to read if the label takes half the row or the caption falls into a stack of single words.</p>
+<p>Use the grid’s content width for the arithmetic. A 600 px viewport might seem wide enough for two cards, but an inset panel that takes another 48 px from each side leaves 472 px after the page gutters. Two 240 px tracks and a 16 px gap need 496 px. The same grid should therefore show one column in the panel and two on the open page. With a capped page shell, measure the shell after padding. With a classic scrollbar, use the available layout width reported by the browser.</p>
+<h2>Let the available width set the column count</h2>
+<p>Give the card collection a fluid minimum with <code>min(100%, 240px)</code> inside <code>minmax()</code>. At 288 px, the minimum is 240 px and the single occupied track grows to fill the grid. If a nested layout leaves 216 px, the minimum drops to 216 px. This clamp matters anywhere a card collection can sit inside a panel or a margin-heavy template. Keep cards in editorial source order so the sequence stays intact as rows reflow.</p>
+<pre><code>body { margin: 0; }
+.journal-shell {
+  box-sizing: border-box;
+  max-inline-size: 1120px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+.editorial-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+.editorial-grid &gt; * { min-inline-size: 0; }</code></pre>
+<p>With enough cards, an additional track fits when the inner width reaches the sum of the track minimums and intervening gaps. Three tracks need 720 px plus 32 px of gaps. At 751 px, two tracks share the available space at 367.5 px apiece. At 752 px, three tracks fit at 240 px apiece. These are thresholds for the example shell under the stated assumptions. The <a href="https://www.w3.org/TR/css-grid-2/#auto-repeat">CSS Grid auto-repeat rules</a> define how repetition accounts for gaps and available space.</p>
+<div class="table-wrap" role="region" aria-label="Editorial grid width reference" tabindex="0">
+<table>
+<caption>Expected sizes with enough cards, 16 px gutters, and 16 px grid gaps</caption>
+<thead><tr><th scope="col">Layout width</th><th scope="col">Grid width</th><th scope="col">Columns</th><th scope="col">Track width</th></tr></thead>
+<tbody>
+<tr><th scope="row">320 px</th><td>288 px</td><td>1</td><td>288 px</td></tr>
+<tr><th scope="row">527 px</th><td>495 px</td><td>1</td><td>495 px</td></tr>
+<tr><th scope="row">528 px</th><td>496 px</td><td>2</td><td>240 px</td></tr>
+<tr><th scope="row">783 px</th><td>751 px</td><td>2</td><td>367.5 px</td></tr>
+<tr><th scope="row">784 px</th><td>752 px</td><td>3</td><td>240 px</td></tr>
+</tbody>
+</table>
+</div>
+<p>Check a lightly populated shelf as well. At 752 px with two cards, <code>auto-fit</code> collapses the empty third track and its adjoining gap, so the two occupied tracks become 368 px each. <code>auto-fill</code> keeps the third slot if the layout needs that space reserved for an incoming card. Once three cards occupy the first row, a fourth card alone on the next row remains one track wide. Track occupancy applies across the grid as a whole.</p>
+<h2>Keep the reading header in the page’s scroll flow</h2>
+<p>Put the sticky header directly inside the shell, before the content that should scroll under it. The shell must extend through the reading area. If a short wrapper encloses only the header, the header runs out of room to stick. Use Flexbox for the header controls and allow those controls to wrap. At 288 px of usable width, a 180 px label and a 112 px navigation group need 304 px with a 12 px gap. The group should move to another line, with its own links able to wrap if they exceed the available width.</p>
+<pre><code>.reading-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background: #f8fafc;
+}
+.reading-bar, .reading-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+}
+.reading-bar &gt; * { min-inline-size: 0; }
+.reading-bar { overflow-wrap: anywhere; }
+.journal-shell [id] { scroll-margin-block-start: var(--reading-clearance, 96px); }</code></pre>
+<p>Measure clearance after fonts load and with the header at its tallest expected wrap. If the occupied height is 84 px, a 96 px offset leaves 12 px between the pinned bar and a heading reached by a fragment link. That offset is a measured allowance. Update it if longer labels, larger text, or additional controls increase header height. Test keyboard focus near the pinned edge too. On a short screen where the header consumes too much reading space, use a height media query to return it to static positioning and adjust the allowance.</p>
+<p>If the header scrolls away before the end of the article, inspect its containing block and the computed overflow of its ancestors. Sticky positioning uses the nearest scrollport and stays within its containing block. An ancestor with <code>overflow-x: hidden</code> and an otherwise visible vertical axis can compute vertical overflow to <code>auto</code>, changing which scrollport the header follows. Move the overflow rule to the element that actually needs it. <a href="https://www.w3.org/TR/css-position-3/#sticky-pos">CSS sticky positioning</a> and <a href="https://www.w3.org/TR/css-overflow-3/#overflow-properties">overflow axis rules</a> explain both constraints.</p>
+<h2>Contain wide content at its source</h2>
+<p>When the page can pan sideways, inspect the element extending past the grid edge. For a 900 px image in a 256 px card content box, limit its inline size to 100% and keep its block size automatic. Reset the inline margins on card figures if default margins eat into that box. If a long source URL widens a nested flex row, allow the text flex item to shrink with <code>min-inline-size: 0</code> and apply <code>overflow-wrap: anywhere</code> to the text. The latter adds break opportunities that also count toward min-content sizing. <a href="https://www.w3.org/TR/css-text-3/#overflow-wrap-property">CSS line wrapping rules</a></p>
+<pre><code>.editorial-grid figure { margin-inline: 0; }
+.editorial-grid img {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+.card-copy { min-inline-size: 0; overflow-wrap: anywhere; }
+.table-wrap, .journal-shell pre {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow-x: auto;
+}</code></pre>
+<p>Keep horizontal scrolling local to material that depends on alignment. If a comparison table needs 420 px to keep its measures legible, a 288 px wrapper gives it 132 px of horizontal travel. Put any required minimum on the table itself and let the wrapper scroll. Preserve the caption and the association between headers and values. Give a keyboard-focusable scroll region an accessible name and a visible focus indicator. Use the same local containment for a code sample whose indentation or line boundaries carry meaning.</p>
+<h2>Verify the layout at seams and under pressure</h2>
+<p>Run a narrow-width pass with the same content and fonts used in production. Use responsive mode to set the viewport in CSS pixels and confirm the actual layout width before comparing it with the table. On a phone, the document should declare a device-width viewport with an initial scale of 1. Otherwise the browser may lay out a wider page and scale it down. Read the grid overlay for column count and the box model for track width. When an edge case fails, record the viewport, grid width, and offending element together. That record helps the next editor reproduce the failure even after the layout moves into a different shell.</p>
+<ul>
+<li>At 320 px, confirm one 288 px track in the example shell. Check that the document root’s <code>scrollWidth</code> equals its <code>clientWidth</code> and that the right edge of the card is visible.</li>
+<li>Check 527 and 528 px, then 783 and 784 px with at least three cards. Compare both sides of each threshold, then remove one card at 784 px and verify the two 368 px tracks.</li>
+<li>Scroll from the first paragraph to the last. Follow a heading link, then tab through controls near the top edge. Confirm the header stays pinned through the reading area and the target and focus indicator remain visible.</li>
+<li>Repeat with a long URL, an oversized image, a wide code line, and larger text. Confirm that text and media fit, the table and code can scroll independently, and the page still reads in source order.</li>
+</ul>
+        </div>
+        <aside class="related-panel" aria-labelledby="related-heading">
+          <h2 id="related-heading" style="margin-top:0">Related Design &amp; Color Guides</h2>
+          <div class="grid-3">
+          <article class="card">
+            <div>
+              <div class="card-meta">Design &amp; Color · 7 min read</div>
+              <h3><a href="../modular-type-scale-readability/">Choosing Modular Type Scales, Line Height, and Measure for Long-Form Reading</a></h3>
+            </div>
+            <p>A type scale can look orderly in a specimen and still interrupt reading when headings wrap or the column gets too wide. Start with one body size, derive adjacent heading steps between 1.200 and 1.333, and tune the column to 60 to 72 characters on roomy layouts. Then adjust baseline spacing using the actual typeface and copy.</p>
+          </article>
+          <article class="card">
+            <div>
+              <div class="card-meta">Design &amp; Color · 7 min read</div>
+              <h3><a href="../print-vs-screen-color-spaces/">sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices</a></h3>
+            </div>
+            <p>A red that separates cleanly on a Display P3 monitor can flatten on an sRGB screen and lose a different set of distinctions on matte paper. This EMFLS Studio Journal field guide shows how to locate the first clipped channel, verify the two CSS color paths, and use measured color differences on a print strip to choose a rendering intent.</p>
+          </article>
+          <article class="card">
+            <div>
+              <div class="card-meta">Design &amp; Color · 7 min read</div>
+              <h3><a href="../svg-diagram-clarity-principles/">Designing Crisp Technical SVG Diagrams with Consistent Stroke and Grid Rules</a></h3>
+            </div>
+            <p>An SVG can look sharp in the drawing tool and still lose thin connectors, arrow direction, or small labels when it lands in a mobile article. This EMFLS Studio Journal field guide builds a 720-unit schematic you can check at 320 CSS pixels, with three measured stroke weights, repeatable arrowhead geometry, and at least 4.5:1 contrast for labels.</p>
+          </article>
+          </div>
+        </aside>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>EMFLS Studio Journal</strong> · Independent reference notes on lighting, design systems, and studio workflow.
+      </div>
+      <nav class="footer-links" aria-label="Editorial &amp; Legal Links">
+        <a href="../../about/">About</a>
+        <a href="../../editorial-policy/">Editorial Policy</a>
+        <a href="../../privacy-policy/">Privacy Policy</a>
+        <a href="../../terms/">Terms</a>
+        <a href="../../contact/">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
