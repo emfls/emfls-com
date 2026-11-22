@@ -700,8 +700,12 @@ def build_trust_pages(latest_date: str, article_count: int) -> dict[str, tuple[s
           <h2>2. Intellectual Property &amp; Fair Citation</h2>
           <p>Original article text, layout styles, studio photographs, and scalable vector diagrams created for EMFLS Studio Journal remain the intellectual property of EMFLS Studio Journal unless otherwise noted. Brief excerpts or links for non-commercial educational citation are welcome with clear attribution back to the canonical URL. Republishing complete guides, tables, or image sets without written permission is prohibited.</p>
           <h2>3. External Reference Links</h2>
-          <p>Links to external reference standards (such as W3C WCAG documentation) or privacy settings pages are provided for reader convenience. We do not control or assume responsibility for the ongoing availability or content of third-party websites.</p>
-          <h2>4. Permissions &amp; Contact Regarding Terms</h2>
+          <p>Links to external reference standards (such as W3C WCAG documentation, optical photometry specifications, or browser privacy settings pages) are provided strictly for reader convenience and independent verification. We do not control, endorse, or assume responsibility for the ongoing availability, accuracy, or privacy policies of third-party websites.</p>
+          <h2>4. Editorial Updates, Revisions &amp; Correction Policy</h2>
+          <p>Technical standards, browser rendering engines, and LED measurement benchmarks evolve over time. Every field guide displays both its original publication date and its most recent substantive review date. When readers or internal checks surface an arithmetic typo, broken anchor, or outdated browser behavior, we correct the affected guide directly and update its revision timestamp rather than silently deleting reference pages.</p>
+          <h2>5. Availability &amp; Limitation of Liability</h2>
+          <p>EMFLS Studio Journal is published as a free static reference library on an &ldquo;as-is&rdquo; basis without warranties of uninterrupted uptime or fitness for a specific commercial installation. Neither EMFLS Studio Journal nor its contributors shall be liable for indirect damages, equipment misuse, or production losses arising from applying general workshop examples without local testing.</p>
+          <h2>6. Permissions &amp; Contact Regarding Terms</h2>
           <p>For permissions inquiries, copyright notices, or questions regarding these terms, write directly to <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or visit our <a href="../contact/">Contact page</a>.</p>
         </div>
       </article>""",
@@ -748,6 +752,8 @@ def build_trust_pages(latest_date: str, article_count: int) -> dict[str, tuple[s
             <li>The exact heading, table row, or diagram label you are referencing.</li>
             <li>For layout or accessibility bugs, your browser name and approximate viewport width (for example, mobile 375 px or desktop 1440 px).</li>
           </ul>
+          <h2>How Editorial Corrections Are Verified &amp; Logged</h2>
+          <p>When you flag a technical discrepancy—such as a lighting falloff calculation, contrast ratio, or CSS layout rule—our editorial desk reproduces the exact conditions on calibrated test fixtures or browser viewports before editing the source file. Confirmed fixes are rebuilt across the static site, validated against automated accessibility and broken-link checks, and reflected in the article&rsquo;s updated revision date.</p>
           <p>Please note that we do not accept paid guest posts, sponsored product placements, or paid link exchanges. Keep confidential passwords or sensitive personal documents out of both email and public GitHub reports. See our <a href="../privacy-policy/">Privacy Policy</a> and <a href="../editorial-policy/">Editorial Policy</a> for full details.</p>
         </div>
       </article>""",

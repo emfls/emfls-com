@@ -1,5 +1,15 @@
 [
   {
+    "path": "design/optical-alignment-icon-grid-metrics/",
+    "title": "Optical Alignment, Bounding-Box Padding, and Visual Weight for System Icons",
+    "category": "design",
+    "category_label": "Design & Color",
+    "reading_minutes": 9,
+    "published_date": "2026-11-23",
+    "summary": "Centering an icon mathematically inside a 24px bounding box often makes it appear misaligned. Shapes like triangles, play arrows, and stars carry uneven visual mass, causing them to lean when placed at strict geometric centers. Establishing optical keylines, compensating interior padding, and shifting visual centroids 1 to 2 pixels restore balance across varied icon systems.",
+    "description": "Align asymmetrical UI icons inside 24px grids by balancing geometric bounding boxes against visual mass, optical padding, and keyline surface areas."
+  },
+  {
     "path": "lighting/softbox-distance-inverse-square-falloff/",
     "title": "Softbox Distance, Feathering, and Inverse-Square Falloff in Small Studios",
     "category": "lighting",
