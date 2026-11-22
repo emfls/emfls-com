@@ -1,48 +1,13 @@
 [
   {
-    "path": "lighting/focal-length-perspective-compression/",
-    "title": "How Focal Length and Subject Distance Change Perspective Compression",
+    "path": "lighting/softbox-distance-inverse-square-falloff/",
+    "title": "Softbox Distance, Feathering, and Inverse-Square Falloff in Small Studios",
     "category": "lighting",
     "category_label": "Lighting & Optics",
-    "reading_minutes": 7,
-    "summary": "A backdrop pattern can grow behind a portrait even when the face stays the same size in the frame. This guide separates the effect of moving the camera from the effect of changing focal length. With 35mm, 50mm, and 85mm lenses, you’ll match subject framing, measure two targets in pixels, and predict how their image sizes compare before moving the tripod.",
-    "description": "Match framing at 35mm, 50mm, and 85mm, then use measured camera and backdrop distances to predict how large background details will look in studio photos."
-  },
-  {
-    "path": "lighting/histogram-exposure-reading/",
-    "title": "Reading Luminance and RGB Histograms Without Clipping Highlights",
-    "category": "lighting",
-    "category_label": "Lighting & Optics",
-    "reading_minutes": 7,
-    "summary": "A bright strip on glazed ceramic or a fold of saturated fabric can lose texture while the camera’s brightness histogram still shows room on the right. Use the RGB display to spot the first channel at risk, then bracket in one-third-stop steps and verify the critical patch in the raw file. Record the brightest clean frame and a repeatable working margin.",
-    "description": "Read luminance and RGB histograms, bracket in one-third-stop steps, and verify raw highlight margins before exposing to the right in the studio."
-  },
-  {
-    "path": "lighting/kelvin-white-balance-guide/",
-    "title": "Understanding Kelvin Color Temperature and Mixed-Light White Balance",
-    "category": "lighting",
-    "category_label": "Lighting & Optics",
-    "reading_minutes": 7,
-    "summary": "A daylight window, a tungsten lamp, and an LED practical can put three different casts on the same subject. Use a gray card at the subject plane to measure each source, then match or contain the spill before setting the final white balance. The worked setup keeps the lamp visibly warm while bringing both subject checkpoints within three RGB code values.",
-    "description": "Balance daylight, tungsten, and LED spill with gray-card readings, Kelvin and tint adjustments, and a three-code RGB tolerance for neutral subjects."
-  },
-  {
-    "path": "lighting/raw-vs-jpeg-dynamic-range/",
-    "title": "Dynamic Range Recovery in 14-Bit RAW Files Compared to In-Camera JPEG",
-    "category": "lighting",
-    "category_label": "Lighting & Optics",
-    "reading_minutes": 7,
-    "summary": "A camera can show a white patch as blown out in its JPEG while the paired RAW still holds the weave. The reverse problem appears in shadows, where a clean-looking JPEG may have smoothed away detail. Use one-third-stop brackets, channel readings, and repeated shadow frames to measure the remaining highlight margin and set a usable shadow limit for your lighting setup.",
-    "description": "Measure highlight headroom in one-third-stop steps, compare 14-bit RAW and 8-bit JPEG, and use a shadow texture test to set a studio exposure limit."
-  },
-  {
-    "path": "lighting/tabletop-product-shadow-control/",
-    "title": "Controlling Specular Reflections and Soft Shadows on Tabletop Surfaces",
-    "category": "lighting",
-    "category_label": "Lighting & Optics",
-    "reading_minutes": 7,
-    "summary": "A scrim can soften a tabletop shadow and still leave a distracting white patch on the product. Use a mirror to locate the reflection, then adjust scrim distance and black card spacing in measured steps. This setup gives you a way to log shadow transition width, control the width of a metal highlight, and keep clear glass edges visible.",
-    "description": "Use measured scrim angles, black card spacing, and shadow edge widths to control highlights on matte ceramic, brushed metal, and clear glass."
+    "reading_minutes": 9,
+    "published_date": "2026-11-22",
+    "summary": "Moving a 60 cm softbox from 0.6 m to 1.8 m does not just change exposure—it transforms how fast light drops behind the subject. Measure the subject-to-light and subject-to-backdrop distances first, then use the inverse-square ratio to brighten or darken a neutral wall by more than two full stops without adding a second light.",
+    "description": "Control portrait background brightness and shadow transition in a 3-metre room by measuring softbox distance, inverse-square falloff stops, and feather angles."
   },
   {
     "path": "lighting/window-light-portrait-setup/",
@@ -50,53 +15,9 @@
     "category": "lighting",
     "category_label": "Lighting & Optics",
     "reading_minutes": 7,
+    "published_date": "2026-11-19",
     "summary": "A window can give you a bright cheek, a dark eye socket, and a hot strip on the nose within the same half metre of floor space. Mark the chair against the window, measure the light lost through a sheer, then move a white foam-core board until the cheek-to-cheek brightness gap lands around one to one and a half stops.",
     "description": "Set up portraits in a small room by measuring window feathering angles, checking sheer curtain light loss, and setting white foam-core fill distance."
-  },
-  {
-    "path": "design/modular-type-scale-readability/",
-    "title": "Choosing Modular Type Scales, Line Height, and Measure for Long-Form Reading",
-    "category": "design",
-    "category_label": "Design & Color",
-    "reading_minutes": 7,
-    "summary": "A type scale can look orderly in a specimen and still interrupt reading when headings wrap or the column gets too wide. Start with one body size, derive adjacent heading steps between 1.200 and 1.333, and tune the column to 60 to 72 characters on roomy layouts. Then adjust baseline spacing using the actual typeface and copy.",
-    "description": "Set heading ratios from 1.200 to 1.333, tune body measure to 60 to 72 characters, and verify line height with real copy at desktop and mobile widths."
-  },
-  {
-    "path": "design/print-vs-screen-color-spaces/",
-    "title": "sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices",
-    "category": "design",
-    "category_label": "Design & Color",
-    "reading_minutes": 7,
-    "summary": "A red that separates cleanly on a Display P3 monitor can flatten on an sRGB screen and lose a different set of distinctions on matte paper. This EMFLS Studio Journal field guide shows how to locate the first clipped channel, verify the two CSS color paths, and use measured color differences on a print strip to choose a rendering intent.",
-    "description": "Locate sRGB clipping in a Display P3 ramp, test CSS fallbacks on two displays, and use measured color differences to approve a matte paper proof."
-  },
-  {
-    "path": "design/responsive-css-grid-editorial-layouts/",
-    "title": "Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px",
-    "category": "design",
-    "category_label": "Design & Color",
-    "reading_minutes": 7,
-    "summary": "An editorial layout can fit its cards at 320 px and still fail when a long caption widens the page or a sticky header covers a heading. Use CSS Grid to size cards from the space they actually have, Flexbox to wrap reading controls, and local scrolling for wide reference material. The test layout leaves a 288 px grid and zero page-level horizontal overflow.",
-    "description": "Build a CSS editorial grid that fits 320 px, adds columns at measured widths, keeps the reading header sticky, and contains horizontal overflow."
-  },
-  {
-    "path": "design/svg-diagram-clarity-principles/",
-    "title": "Designing Crisp Technical SVG Diagrams with Consistent Stroke and Grid Rules",
-    "category": "design",
-    "category_label": "Design & Color",
-    "reading_minutes": 7,
-    "summary": "An SVG can look sharp in the drawing tool and still lose thin connectors, arrow direction, or small labels when it lands in a mobile article. This EMFLS Studio Journal field guide builds a 720-unit schematic you can check at 320 CSS pixels, with three measured stroke weights, repeatable arrowhead geometry, and at least 4.5:1 contrast for labels.",
-    "description": "Use a 40-unit SVG grid, a three-weight stroke hierarchy, measured arrowheads, and 4.5:1 label contrast to keep technical diagrams readable on mobile."
-  },
-  {
-    "path": "design/wcag-contrast-palette-building/",
-    "title": "Building Accessible Light and Dark Color Palettes with Luminance Ratios",
-    "category": "design",
-    "category_label": "Design & Color",
-    "reading_minutes": 7,
-    "summary": "A caption can pass on a white canvas and fail when it moves into a tinted panel. Build light and dark palettes by measuring each ink against every surface it can touch. This guide shows how to calculate those ratios, set three legible ink levels, and give quiet dividers and functional borders different jobs.",
-    "description": "Calculate WCAG luminance ratios for light and dark surfaces, then build three readable ink levels and verify muted borders against adjacent colors."
   },
   {
     "path": "design/whitespace-visual-hierarchy/",
@@ -104,53 +25,39 @@
     "category": "design",
     "category_label": "Design & Color",
     "reading_minutes": 7,
+    "published_date": "2026-11-19",
     "summary": "When a procedure, warning, and reference table sit close together, readers can lose track of which instructions belong to which heading. Start with a 4 px spacing grid, give a heading 8 px to its body, and use 32 px between peer sections. Measure the rendered gaps and test the grouping at narrow widths with real content.",
     "description": "Use a 4 px spacing grid, 8 px heading gaps, and 32 px section gaps to clarify dense documentation and verify the hierarchy at narrow widths."
   },
   {
-    "path": "studio/keyboard-ergonomics-desk-geometry/",
-    "title": "Measuring Chair Height, Monitor Angle, and Wrist Alignment for Long Sessions",
-    "category": "studio",
-    "category_label": "Studio Workflow",
+    "path": "design/wcag-contrast-palette-building/",
+    "title": "Building Accessible Light and Dark Color Palettes with Luminance Ratios",
+    "category": "design",
+    "category_label": "Design & Color",
     "reading_minutes": 7,
-    "summary": "A chair can feel right until the desk lifts your shoulders, the keyboard bends your wrists, or the screen makes you crane your neck. Use a tape measure to set loaded seat height and knee clearance, check elbow and wrist angles while typing, and align the monitor's top bezel with seated eye level. Record the measurements so you can restore the setup after someone moves it.",
-    "description": "Use a tape measure to set chair height, seat pan clearance, and monitor position, then check elbow angle and near-neutral wrists while typing."
+    "published_date": "2026-11-19",
+    "summary": "A caption can pass on a white canvas and fail when it moves into a tinted panel. Build light and dark palettes by measuring each ink against every surface it can touch. This guide shows how to calculate those ratios, set three legible ink levels, and give quiet dividers and functional borders different jobs.",
+    "description": "Calculate WCAG luminance ratios for light and dark surfaces, then build three readable ink levels and verify muted borders against adjacent colors."
   },
   {
-    "path": "studio/markdown-plain-text-archiving/",
-    "title": "Structuring Long-Term Project Notes in Portable Plain-Text Markdown",
-    "category": "studio",
-    "category_label": "Studio Workflow",
-    "reading_minutes": 8,
-    "summary": "A project archive can survive a move and still lose the trail from a decision to its supporting photograph. Build a folder that keeps that trail intact with six frontmatter fields, sortable dates, relative image links, and a plain-text index. Then copy the folder and spend ten minutes checking three notes, every path they cite, and the recorded decision behind one measurement.",
-    "description": "Archive studio projects with six frontmatter fields, ISO dates, relative image links, and a flat index you can verify in a 10-minute migration drill."
+    "path": "lighting/tabletop-product-shadow-control/",
+    "title": "Controlling Specular Reflections and Soft Shadows on Tabletop Surfaces",
+    "category": "lighting",
+    "category_label": "Lighting & Optics",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A scrim can soften a tabletop shadow and still leave a distracting white patch on the product. Use a mirror to locate the reflection, then adjust scrim distance and black card spacing in measured steps. This setup gives you a way to log shadow transition width, control the width of a metal highlight, and keep clear glass edges visible.",
+    "description": "Use measured scrim angles, black card spacing, and shadow edge widths to control highlights on matte ceramic, brushed metal, and clear glass."
   },
   {
-    "path": "studio/microphone-distance-proximity-effect/",
-    "title": "Balancing Microphone Distance, Polar Patterns, and Proximity Effect",
-    "category": "studio",
-    "category_label": "Studio Workflow",
+    "path": "design/svg-diagram-clarity-principles/",
+    "title": "Designing Crisp Technical SVG Diagrams with Consistent Stroke and Grid Rules",
+    "category": "design",
+    "category_label": "Design & Color",
     "reading_minutes": 7,
-    "summary": "A close cardioid vocal can gain useful weight on held notes and still lose a take to one hard P. Record the same phrase on a dynamic and a condenser from 10 to 35 cm, then match playback levels and measure vowel bass and plosive peaks separately. The aim is a placement you can repeat that keeps the vocal full and the room in check.",
-    "description": "Test cardioid dynamics and condensers at 10 to 35 cm, match vocal levels, and measure bass and plosive peaks to choose a repeatable placement."
-  },
-  {
-    "path": "studio/monitor-calibration-ambient-light/",
-    "title": "Setting Desk Monitor Brightness and Bias Lighting for Accurate Color Work",
-    "category": "studio",
-    "category_label": "Studio Workflow",
-    "reading_minutes": 7,
-    "summary": "A bright screen against a dark wall makes your eyes repeatedly adapt, while light reflected off the panel can hide shadow detail. Set SDR screen white to 100–120 cd/m², then measure the neutral D65 wall glow at about one tenth of that value. Check a near-black pattern from your editing seat before making exposure or black-point decisions.",
-    "description": "Set your monitor to 100–120 cd/m² and measure neutral D65 bias lighting at about 10% of screen white for more consistent shadow judgments."
-  },
-  {
-    "path": "studio/non-destructive-file-naming-system/",
-    "title": "Practical Date-First File Naming and Folder Trees for Creative Assets",
-    "category": "studio",
-    "category_label": "Studio Workflow",
-    "reading_minutes": 7,
-    "summary": "A folder full of final-v2 files leaves the next editor guessing which source and edit produced a delivery. Give each asset a date-first ID, protect the master, and put each export under its working revision. On a 240-file intake, you can verify zero duplicate destination paths and trace a delivered JPEG to its master in under two minutes.",
-    "description": "Use date-first names, fixed-width sequences, read-only masters, and export folders to reach zero duplicate paths and trace each delivery to its source."
+    "published_date": "2026-11-19",
+    "summary": "An SVG can look sharp in the drawing tool and still lose thin connectors, arrow direction, or small labels when it lands in a mobile article. This EMFLS Studio Journal field guide builds a 720-unit schematic you can check at 320 CSS pixels, with three measured stroke weights, repeatable arrowhead geometry, and at least 4.5:1 contrast for labels.",
+    "description": "Use a 40-unit SVG grid, a three-weight stroke hierarchy, measured arrowheads, and 4.5:1 label contrast to keep technical diagrams readable on mobile."
   },
   {
     "path": "studio/small-room-acoustic-treatment/",
@@ -158,7 +65,128 @@
     "category": "studio",
     "category_label": "Studio Workflow",
     "reading_minutes": 7,
+    "published_date": "2026-11-19",
     "summary": "A small desk room can send a speaker reflection back to your ears within a few milliseconds, ring between bare walls, and bounce your voice off the desktop into the mic. Mark each path, calculate a panel gap that fits the room, then compare reflection levels in decibels and record dry voice takes to hear what changed.",
     "description": "Map first reflections, size a porous panel’s air gap, and test desk bounce and flutter echo with measured path lengths and before-and-after recordings."
+  },
+  {
+    "path": "design/responsive-css-grid-editorial-layouts/",
+    "title": "Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px",
+    "category": "design",
+    "category_label": "Design & Color",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "An editorial layout can fit its cards at 320 px and still fail when a long caption widens the page or a sticky header covers a heading. Use CSS Grid to size cards from the space they actually have, Flexbox to wrap reading controls, and local scrolling for wide reference material. The test layout leaves a 288 px grid and zero page-level horizontal overflow.",
+    "description": "Build a CSS editorial grid that fits 320 px, adds columns at measured widths, keeps the reading header sticky, and contains horizontal overflow."
+  },
+  {
+    "path": "lighting/raw-vs-jpeg-dynamic-range/",
+    "title": "Dynamic Range Recovery in 14-Bit RAW Files Compared to In-Camera JPEG",
+    "category": "lighting",
+    "category_label": "Lighting & Optics",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A camera can show a white patch as blown out in its JPEG while the paired RAW still holds the weave. The reverse problem appears in shadows, where a clean-looking JPEG may have smoothed away detail. Use one-third-stop brackets, channel readings, and repeated shadow frames to measure the remaining highlight margin and set a usable shadow limit for your lighting setup.",
+    "description": "Measure highlight headroom in one-third-stop steps, compare 14-bit RAW and 8-bit JPEG, and use a shadow texture test to set a studio exposure limit."
+  },
+  {
+    "path": "design/print-vs-screen-color-spaces/",
+    "title": "sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices",
+    "category": "design",
+    "category_label": "Design & Color",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A red that separates cleanly on a Display P3 monitor can flatten on an sRGB screen and lose a different set of distinctions on matte paper. This EMFLS Studio Journal field guide shows how to locate the first clipped channel, verify the two CSS color paths, and use measured color differences on a print strip to choose a rendering intent.",
+    "description": "Locate sRGB clipping in a Display P3 ramp, test CSS fallbacks on two displays, and use measured color differences to approve a matte paper proof."
+  },
+  {
+    "path": "studio/non-destructive-file-naming-system/",
+    "title": "Practical Date-First File Naming and Folder Trees for Creative Assets",
+    "category": "studio",
+    "category_label": "Studio Workflow",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A folder full of final-v2 files leaves the next editor guessing which source and edit produced a delivery. Give each asset a date-first ID, protect the master, and put each export under its working revision. On a 240-file intake, you can verify zero duplicate destination paths and trace a delivered JPEG to its master in under two minutes.",
+    "description": "Use date-first names, fixed-width sequences, read-only masters, and export folders to reach zero duplicate paths and trace each delivery to its source."
+  },
+  {
+    "path": "studio/monitor-calibration-ambient-light/",
+    "title": "Setting Desk Monitor Brightness and Bias Lighting for Accurate Color Work",
+    "category": "studio",
+    "category_label": "Studio Workflow",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A bright screen against a dark wall makes your eyes repeatedly adapt, while light reflected off the panel can hide shadow detail. Set SDR screen white to 100–120 cd/m², then measure the neutral D65 wall glow at about one tenth of that value. Check a near-black pattern from your editing seat before making exposure or black-point decisions.",
+    "description": "Set your monitor to 100–120 cd/m² and measure neutral D65 bias lighting at about 10% of screen white for more consistent shadow judgments."
+  },
+  {
+    "path": "design/modular-type-scale-readability/",
+    "title": "Choosing Modular Type Scales, Line Height, and Measure for Long-Form Reading",
+    "category": "design",
+    "category_label": "Design & Color",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A type scale can look orderly in a specimen and still interrupt reading when headings wrap or the column gets too wide. Start with one body size, derive adjacent heading steps between 1.200 and 1.333, and tune the column to 60 to 72 characters on roomy layouts. Then adjust baseline spacing using the actual typeface and copy.",
+    "description": "Set heading ratios from 1.200 to 1.333, tune body measure to 60 to 72 characters, and verify line height with real copy at desktop and mobile widths."
+  },
+  {
+    "path": "studio/microphone-distance-proximity-effect/",
+    "title": "Balancing Microphone Distance, Polar Patterns, and Proximity Effect",
+    "category": "studio",
+    "category_label": "Studio Workflow",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A close cardioid vocal can gain useful weight on held notes and still lose a take to one hard P. Record the same phrase on a dynamic and a condenser from 10 to 35 cm, then match playback levels and measure vowel bass and plosive peaks separately. The aim is a placement you can repeat that keeps the vocal full and the room in check.",
+    "description": "Test cardioid dynamics and condensers at 10 to 35 cm, match vocal levels, and measure bass and plosive peaks to choose a repeatable placement."
+  },
+  {
+    "path": "studio/markdown-plain-text-archiving/",
+    "title": "Structuring Long-Term Project Notes in Portable Plain-Text Markdown",
+    "category": "studio",
+    "category_label": "Studio Workflow",
+    "reading_minutes": 8,
+    "published_date": "2026-11-19",
+    "summary": "A project archive can survive a move and still lose the trail from a decision to its supporting photograph. Build a folder that keeps that trail intact with six frontmatter fields, sortable dates, relative image links, and a plain-text index. Then copy the folder and spend ten minutes checking three notes, every path they cite, and the recorded decision behind one measurement.",
+    "description": "Archive studio projects with six frontmatter fields, ISO dates, relative image links, and a flat index you can verify in a 10-minute migration drill."
+  },
+  {
+    "path": "studio/keyboard-ergonomics-desk-geometry/",
+    "title": "Measuring Chair Height, Monitor Angle, and Wrist Alignment for Long Sessions",
+    "category": "studio",
+    "category_label": "Studio Workflow",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A chair can feel right until the desk lifts your shoulders, the keyboard bends your wrists, or the screen makes you crane your neck. Use a tape measure to set loaded seat height and knee clearance, check elbow and wrist angles while typing, and align the monitor's top bezel with seated eye level. Record the measurements so you can restore the setup after someone moves it.",
+    "description": "Use a tape measure to set chair height, seat pan clearance, and monitor position, then check elbow angle and near-neutral wrists while typing."
+  },
+  {
+    "path": "lighting/kelvin-white-balance-guide/",
+    "title": "Understanding Kelvin Color Temperature and Mixed-Light White Balance",
+    "category": "lighting",
+    "category_label": "Lighting & Optics",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A daylight window, a tungsten lamp, and an LED practical can put three different casts on the same subject. Use a gray card at the subject plane to measure each source, then match or contain the spill before setting the final white balance. The worked setup keeps the lamp visibly warm while bringing both subject checkpoints within three RGB code values.",
+    "description": "Balance daylight, tungsten, and LED spill with gray-card readings, Kelvin and tint adjustments, and a three-code RGB tolerance for neutral subjects."
+  },
+  {
+    "path": "lighting/histogram-exposure-reading/",
+    "title": "Reading Luminance and RGB Histograms Without Clipping Highlights",
+    "category": "lighting",
+    "category_label": "Lighting & Optics",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A bright strip on glazed ceramic or a fold of saturated fabric can lose texture while the camera’s brightness histogram still shows room on the right. Use the RGB display to spot the first channel at risk, then bracket in one-third-stop steps and verify the critical patch in the raw file. Record the brightest clean frame and a repeatable working margin.",
+    "description": "Read luminance and RGB histograms, bracket in one-third-stop steps, and verify raw highlight margins before exposing to the right in the studio."
+  },
+  {
+    "path": "lighting/focal-length-perspective-compression/",
+    "title": "How Focal Length and Subject Distance Change Perspective Compression",
+    "category": "lighting",
+    "category_label": "Lighting & Optics",
+    "reading_minutes": 7,
+    "published_date": "2026-11-19",
+    "summary": "A backdrop pattern can grow behind a portrait even when the face stays the same size in the frame. This guide separates the effect of moving the camera from the effect of changing focal length. With 35mm, 50mm, and 85mm lenses, you’ll match subject framing, measure two targets in pixels, and predict how their image sizes compare before moving the tripod.",
+    "description": "Match framing at 35mm, 50mm, and 85mm, then use measured camera and backdrop distances to predict how large background details will look in studio photos."
   }
 ]

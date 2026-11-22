@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>EMFLS Studio Journal</title>
+    <link>https://www.emfls.com/</link>
+    <description>Independent field guides covering photography lighting, editorial design systems, and studio workflow craft.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Nov 2026 12:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.emfls.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Softbox Distance, Feathering, and Inverse-Square Falloff in Small Studios</title>
+      <link>https://www.emfls.com/lighting/softbox-distance-inverse-square-falloff/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/softbox-distance-inverse-square-falloff/</guid>
+      <pubDate>Sun, 22 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Control portrait background brightness and shadow transition in a 3-metre room by measuring softbox distance, inverse-square falloff stops, and feather angles.</description>
+    </item>
+    <item>
+      <title>Window Light Direction, Diffusion, and Fill Angles for Small Rooms</title>
+      <link>https://www.emfls.com/lighting/window-light-portrait-setup/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/window-light-portrait-setup/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Set up portraits in a small room by measuring window feathering angles, checking sheer curtain light loss, and setting white foam-core fill distance.</description>
+    </item>
+    <item>
+      <title>Using Spacing Tokens and Grouping Ratios to Clarify Complex Pages</title>
+      <link>https://www.emfls.com/design/whitespace-visual-hierarchy/</link>
+      <guid isPermaLink="true">https://www.emfls.com/design/whitespace-visual-hierarchy/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Use a 4 px spacing grid, 8 px heading gaps, and 32 px section gaps to clarify dense documentation and verify the hierarchy at narrow widths.</description>
+    </item>
+    <item>
+      <title>Building Accessible Light and Dark Color Palettes with Luminance Ratios</title>
+      <link>https://www.emfls.com/design/wcag-contrast-palette-building/</link>
+      <guid isPermaLink="true">https://www.emfls.com/design/wcag-contrast-palette-building/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Calculate WCAG luminance ratios for light and dark surfaces, then build three readable ink levels and verify muted borders against adjacent colors.</description>
+    </item>
+    <item>
+      <title>Controlling Specular Reflections and Soft Shadows on Tabletop Surfaces</title>
+      <link>https://www.emfls.com/lighting/tabletop-product-shadow-control/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/tabletop-product-shadow-control/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Use measured scrim angles, black card spacing, and shadow edge widths to control highlights on matte ceramic, brushed metal, and clear glass.</description>
+    </item>
+    <item>
+      <title>Designing Crisp Technical SVG Diagrams with Consistent Stroke and Grid Rules</title>
+      <link>https://www.emfls.com/design/svg-diagram-clarity-principles/</link>
+      <guid isPermaLink="true">https://www.emfls.com/design/svg-diagram-clarity-principles/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Use a 40-unit SVG grid, a three-weight stroke hierarchy, measured arrowheads, and 4.5:1 label contrast to keep technical diagrams readable on mobile.</description>
+    </item>
+    <item>
+      <title>Reducing First Reflections and Flutter Echo in Small Desk Rooms</title>
+      <link>https://www.emfls.com/studio/small-room-acoustic-treatment/</link>
+      <guid isPermaLink="true">https://www.emfls.com/studio/small-room-acoustic-treatment/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Map first reflections, size a porous panel’s air gap, and test desk bounce and flutter echo with measured path lengths and before-and-after recordings.</description>
+    </item>
+    <item>
+      <title>Structuring Multi-Column Editorial Layouts That Scale Cleanly to 320px</title>
+      <link>https://www.emfls.com/design/responsive-css-grid-editorial-layouts/</link>
+      <guid isPermaLink="true">https://www.emfls.com/design/responsive-css-grid-editorial-layouts/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Build a CSS editorial grid that fits 320 px, adds columns at measured widths, keeps the reading header sticky, and contains horizontal overflow.</description>
+    </item>
+    <item>
+      <title>Dynamic Range Recovery in 14-Bit RAW Files Compared to In-Camera JPEG</title>
+      <link>https://www.emfls.com/lighting/raw-vs-jpeg-dynamic-range/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/raw-vs-jpeg-dynamic-range/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Measure highlight headroom in one-third-stop steps, compare 14-bit RAW and 8-bit JPEG, and use a shadow texture test to set a studio exposure limit.</description>
+    </item>
+    <item>
+      <title>sRGB, Display P3, and CMYK: Preventing Color Shifts Across Devices</title>
+      <link>https://www.emfls.com/design/print-vs-screen-color-spaces/</link>
+      <guid isPermaLink="true">https://www.emfls.com/design/print-vs-screen-color-spaces/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Locate sRGB clipping in a Display P3 ramp, test CSS fallbacks on two displays, and use measured color differences to approve a matte paper proof.</description>
+    </item>
+    <item>
+      <title>Practical Date-First File Naming and Folder Trees for Creative Assets</title>
+      <link>https://www.emfls.com/studio/non-destructive-file-naming-system/</link>
+      <guid isPermaLink="true">https://www.emfls.com/studio/non-destructive-file-naming-system/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Use date-first names, fixed-width sequences, read-only masters, and export folders to reach zero duplicate paths and trace each delivery to its source.</description>
+    </item>
+    <item>
+      <title>Setting Desk Monitor Brightness and Bias Lighting for Accurate Color Work</title>
+      <link>https://www.emfls.com/studio/monitor-calibration-ambient-light/</link>
+      <guid isPermaLink="true">https://www.emfls.com/studio/monitor-calibration-ambient-light/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Set your monitor to 100–120 cd/m² and measure neutral D65 bias lighting at about 10% of screen white for more consistent shadow judgments.</description>
+    </item>
+    <item>
+      <title>Choosing Modular Type Scales, Line Height, and Measure for Long-Form Reading</title>
+      <link>https://www.emfls.com/design/modular-type-scale-readability/</link>
+      <guid isPermaLink="true">https://www.emfls.com/design/modular-type-scale-readability/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Set heading ratios from 1.200 to 1.333, tune body measure to 60 to 72 characters, and verify line height with real copy at desktop and mobile widths.</description>
+    </item>
+    <item>
+      <title>Balancing Microphone Distance, Polar Patterns, and Proximity Effect</title>
+      <link>https://www.emfls.com/studio/microphone-distance-proximity-effect/</link>
+      <guid isPermaLink="true">https://www.emfls.com/studio/microphone-distance-proximity-effect/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Test cardioid dynamics and condensers at 10 to 35 cm, match vocal levels, and measure bass and plosive peaks to choose a repeatable placement.</description>
+    </item>
+    <item>
+      <title>Structuring Long-Term Project Notes in Portable Plain-Text Markdown</title>
+      <link>https://www.emfls.com/studio/markdown-plain-text-archiving/</link>
+      <guid isPermaLink="true">https://www.emfls.com/studio/markdown-plain-text-archiving/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Archive studio projects with six frontmatter fields, ISO dates, relative image links, and a flat index you can verify in a 10-minute migration drill.</description>
+    </item>
+    <item>
+      <title>Measuring Chair Height, Monitor Angle, and Wrist Alignment for Long Sessions</title>
+      <link>https://www.emfls.com/studio/keyboard-ergonomics-desk-geometry/</link>
+      <guid isPermaLink="true">https://www.emfls.com/studio/keyboard-ergonomics-desk-geometry/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Use a tape measure to set chair height, seat pan clearance, and monitor position, then check elbow angle and near-neutral wrists while typing.</description>
+    </item>
+    <item>
+      <title>Understanding Kelvin Color Temperature and Mixed-Light White Balance</title>
+      <link>https://www.emfls.com/lighting/kelvin-white-balance-guide/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/kelvin-white-balance-guide/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Balance daylight, tungsten, and LED spill with gray-card readings, Kelvin and tint adjustments, and a three-code RGB tolerance for neutral subjects.</description>
+    </item>
+    <item>
+      <title>Reading Luminance and RGB Histograms Without Clipping Highlights</title>
+      <link>https://www.emfls.com/lighting/histogram-exposure-reading/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/histogram-exposure-reading/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Read luminance and RGB histograms, bracket in one-third-stop steps, and verify raw highlight margins before exposing to the right in the studio.</description>
+    </item>
+    <item>
+      <title>How Focal Length and Subject Distance Change Perspective Compression</title>
+      <link>https://www.emfls.com/lighting/focal-length-perspective-compression/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/focal-length-perspective-compression/</guid>
+      <pubDate>Thu, 19 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Match framing at 35mm, 50mm, and 85mm, then use measured camera and backdrop distances to predict how large background details will look in studio photos.</description>
+    </item>
+  </channel>
+</rss>

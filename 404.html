@@ -7,11 +7,20 @@
   <meta name="description" content="Explore current EMFLS Studio Journal guides on lighting, design, and studio workflow.">
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.emfls.com/404.html">
+  <link rel="alternate" type="application/rss+xml" title="EMFLS Studio Journal RSS" href="https://www.emfls.com/rss.xml">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EMFLS Studio Journal">
   <meta property="og:title" content="Page Not Found — EMFLS Studio Journal">
   <meta property="og:description" content="Explore current EMFLS Studio Journal guides on lighting, design, and studio workflow.">
   <meta property="og:url" content="https://www.emfls.com/404.html">
+  <meta property="og:image" content="https://www.emfls.com/assets/images/og-home.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="800">
+  <meta property="og:image:alt" content="EMFLS Studio Journal workspace with calibrated photography, design, and studio instruments">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Page Not Found — EMFLS Studio Journal">
+  <meta name="twitter:description" content="Explore current EMFLS Studio Journal guides on lighting, design, and studio workflow.">
+  <meta name="twitter:image" content="https://www.emfls.com/assets/images/og-home.webp">
   <style>/* EMFLS Studio Journal — Editorial Field Guide Stylesheet */
 :root {
   --bg: #faf9f6;
@@ -257,6 +266,68 @@ h3 {
   gap: 10px;
 }
 
+.card-thumb-link {
+  display: block;
+  margin: -20px -20px 8px;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.card-thumb {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-photo {
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+.hero-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.hero-photo figcaption {
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+.faq-section {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.faq-item h3 {
+  margin: 0 0 6px;
+  font-size: 1.04rem;
+}
+
+.faq-item p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+}
+
 .card h3,
 .card h2 {
   margin: 0;
@@ -498,9 +569,9 @@ code {
       <section class="hero">
         <p class="eyebrow">Page Not Found (404)</p>
         <h1>This URL has moved or been retired</h1>
-        <p class="lead">EMFLS Studio Journal was rebuilt from the ground up with organized technical guides covering Lighting &amp; Optics, Design &amp; Color, and Studio Workflow. Use the search below or browse any section directly.</p>
+        <p class="lead">EMFLS Studio Journal is organized into field guides covering Lighting &amp; Optics, Design &amp; Color, and Studio Workflow. Use the search below or browse any section directly.</p>
         <form id="studio-search-form" class="search-box" role="search">
-          <input id="studio-search-input" type="search" aria-label="Search current field guides" placeholder="Try lighting or contrast">
+          <input id="studio-search-input" type="search" aria-label="Search current field guides" placeholder="Try softbox, lighting, or contrast">
           <button type="submit">Search</button>
         </form>
         <div id="studio-search-results" class="search-results" role="region" aria-live="polite" aria-label="Search results"></div>
@@ -509,8 +580,8 @@ code {
         <h2 id="recover-title">Browse Current Sections</h2>
         <div class="grid-3">
           <article class="card">
-            <div><div class="card-meta">6 Guides</div><h3><a href="/lighting/" data-nav-rel="lighting/">Lighting &amp; Optics</a></h3></div>
-            <p>Window diffusion angles, Kelvin balance, focal length geometry, and RAW dynamic range.</p>
+            <div><div class="card-meta">7 Guides</div><h3><a href="/lighting/" data-nav-rel="lighting/">Lighting &amp; Optics</a></h3></div>
+            <p>Window diffusion angles, softbox falloff math, Kelvin balance, focal length geometry, and RAW dynamic range.</p>
           </article>
           <article class="card">
             <div><div class="card-meta">6 Guides</div><h3><a href="/design/" data-nav-rel="design/">Design &amp; Color</a></h3></div>
@@ -535,6 +606,7 @@ code {
         <a href="/privacy-policy/" data-nav-rel="privacy-policy/">Privacy Policy</a>
         <a href="/terms/" data-nav-rel="terms/">Terms</a>
         <a href="/contact/" data-nav-rel="contact/">Contact</a>
+        <a href="/rss.xml" data-nav-rel="rss.xml">RSS Feed</a>
       </nav>
     </div>
   </footer>

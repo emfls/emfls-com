@@ -1,34 +1,38 @@
 #!/usr/bin/env python3
-"""Static compiler for EMFLS Studio Journal (clean-slate AdSense-ready static site)."""
+"""Static compiler for EMFLS Studio Journal (AdSense-ready daily editorial static site)."""
 
 from __future__ import annotations
 
 import html
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CONTENT_DIR = ROOT / "content"
 SITE_ORIGIN = "https://www.emfls.com"
-PUB_DATE = "2026-11-19"
-PUB_LABEL = "November 19, 2026"
+DEFAULT_PUB_DATE = "2026-11-19"
 ADSENSE_PUB = "ca-pub-8830524482034754"
+CONTACT_EMAIL = "emfls24777@daum.net"
 
 CATEGORIES = {
     "lighting": {
         "label": "Lighting & Optics",
         "eyebrow": "Photography Lighting & Exposure",
-        "description": "How to measure window-light ratios, balance Kelvin color, predict focal compression, and check dynamic range in a studio setup.",
+        "description": "How to measure window-light ratios, control softbox falloff, balance Kelvin color, predict focal compression, and check dynamic range in a studio setup.",
+        "og_image": "assets/images/og-lighting.webp",
     },
     "design": {
         "label": "Design & Color",
         "eyebrow": "Typography, Color Spaces & Vector Craft",
         "description": "Readable modular type scales, accessible WCAG luminance pairs, structured SVG technical diagrams, and wide-gamut display proofing.",
+        "og_image": "assets/images/og-design.webp",
     },
     "studio": {
         "label": "Studio Workflow",
         "eyebrow": "Acoustics, Calibration & Asset Architecture",
         "description": "First-reflection acoustic placement, monitor bias-light calibration, desk ergonomics, and durable plain-text project archiving.",
+        "og_image": "assets/images/og-studio.webp",
     },
 }
 
@@ -38,11 +42,26 @@ TRUST_LINKS = (
     ("privacy-policy/", "Privacy Policy"),
     ("terms/", "Terms"),
     ("contact/", "Contact"),
+    ("rss.xml", "RSS Feed"),
 )
 
 
 def rel_prefix(depth: int) -> str:
     return "" if depth == 0 else "../" * depth
+
+
+def format_date_label(iso_date: str) -> str:
+    dt = datetime.strptime(iso_date, "%Y-%m-%d")
+    return dt.strftime("%B %-d, %Y")
+
+
+def format_rfc822(iso_date: str) -> str:
+    dt = datetime.strptime(iso_date, "%Y-%m-%d").replace(hour=12, tzinfo=timezone.utc)
+    return dt.strftime("%a, %d %b %Y %H:%M:%S +0000")
+
+
+def article_image_rel(article: dict) -> str:
+    return f"assets/images/{article['category']}-{article['slug']}.webp"
 
 
 def head_block(
@@ -52,6 +71,8 @@ def head_block(
     canonical_path: str,
     depth: int,
     og_type: str = "website",
+    og_image_rel: str = "assets/images/og-home.webp",
+    og_image_alt: str = "EMFLS Studio Journal workspace with calibrated photography, design, and studio instruments",
     extra_style: str = "",
     json_ld: list[dict] | None = None,
     noindex: bool = False,
@@ -59,6 +80,7 @@ def head_block(
 ) -> str:
     prefix = rel_prefix(depth)
     canon_url = f"{SITE_ORIGIN}/{canonical_path}"
+    og_image_url = f"{SITE_ORIGIN}/{og_image_rel}"
     robots = "noindex, follow" if noindex else "index, follow"
     ld_tags = ""
     if json_ld:
@@ -86,11 +108,20 @@ def head_block(
   <meta name="description" content="{html.escape(description)}">
   <meta name="robots" content="{robots}">{adsense_meta}
   <link rel="canonical" href="{html.escape(canon_url)}">
+  <link rel="alternate" type="application/rss+xml" title="EMFLS Studio Journal RSS" href="{SITE_ORIGIN}/rss.xml">
   <meta property="og:type" content="{og_type}">
   <meta property="og:site_name" content="EMFLS Studio Journal">
   <meta property="og:title" content="{html.escape(title)}">
   <meta property="og:description" content="{html.escape(description)}">
   <meta property="og:url" content="{html.escape(canon_url)}">
+  <meta property="og:image" content="{html.escape(og_image_url)}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="800">
+  <meta property="og:image:alt" content="{html.escape(og_image_alt)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{html.escape(title)}">
+  <meta name="twitter:description" content="{html.escape(description)}">
+  <meta name="twitter:image" content="{html.escape(og_image_url)}">
 {css_link}
 {ld_tags}{adsense_script}
 </head>"""
@@ -159,6 +190,8 @@ def wrap_page(
     body_html: str,
     active_rel: str = "",
     og_type: str = "website",
+    og_image_rel: str = "assets/images/og-home.webp",
+    og_image_alt: str = "EMFLS Studio Journal workspace with calibrated photography, design, and studio instruments",
     json_ld: list[dict] | None = None,
     include_search_js: bool = False,
     dynamic_nav: bool = False,
@@ -174,7 +207,6 @@ def wrap_page(
         else ""
     )
     if dynamic_nav and include_search_js:
-        # Resolve search.js cleanly at both root and /emfls-com/ staging subpath
         script_tag = (
             '\n  <script>(function(){var p=window.location.pathname||"/";'
             'var b=(p==="/emfls-com"||p.indexOf("/emfls-com/")===0)?"/emfls-com/":"/";'
@@ -188,6 +220,8 @@ def wrap_page(
             canonical_path=canonical_path,
             depth=depth,
             og_type=og_type,
+            og_image_rel=og_image_rel,
+            og_image_alt=og_image_alt,
             json_ld=json_ld,
             extra_style=extra_style,
             noindex=noindex,
@@ -205,19 +239,27 @@ def wrap_page(
 
 def load_articles() -> list[dict]:
     files = sorted(CONTENT_DIR.glob("*__*.json"))
-    if len(files) != 18:
-        raise RuntimeError(f"Expected 18 article JSON files in {CONTENT_DIR}, found {len(files)}")
-    items = [json.loads(p.read_text(encoding="utf-8")) for p in files]
+    if len(files) < 18:
+        raise RuntimeError(f"Expected at least 18 article JSON files in {CONTENT_DIR}, found {len(files)}")
+    items = []
+    for p in files:
+        data = json.loads(p.read_text(encoding="utf-8"))
+        data.setdefault("published_date", DEFAULT_PUB_DATE)
+        data.setdefault("updated_date", data["published_date"])
+        items.append(data)
     cat_order = {"lighting": 0, "design": 1, "studio": 2}
     items.sort(key=lambda a: (cat_order.get(a["category"], 99), a["slug"]))
     return items
 
 
-def build_home(articles: list[dict]) -> str:
+def build_home(articles: list[dict], latest_date: str) -> str:
     cat_counts = {c: sum(1 for a in articles if a["category"] == c) for c in CATEGORIES}
     cat_cards = "\n".join(
         f"""        <article class="card">
           <div>
+            <a class="card-thumb-link" href="{c}/">
+              <img class="card-thumb" src="{info['og_image']}" alt="{html.escape(info['label'])} studio photography reference" width="1200" height="800" loading="lazy" decoding="async">
+            </a>
             <div class="card-meta">{html.escape(info['eyebrow'])} · {cat_counts[c]} guides</div>
             <h2><a href="{c}/">{html.escape(info['label'])}</a></h2>
           </div>
@@ -226,28 +268,46 @@ def build_home(articles: list[dict]) -> str:
         for c, info in CATEGORIES.items()
     )
 
-    featured_cards = []
-    # 2 featured guides from each category (6 featured total on Home + full archive in categories)
+    newest_first = sorted(articles, key=lambda a: (a["published_date"], a["slug"]), reverse=True)
+    featured_picks: list[dict] = []
+    seen_slugs: set[str] = set()
+    # Always lead with the newest published articles first, then fill evenly across all 3 categories (9 cards total)
+    for a in newest_first[:3]:
+        featured_picks.append(a)
+        seen_slugs.add(a["slug"])
     for c in ("lighting", "design", "studio"):
-        subset = [a for a in articles if a["category"] == c][:3]
-        for a in subset:
-            rel = f"{a['category']}/{a['slug']}/"
-            featured_cards.append(
-                f"""        <article class="card">
+        for a in [x for x in newest_first if x["category"] == c]:
+            if a["slug"] not in seen_slugs and len(featured_picks) < 9:
+                featured_picks.append(a)
+                seen_slugs.add(a["slug"])
+                if sum(1 for p in featured_picks if p["category"] == c) >= 3:
+                    break
+
+    featured_cards = []
+    for a in featured_picks:
+        c = a["category"]
+        rel = f"{c}/{a['slug']}/"
+        img_rel = article_image_rel(a)
+        alt_txt = a.get("hero_alt") or f"Editorial studio photograph illustrating {a['title']}"
+        featured_cards.append(
+            f"""        <article class="card">
           <div>
-            <div class="card-meta">{html.escape(CATEGORIES[c]['label'])} · {a['reading_minutes']} min read</div>
+            <a class="card-thumb-link" href="{html.escape(rel)}">
+              <img class="card-thumb" src="{html.escape(img_rel)}" alt="{html.escape(alt_txt)}" width="1200" height="800" loading="lazy" decoding="async">
+            </a>
+            <div class="card-meta">{html.escape(CATEGORIES[c]['label'])} · {format_date_label(a['published_date'])} · {a['reading_minutes']} min read</div>
             <h3><a href="{html.escape(rel)}">{html.escape(a['title'])}</a></h3>
           </div>
           <p>{html.escape(a['lead_summary'])}</p>
         </article>"""
-            )
+        )
 
     body = f"""      <section class="hero">
-        <p class="eyebrow">Independent Technical Reference · Updated {PUB_LABEL}</p>
+        <p class="eyebrow">Independent Technical Reference · Updated {format_date_label(latest_date)}</p>
         <h1>EMFLS Studio Journal</h1>
-        <p class="lead">Practical field guides on lighting, accessible typography and color, and studio acoustics. Each guide uses a schematic, worked examples, and a checklist to help you apply and verify the technique in your own setup.</p>
+        <p class="lead">Practical field guides on photography lighting, accessible typography and color systems, and small-room studio acoustics. Each guide pairs studio photography, a measured schematic, worked numerical examples, and a reproducible verification checklist.</p>
         <form id="studio-search-form" class="search-box" role="search">
-          <input id="studio-search-input" type="search" aria-label="Search field guides" placeholder="Try WCAG or acoustic">
+          <input id="studio-search-input" type="search" aria-label="Search field guides" placeholder="Try softbox, WCAG, or acoustic">
           <button type="submit">Search</button>
         </form>
         <div id="studio-search-results" class="search-results" role="region" aria-live="polite" aria-label="Search results"></div>
@@ -261,7 +321,7 @@ def build_home(articles: list[dict]) -> str:
       </section>
 
       <section aria-labelledby="featured-title">
-        <h2 id="featured-title">Featured Studio Field Guides</h2>
+        <h2 id="featured-title">Latest &amp; Featured Studio Field Guides</h2>
         <div class="grid-3">
 {chr(10).join(featured_cards)}
         </div>
@@ -269,42 +329,61 @@ def build_home(articles: list[dict]) -> str:
 
       <section class="trust-strip" aria-labelledby="standards-title">
         <h2 id="standards-title" style="margin-top:0">Editorial Verification &amp; Independence</h2>
-        <p>Check light levels, calculate contrast ratios, or measure room geometry with the steps in each guide. Read our <a href="editorial-policy/">Editorial Policy</a> or <a href="contact/">report a technical issue</a>.</p>
+        <p>Check light levels, calculate contrast ratios, or measure room geometry with the reproducible steps in each guide. Read our <a href="about/">About page</a>, inspect our <a href="editorial-policy/">Editorial Policy</a>, or <a href="contact/">contact the editorial desk</a> directly with corrections.</p>
       </section>"""
 
     ld = [
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "EMFLS Studio Journal",
+            "url": f"{SITE_ORIGIN}/",
+            "email": CONTACT_EMAIL,
+            "logo": f"{SITE_ORIGIN}/assets/images/og-home.webp",
+        },
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "EMFLS Studio Journal",
             "url": f"{SITE_ORIGIN}/",
             "description": "Independent field guides covering photography lighting, editorial design systems, and studio workflow craft.",
-        }
+        },
     ]
     return wrap_page(
         title="EMFLS Studio Journal — Lighting, Design & Studio Craft Field Guides",
-        description="Practical field guides with worked examples, diagrams, and checks for photography lighting, accessible design, and small-room acoustics.",
+        description="Practical field guides with studio photographs, worked examples, schematics, and checks for photography lighting, accessible design, and small-room acoustics.",
         canonical_path="",
         depth=0,
         body_html=body,
         active_rel="",
+        og_image_rel="assets/images/og-home.webp",
         json_ld=ld,
         include_search_js=True,
     )
 
 
 def build_category_page(cat: str, info: dict, articles: list[dict]) -> str:
-    subset = [a for a in articles if a["category"] == cat]
-    cards = "\n".join(
-        f"""        <article class="card">
+    subset = sorted(
+        [a for a in articles if a["category"] == cat],
+        key=lambda a: (a["published_date"], a["slug"]),
+        reverse=True,
+    )
+    card_list = []
+    for a in subset:
+        alt_txt = a.get("hero_alt") or f"Editorial studio photograph for {a['title']}"
+        card_list.append(
+            f"""        <article class="card">
           <div>
-            <div class="card-meta">{html.escape(info['label'])} · {a['reading_minutes']} min read</div>
+            <a class="card-thumb-link" href="{html.escape(a['slug'])}/">
+              <img class="card-thumb" src="../{html.escape(article_image_rel(a))}" alt="{html.escape(alt_txt)}" width="1200" height="800" loading="lazy" decoding="async">
+            </a>
+            <div class="card-meta">{html.escape(info['label'])} · {format_date_label(a['published_date'])} · {a['reading_minutes']} min read</div>
             <h2><a href="{html.escape(a['slug'])}/">{html.escape(a['title'])}</a></h2>
           </div>
           <p>{html.escape(a['lead_summary'])}</p>
         </article>"""
-        for a in subset
-    )
+        )
+    cards = "\n".join(card_list)
     body = f"""      <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../">Home</a> / <span aria-current="page">{html.escape(info['label'])}</span>
       </nav>
@@ -333,6 +412,8 @@ def build_category_page(cat: str, info: dict, articles: list[dict]) -> str:
         depth=1,
         body_html=body,
         active_rel=f"{cat}/",
+        og_image_rel=info["og_image"],
+        og_image_alt=f"{info['label']} editorial cover photograph for EMFLS Studio Journal",
         json_ld=ld,
     )
 
@@ -341,21 +422,54 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
     cat = article["category"]
     slug = article["slug"]
     cat_label = CATEGORIES[cat]["label"]
-    siblings = [a for a in all_articles if a["category"] == cat and a["slug"] != slug][:3]
+    pub_date = article["published_date"]
+    upd_date = article["updated_date"]
+    img_rel = article_image_rel(article)
+    hero_alt = article.get("hero_alt") or f"Editorial studio photograph illustrating {article['title']}"
+    hero_caption = article.get("hero_caption") or f"Editorial visual reference for {article['title']}. Technical floor geometry and worked values appear in the schematic and tables below."
+
+    siblings = sorted(
+        [a for a in all_articles if a["category"] == cat and a["slug"] != slug],
+        key=lambda a: (a["published_date"], a["slug"]),
+        reverse=True,
+    )[:3]
     sections = article["sections_html"].replace(
         '<div class="table-wrap">',
         '<div class="table-wrap" role="region" aria-label="Comparison table" tabindex="0">',
     )
-    related_cards = "\n".join(
-        f"""          <article class="card">
+
+    faq_html = ""
+    faqs = article.get("faqs") or []
+    if faqs:
+        items_html = "\n".join(
+            f"""            <div class="faq-item">
+              <h3>{html.escape(item['question'])}</h3>
+              <p>{html.escape(item['answer'])}</p>
+            </div>"""
+            for item in faqs
+        )
+        faq_html = f"""
+          <section class="faq-section" aria-labelledby="faq-heading">
+            <h2 id="faq-heading">Frequently Asked Questions</h2>
+{items_html}
+          </section>"""
+
+    rel_list = []
+    for s in siblings:
+        s_alt = s.get("hero_alt") or f"Editorial photograph for {s['title']}"
+        rel_list.append(
+            f"""          <article class="card">
             <div>
+              <a class="card-thumb-link" href="../{html.escape(s['slug'])}/">
+                <img class="card-thumb" src="../../{html.escape(article_image_rel(s))}" alt="{html.escape(s_alt)}" width="1200" height="800" loading="lazy" decoding="async">
+              </a>
               <div class="card-meta">{html.escape(cat_label)} · {s['reading_minutes']} min read</div>
               <h3><a href="../{html.escape(s['slug'])}/">{html.escape(s['title'])}</a></h3>
             </div>
             <p>{html.escape(s['lead_summary'])}</p>
           </article>"""
-        for s in siblings
-    )
+        )
+    related_cards = "\n".join(rel_list)
 
     body = f"""      <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="../../">Home</a> / <a href="../">{html.escape(cat_label)}</a> / <span aria-current="page">{html.escape(article['title'])}</span>
@@ -364,7 +478,11 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
         <div class="article-body">
           <p class="eyebrow">{html.escape(CATEGORIES[cat]['eyebrow'])}</p>
           <h1>{html.escape(article['title'])}</h1>
-          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published {PUB_LABEL} · {article['reading_minutes']} min read ({article['word_count']:,} words)</div>
+          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published <time datetime="{pub_date}">{format_date_label(pub_date)}</time> · {article['reading_minutes']} min read ({article['word_count']:,} words)</div>
+          <figure class="hero-photo">
+            <img src="../../{html.escape(img_rel)}" alt="{html.escape(hero_alt)}" width="1200" height="800" loading="eager" decoding="async">
+            <figcaption>{html.escape(hero_caption)}</figcaption>
+          </figure>
           <p class="lead-callout">{html.escape(article['lead_summary'])}</p>
           <figure class="diagram-figure">
             <input type="checkbox" id="diagram-full-size" aria-describedby="diagram-scroll-hint">
@@ -375,7 +493,7 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
             </div>
             <figcaption>{html.escape(article['svg_caption'])}</figcaption>
           </figure>
-          {sections}
+          {sections}{faq_html}
         </div>
         <aside class="related-panel" aria-labelledby="related-heading">
           <h2 id="related-heading" style="margin-top:0">Related {html.escape(cat_label)} Guides</h2>
@@ -386,16 +504,17 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
       </article>"""
 
     canon = f"{SITE_ORIGIN}/{cat}/{slug}/"
-    ld = [
+    ld: list[dict] = [
         {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": article["title"],
             "description": article["meta_description"],
-            "datePublished": PUB_DATE,
-            "dateModified": PUB_DATE,
-            "author": {"@type": "Organization", "name": "EMFLS Editorial Desk"},
-            "publisher": {"@type": "Organization", "name": "EMFLS Studio Journal"},
+            "image": f"{SITE_ORIGIN}/{img_rel}",
+            "datePublished": pub_date,
+            "dateModified": upd_date,
+            "author": {"@type": "Organization", "name": "EMFLS Editorial Desk", "url": f"{SITE_ORIGIN}/about/"},
+            "publisher": {"@type": "Organization", "name": "EMFLS Studio Journal", "url": f"{SITE_ORIGIN}/"},
             "mainEntityOfPage": canon,
         },
         {
@@ -408,6 +527,21 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
             ],
         },
     ]
+    if faqs:
+        ld.append(
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": item["question"],
+                        "acceptedAnswer": {"@type": "Answer", "text": item["answer"]},
+                    }
+                    for item in faqs
+                ],
+            }
+        )
     return wrap_page(
         title=f"{article['title']} — EMFLS Studio Journal",
         description=article["meta_description"],
@@ -416,133 +550,233 @@ def build_article_page(article: dict, all_articles: list[dict]) -> str:
         body_html=body,
         active_rel=f"{cat}/",
         og_type="article",
+        og_image_rel=img_rel,
+        og_image_alt=hero_alt,
         json_ld=ld,
     )
 
 
-def build_trust_pages() -> dict[str, tuple[str, str, str]]:
-    pages = {}
+def build_trust_pages(latest_date: str, article_count: int) -> dict[str, tuple[str, str, str, list[dict]]]:
+    latest_label = format_date_label(latest_date)
+    pages: dict[str, tuple[str, str, str, list[dict]]] = {}
 
     pages["about"] = (
         "About EMFLS Studio Journal",
-        "Learn who publishes EMFLS Studio Journal and how to use its photography, design, and studio reference guides.",
+        "Learn who publishes EMFLS Studio Journal, our studio bench verification process, and how our lighting, design, and studio reference guides are built.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">About</span></nav>
       <article class="article-shell">
         <div class="article-body">
-          <p class="eyebrow">Publication Profile</p>
+          <p class="eyebrow">Publication Profile · {article_count} Reference Guides</p>
           <h1>About EMFLS Studio Journal</h1>
-          <p class="lead-callout">EMFLS Studio Journal is an independent technical publication dedicated to practical photography lighting geometry, accessible digital typography and vector diagramming, and ergonomic desk studio engineering.</p>
+          <figure class="hero-photo">
+            <img src="../assets/images/og-home.webp" alt="EMFLS Studio Journal minimalist workbench with calibrated camera body, gray card, brass ruler, and linen sketchbook" width="1200" height="800" loading="eager" decoding="async">
+            <figcaption>EMFLS Studio Journal publishes reproducible field guides built around physical measurements, clean schematics, and small-room constraints.</figcaption>
+          </figure>
+          <p class="lead-callout">EMFLS Studio Journal is an independent technical publication dedicated to practical photography lighting geometry, accessible digital typography and color systems, and small-room studio ergonomics and acoustics.</p>
           <h2>Why We Focus on Physical &amp; Visual Fundamentals</h2>
-          <p>Modern creative workspaces sit at the intersection of light, color perception, typography, and acoustics. Too often, creators run into subtle technical obstacles—clipped highlights in window portraits, muddy print exports, vibrating low-end voice recordings, or low-contrast web diagrams—that can be resolved quickly with clear numbers and first-principles diagrams.</p>
-          <p>Our guides explain how to check incident light with a meter, calculate WCAG contrast ratios, compare sRGB and Display P3, and measure a room or desk layout. Worked examples show how to apply each method. Use your own equipment and conditions to verify the result.</p>
-          <h2>Core Sections Maintained Here</h2>
+          <p>Independent photographers, designers, educators, and solo studio creators work in real rooms—often spare bedrooms, shared offices, or compact desks under three by four metres—rather than commercial soundstages with unlimited rigging space. Many frustrating creative issues stem from a handful of measurable physical factors: window light falling off too steeply across a portrait, clipped skin highlights under mixed Kelvin fixtures, muddy print proofs exported from wide-gamut displays, resonant bass reflections in untreated corners, or web diagrams whose color contrast fails WCAG legibility thresholds.</p>
+          <p>Instead of repeating vague gear opinions or affiliate product roundups, every EMFLS Studio Journal article breaks a recurring studio problem down to repeatable numbers, plain floor geometry, and step-by-step verification checks. Our guides explain how to meter incident light loss in photographic stops, compute WCAG relative luminance contrast ratios, compare sRGB and Display P3 color boundaries, position first-reflection broadband acoustic panels using a hand mirror, and establish durable plain-text project archives.</p>
+          <h2>How Each Field Guide Is Structured &amp; Verified</h2>
+          <p>Before a guide enters our main archive, the EMFLS Editorial Desk follows a consistent four-part format designed so any reader can reproduce and audit the result with ordinary tools:</p>
+          <ol>
+            <li><strong>Defined room or digital baseline:</strong> Every article states the working assumptions—room dimensions, modifier size, color space, viewing distance, or microphone capsule pattern—up front so numbers are never presented out of context.</li>
+            <li><strong>Scaled schematic &amp; visual reference:</strong> Each guide pairs an editorial studio visual with an accessible inline SVG technical schematic (expandable to full 720-pixel width with keyboard scrolling) so spatial relationships are immediately clear on both phones and desktop monitors.</li>
+            <li><strong>Worked numerical table:</strong> Real ratios—such as stop falloff by distance, Kelvin shift steps, typographic modular scales, or microphone proximity bass boost—are laid out in scannable reference tables.</li>
+            <li><strong>Reproducible field checklist:</strong> Every article closes with concrete inspection steps so you can test the method on your own camera, display, or room acoustics rather than taking any number on faith.</li>
+          </ol>
+          <h2>Core Editorial Sections</h2>
           <ul>
-            <li><a href="../lighting/">Lighting &amp; Optics</a>: Directional window diffusion, Kelvin color reconciliation, perspective compression, histogram reading, and RAW headroom.</li>
-            <li><a href="../design/">Design &amp; Color</a>: Modular typographic hierarchies, WCAG palette math, crisp SVG schematic rules, and responsive CSS grids.</li>
-            <li><a href="../studio/">Studio Workflow</a>: First-reflection acoustic treatment, microphone proximity control, bias lighting calibration, and long-term plain-text archiving.</li>
+            <li><a href="../lighting/"><strong>Lighting &amp; Optics</strong></a>: Directional window diffusion, softbox inverse-square falloff, tabletop product shadow control, Kelvin color reconciliation, focal-length perspective compression, histogram reading, and RAW highlight headroom.</li>
+            <li><a href="../design/"><strong>Design &amp; Color</strong></a>: Modular typographic scales, WCAG luminance contrast palettes, clear SVG diagramming rules, print versus screen color spaces, responsive editorial CSS grids, and deliberate whitespace hierarchy.</li>
+            <li><a href="../studio/"><strong>Studio Workflow</strong></a>: Small-room first-reflection acoustic treatment, microphone distance and proximity control, monitor bias-lighting calibration, ergonomic desk geometry, non-destructive media file naming, and plain-text archiving.</li>
           </ul>
-          <h2>Publisher Information</h2>
-          <p>The EMFLS Editorial Desk independently publishes EMFLS Studio Journal. See the <a href="../contact/">Contact page</a> for technical corrections and accessibility feedback.</p>
+          <h2>Editorial Team, Cadence &amp; Accountability</h2>
+          <p>EMFLS Studio Journal is independently published and maintained by the <strong>EMFLS Editorial Desk</strong> as an ad-supported educational publication. We publish new original field guides on an ongoing schedule and periodically revise existing articles when technical standards (such as WCAG specifications, color profile workflows, or display calibration practices) evolve. All substantial technical revisions update the visible publication record and sitemap modification date.</p>
+          <p>Have a calculation correction, accessibility issue, or topic suggestion? Reach our editors directly via email at <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or review our full channels on the <a href="../contact/">Contact page</a> and <a href="../editorial-policy/">Editorial Policy</a>.</p>
         </div>
       </article>""",
+        [
+            {
+                "@context": "https://schema.org",
+                "@type": "AboutPage",
+                "name": "About EMFLS Studio Journal",
+                "url": f"{SITE_ORIGIN}/about/",
+                "mainEntity": {
+                    "@type": "Organization",
+                    "name": "EMFLS Studio Journal",
+                    "url": f"{SITE_ORIGIN}/",
+                    "email": CONTACT_EMAIL,
+                },
+            }
+        ],
     )
 
     pages["editorial-policy"] = (
         "Editorial Policy & Verification Standards",
-        "How EMFLS Studio Journal presents worked examples, technical diagrams, and reader corrections.",
+        "How EMFLS Studio Journal verifies lighting math, color contrast tables, original diagrams, editorial independence, and reader corrections.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">Editorial Policy</span></nav>
       <article class="article-shell">
         <div class="article-body">
-          <p class="eyebrow">Standards &amp; Accountability</p>
+          <p class="eyebrow">Standards &amp; Accountability · Updated {latest_label}</p>
           <h1>Editorial Policy</h1>
-          <p class="lead-callout">Our reference guides explain how to check a calculation or technique so readers can reproduce it in their own setup.</p>
-          <h2>1. Measurement &amp; Technical Accuracy</h2>
-          <p>Worked examples illustrate calculations and measurement procedures. Results depend on the equipment, room, and settings used. Check the assumptions in each example before using its numbers as a target.</p>
-          <h2>2. Independence &amp; Conflict Prevention</h2>
-          <p>EMFLS Studio Journal accepts no paid placement, undisclosed sponsorships, or commercial review exchanges. Product categories and tools mentioned in our lighting or studio setup notes serve purely as technical examples illustrating physics, optics, or software behavior.</p>
-          <h2>3. Original Technical Diagrams</h2>
-          <p>Article figures use scalable SVGs and text captions. Choose “Show full-size diagram” when labels are too small in the preview.</p>
-          <h2>4. Corrections</h2>
-          <p>See the <a href="../contact/">Contact page</a> to report a calculation error, unclear diagram label, or outdated reference. Include the article URL and the specific passage or label.</p>
+          <p class="lead-callout">Every reference guide on EMFLS Studio Journal is written so a practitioner can reproduce the geometry, check the underlying math, and verify the visual or acoustic outcome in their own workspace.</p>
+          <h2>1. Measurement Transparency &amp; Worked Examples</h2>
+          <p>Worked tables and stop calculations across our Lighting, Design, and Studio sections illustrate optical, acoustic, or mathematical relationships under stated baseline assumptions—for instance, a fixed 1.20 m backdrop distance, a standard 6500 K viewing white point, or WCAG 2.x relative luminance formulas. Real studio outcomes always depend on wall paint reflectance, window orientation, lens transmission, display gamut, and room dimensions. We clearly label baseline assumptions and encourage readers to confirm target values with their own light meter, colorimeter, or reference test chart.</p>
+          <h2>2. Editorial Independence &amp; Advertising Separation</h2>
+          <p>EMFLS Studio Journal is reader-first and maintains a strict firewall between editorial content and display advertising. We do not accept paid article placements, undisclosed sponsorships, paid link insertions, or free-hardware review exchanges. Whenever a camera format, color space, modifier shape, or file convention is named in a guide, it appears purely to illustrate a physical, optical, or workflow principle—never as a paid endorsement.</p>
+          <p>Advertising revenue from Google AdSense helps support ongoing research, writing, and hosting. Advertisers have zero influence over topic selection, conclusions, diagrams, or corrections.</p>
+          <h2>3. Original Photography, Schematics &amp; Accessibility</h2>
+          <p>Each guide pairs high-resolution visual references with custom scalable vector schematics (`720 × 320` viewBox) accompanied by descriptive alternative text and readable captions. Every schematic includes a “Show full-size diagram” toggle and keyboard-scrollable viewport so mobile readers and assistive-technology users can inspect small angle markers and meter values without clipping or zooming glitches.</p>
+          <h2>4. Fact-Checking, Updates &amp; Substantive Revisions</h2>
+          <p>Before publication, every article passes automated structural, HTML, link-integrity, schema, and reading-clarity checks in addition to editorial review of equations, units, and standards citations (including W3C WCAG specifications, IEC sRGB / Display P3 definitions, and standard photographic exposure formulas).</p>
+          <ul>
+            <li><strong>Substantive corrections or updates:</strong> When a formula, threshold, or technical standard changes, we update the text, recalculate affected tables, and refresh the guide's visible modification date.</li>
+            <li><strong>Minor maintenance edits:</strong> Typographical fixes, spacing improvements, or broken-link repairs are deployed promptly without inflating publication dates.</li>
+          </ul>
+          <h2>5. Reader Corrections &amp; Feedback Process</h2>
+          <p>We welcome technical scrutiny from working photographers, designers, and engineers. If you spot a calculation slip, ambiguous diagram label, broken internal link, or accessibility barrier, email us directly at <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or open a public report on our <a href="../contact/">Contact page</a>. Include the article URL and the specific table row or schematic label; we review and respond to actionable technical reports within 2 to 4 business days.</p>
         </div>
       </article>""",
+        [
+            {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Editorial Policy — EMFLS Studio Journal",
+                "url": f"{SITE_ORIGIN}/editorial-policy/",
+            }
+        ],
     )
 
     pages["privacy-policy"] = (
         "Privacy Policy",
-        "What GitHub Pages and Google AdSense collect when you visit EMFLS Studio Journal and where to manage ad personalization.",
+        "What GitHub Pages and Google AdSense collect when you visit EMFLS Studio Journal and how to manage ad personalization or contact us privately.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">Privacy Policy</span></nav>
       <article class="article-shell">
         <div class="article-body">
-          <p class="eyebrow">Effective Date: {PUB_LABEL}</p>
+          <p class="eyebrow">Effective Date: {latest_label}</p>
           <h1>Privacy Policy</h1>
-          <p class="lead-callout">This policy explains how our host and advertising providers process data when you visit www.emfls.com.</p>
-          <h2>1. Hosting &amp; Site Search</h2>
-          <p>GitHub Pages hosts this static site. GitHub logs and stores visitors’ Internet Protocol (IP) addresses for security, including visits by people who are signed out of GitHub. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">GitHub Pages data collection</a> and the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a>.</p>
-          <p>Reading the site requires no account. The site search downloads an article index and matches your search terms in your browser.</p>
-          <h2>2. Google AdSense &amp; Third-Party Advertising</h2>
-          <p>This site loads <strong>Google AdSense</strong>. Your browser shares information with Google when its advertising services load, including the page URL and your IP address. Third parties, including Google, can place or read cookies in your browser and use web beacons, IP addresses, or other identifiers to collect information as a result of serving ads.</p>
-          <p>Google uses this information to deliver ads, measure performance, and prevent fraud or abuse. Depending on your settings, Google and its partners may use information about previous visits to this site and other sites to personalize ads. Read <a href="https://policies.google.com/technologies/partner-sites">how Google uses data from sites and apps that use its services</a>.</p>
-          <h2>3. Advertising Choices</h2>
+          <p class="lead-callout">This policy explains how our host, advertising partners, and editorial email channel process data when you visit www.emfls.com.</p>
+          <h2>1. Hosting &amp; Static Site Search</h2>
+          <p>GitHub Pages hosts this static site. GitHub logs and stores visitors’ Internet Protocol (IP) addresses for security and reliability, including visits by people who are signed out of GitHub. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">GitHub Pages data collection</a> and the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a>.</p>
+          <p>Reading the site requires no account, login, or newsletter signup. On-site search downloads a static article index JSON file and filters your search query locally inside your browser without transmitting search terms to an external database.</p>
+          <h2>2. Google AdSense &amp; Third-Party Advertising Cookies</h2>
+          <p>This site integrates <strong>Google AdSense</strong> to support independent publishing. When advertising services load, your browser shares standard technical information with Google, including the page URL and IP address. Third-party vendors, including Google, use cookies, web beacons, or similar identifiers to serve ads based on a user’s prior visits to this website or other websites.</p>
+          <p>Google’s use of advertising cookies enables Google and its partners to serve ads based on your visits to this site and/or other sites on the internet, measure ad performance, and help prevent fraud or invalid traffic. Read <a href="https://policies.google.com/technologies/partner-sites">how Google uses data from sites and apps that use its services</a>.</p>
+          <h2>3. Your Advertising &amp; Cookie Choices</h2>
           <ul>
-            <li>Manage Google ad personalization in <a href="https://adssettings.google.com/">Google Ad Settings</a>.</li>
-            <li>Manage personalized advertising from participating vendors through <a href="https://www.aboutads.info/choices/">YourAdChoices</a>.</li>
+            <li>Opt out of personalized advertising from Google via <a href="https://adssettings.google.com/">Google Ad Settings</a>.</li>
+            <li>Opt out of third-party vendor personalized advertising cookies via <a href="https://www.aboutads.info/choices/">YourAdChoices (aboutads.info)</a>.</li>
+            <li>Clear or block cookies at any time through your browser privacy controls.</li>
           </ul>
-          <h2>4. Children's Information</h2>
+          <h2>4. Direct Email Correspondence</h2>
+          <p>If you email the EMFLS Editorial Desk at <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>, your email provider and ours process your address and message content solely to read and reply to your inquiry. We do not sell, rent, or add reader email addresses to marketing lists. Please do not include sensitive financial, medical, or account credentials in email correspondence.</p>
+          <h2>5. Children's Information</h2>
           <p>EMFLS Studio Journal is a general technical reference resource intended for creative practitioners and does not knowingly collect personally identifiable information from children under the age of 13.</p>
-          <h2>5. Privacy Requests</h2>
-          <p>For data handled by our host or ad provider, see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a> or <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. This site does not currently offer a private contact channel. Keep personal information out of the public technical issue tracker linked on the <a href="../contact/">Contact page</a>.</p>
+          <h2>6. Privacy Requests &amp; Policy Updates</h2>
+          <p>For data handled by our host or advertising provider, see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a> or <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. For site-specific privacy questions or removal of email correspondence, write directly to <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or review the <a href="../contact/">Contact page</a>.</p>
         </div>
       </article>""",
+        [
+            {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Privacy Policy — EMFLS Studio Journal",
+                "url": f"{SITE_ORIGIN}/privacy-policy/",
+            }
+        ],
     )
 
     pages["terms"] = (
         "Terms of Use & Reference Disclaimer",
-        "Terms governing your access to EMFLS Studio Journal guides, vector diagrams, and educational technical examples.",
+        "Terms governing your access to EMFLS Studio Journal guides, studio photographs, vector schematics, and educational technical examples.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">Terms of Use</span></nav>
       <article class="article-shell">
         <div class="article-body">
-          <p class="eyebrow">Last Updated: {PUB_LABEL}</p>
+          <p class="eyebrow">Last Updated: {latest_label}</p>
           <h1>Terms of Use</h1>
           <p class="lead-callout">By reading or referencing materials on EMFLS Studio Journal (www.emfls.com), you agree to the educational usage terms and disclaimers summarized below.</p>
           <h2>1. Educational &amp; Informational Purpose</h2>
-          <p>All articles, exposure charts, color contrast guidelines, acoustic placement steps, and ergonomic geometry ranges published on this website are provided strictly for general educational reference. Workspace safety, electrical rigging for studio lights, and personal physical comfort should always be verified against equipment manufacturer safety manuals and qualified local professionals where applicable.</p>
-          <h2>2. Intellectual Property</h2>
-          <p>Original article text, layout styles, and scalable vector diagrams created for EMFLS Studio Journal remain the intellectual property of EMFLS Studio Journal unless otherwise noted. Brief excerpts or links for non-commercial citation are welcome with clear attribution back to the canonical URL.</p>
-          <h2>3. External Links</h2>
-          <p>Links to external reference standards or privacy settings pages are provided for reader convenience. We do not control or assume responsibility for the ongoing availability or content of third-party websites.</p>
-          <h2>4. Contact Regarding Terms</h2>
-          <p>The <a href="../contact/">Contact page</a> lists the public route for technical issues. A private channel for permissions requests is currently unavailable.</p>
+          <p>All articles, exposure charts, color contrast guidelines, acoustic placement steps, and ergonomic geometry ranges published on this website are provided strictly for general educational reference. Workspace safety, overhead electrical rigging for studio lights, acoustic wall mounting hardware, and personal physical comfort should always be verified against equipment manufacturer safety manuals and qualified local professionals where applicable.</p>
+          <h2>2. Intellectual Property &amp; Fair Citation</h2>
+          <p>Original article text, layout styles, studio photographs, and scalable vector diagrams created for EMFLS Studio Journal remain the intellectual property of EMFLS Studio Journal unless otherwise noted. Brief excerpts or links for non-commercial educational citation are welcome with clear attribution back to the canonical URL. Republishing complete guides, tables, or image sets without written permission is prohibited.</p>
+          <h2>3. External Reference Links</h2>
+          <p>Links to external reference standards (such as W3C WCAG documentation) or privacy settings pages are provided for reader convenience. We do not control or assume responsibility for the ongoing availability or content of third-party websites.</p>
+          <h2>4. Permissions &amp; Contact Regarding Terms</h2>
+          <p>For permissions inquiries, copyright notices, or questions regarding these terms, write directly to <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or visit our <a href="../contact/">Contact page</a>.</p>
         </div>
       </article>""",
+        [
+            {
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Terms of Use — EMFLS Studio Journal",
+                "url": f"{SITE_ORIGIN}/terms/",
+            }
+        ],
     )
 
     pages["contact"] = (
         "Contact EMFLS Editorial Desk",
-        "Report technical corrections, diagram accessibility problems, or broken links for EMFLS Studio Journal.",
+        "Reach the EMFLS Studio Journal editorial desk by direct email or public GitHub issue for corrections, accessibility reports, or inquiries.",
         f"""      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> / <span aria-current="page">Contact</span></nav>
       <article class="article-shell">
         <div class="article-body">
           <p class="eyebrow">Reader Support &amp; Corrections</p>
           <h1>Contact Us</h1>
-          <p class="lead-callout">Report a technical correction, inaccessible diagram, or broken link in the <a href="https://github.com/emfls/emfls-com/issues">public EMFLS Studio Journal GitHub issue tracker</a>. Posting requires a GitHub account.</p>
-          <h2>What to Include</h2>
-          <p>Include the article URL, the relevant passage or diagram label, and what you expected to see. For a layout problem, include your browser and approximate screen width.</p>
-          <h2>Private Inquiries</h2>
-          <p>GitHub issues are public. Keep personal information, privacy requests, and other confidential matters out of the tracker. A private contact channel is currently unavailable. See our <a href="../privacy-policy/">Privacy Policy</a> for information on how GitHub and Google handle data.</p>
+          <p class="lead-callout">Have a technical correction, accessibility report, diagram question, or privacy request? Contact the EMFLS Editorial Desk directly by email at <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a> or log a reproducible technical issue on GitHub.</p>
+          <h2>Direct Editorial Email (Private Channel)</h2>
+          <p>For editorial questions, privacy inquiries, copyright notices, or feedback you prefer to keep private, email <a href="mailto:{CONTACT_EMAIL}"><strong>{CONTACT_EMAIL}</strong></a>. We review incoming messages regularly and aim to respond to actionable editorial and privacy inquiries within <strong>2 to 4 business days</strong>.</p>
+          <h2>Public Technical Correction Tracker</h2>
+          <p>For open technical corrections—such as an equation check, broken link, table typo, or mobile layout defect—you can also open an issue in the <a href="https://github.com/emfls/emfls-com/issues">public EMFLS Studio Journal GitHub issue tracker</a> so fixes remain publicly auditable. Posting on GitHub requires a free GitHub account; existing reports remain publicly readable without signing in.</p>
+          <h2>Choose the Best Channel</h2>
+          <div class="table-wrap" role="region" aria-label="Contact channel routing" tabindex="0">
+            <table>
+              <thead>
+                <tr><th scope="col">Inquiry Type</th><th scope="col">Recommended Channel</th><th scope="col">Target Review Window</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Calculation or technical standard correction</th><td>Direct email or GitHub issue</td><td>2–4 business days</td></tr>
+                <tr><th scope="row">Diagram accessibility or mobile layout defect</th><td>GitHub issue or direct email</td><td>2–4 business days</td></tr>
+                <tr><th scope="row">Privacy, copyright, or permissions request</th><td>Direct email (<a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>)</td><td>2–4 business days</td></tr>
+                <tr><th scope="row">New studio guide topic suggestion</th><td>Direct email or GitHub issue</td><td>Reviewed monthly during editorial planning</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h2>Helpful Details to Include</h2>
+          <ul>
+            <li>The full article URL on <code>www.emfls.com</code>.</li>
+            <li>The exact heading, table row, or diagram label you are referencing.</li>
+            <li>For layout or accessibility bugs, your browser name and approximate viewport width (for example, mobile 375 px or desktop 1440 px).</li>
+          </ul>
+          <p>Please note that we do not accept paid guest posts, sponsored product placements, or paid link exchanges. Keep confidential passwords or sensitive personal documents out of both email and public GitHub reports. See our <a href="../privacy-policy/">Privacy Policy</a> and <a href="../editorial-policy/">Editorial Policy</a> for full details.</p>
         </div>
       </article>""",
+        [
+            {
+                "@context": "https://schema.org",
+                "@type": "ContactPage",
+                "name": "Contact EMFLS Studio Journal",
+                "url": f"{SITE_ORIGIN}/contact/",
+                "mainEntity": {
+                    "@type": "Organization",
+                    "name": "EMFLS Studio Journal",
+                    "email": CONTACT_EMAIL,
+                    "url": f"{SITE_ORIGIN}/",
+                },
+            }
+        ],
     )
     return pages
 
 
-def build_404(style_text: str) -> str:
-    body = """      <section class="hero">
+def build_404(style_text: str, articles: list[dict]) -> str:
+    cat_counts = {c: sum(1 for a in articles if a["category"] == c) for c in CATEGORIES}
+    body = f"""      <section class="hero">
         <p class="eyebrow">Page Not Found (404)</p>
         <h1>This URL has moved or been retired</h1>
-        <p class="lead">EMFLS Studio Journal was rebuilt from the ground up with organized technical guides covering Lighting &amp; Optics, Design &amp; Color, and Studio Workflow. Use the search below or browse any section directly.</p>
+        <p class="lead">EMFLS Studio Journal is organized into field guides covering Lighting &amp; Optics, Design &amp; Color, and Studio Workflow. Use the search below or browse any section directly.</p>
         <form id="studio-search-form" class="search-box" role="search">
-          <input id="studio-search-input" type="search" aria-label="Search current field guides" placeholder="Try lighting or contrast">
+          <input id="studio-search-input" type="search" aria-label="Search current field guides" placeholder="Try softbox, lighting, or contrast">
           <button type="submit">Search</button>
         </form>
         <div id="studio-search-results" class="search-results" role="region" aria-live="polite" aria-label="Search results"></div>
@@ -551,15 +785,15 @@ def build_404(style_text: str) -> str:
         <h2 id="recover-title">Browse Current Sections</h2>
         <div class="grid-3">
           <article class="card">
-            <div><div class="card-meta">6 Guides</div><h3><a href="/lighting/" data-nav-rel="lighting/">Lighting &amp; Optics</a></h3></div>
-            <p>Window diffusion angles, Kelvin balance, focal length geometry, and RAW dynamic range.</p>
+            <div><div class="card-meta">{cat_counts['lighting']} Guides</div><h3><a href="/lighting/" data-nav-rel="lighting/">Lighting &amp; Optics</a></h3></div>
+            <p>Window diffusion angles, softbox falloff math, Kelvin balance, focal length geometry, and RAW dynamic range.</p>
           </article>
           <article class="card">
-            <div><div class="card-meta">6 Guides</div><h3><a href="/design/" data-nav-rel="design/">Design &amp; Color</a></h3></div>
+            <div><div class="card-meta">{cat_counts['design']} Guides</div><h3><a href="/design/" data-nav-rel="design/">Design &amp; Color</a></h3></div>
             <p>Modular type scales, WCAG contrast pairs, clean SVG diagramming, and responsive CSS grids.</p>
           </article>
           <article class="card">
-            <div><div class="card-meta">6 Guides</div><h3><a href="/studio/" data-nav-rel="studio/">Studio Workflow</a></h3></div>
+            <div><div class="card-meta">{cat_counts['studio']} Guides</div><h3><a href="/studio/" data-nav-rel="studio/">Studio Workflow</a></h3></div>
             <p>Room acoustic treatment, mic placement, bias lighting, plain-text archiving, and ergonomics.</p>
           </article>
         </div>
@@ -578,28 +812,54 @@ def build_404(style_text: str) -> str:
     )
 
 
+def build_rss(articles: list[dict], latest_date: str) -> str:
+    ordered = sorted(articles, key=lambda a: (a["updated_date"], a["published_date"], a["slug"]), reverse=True)
+    items = []
+    for a in ordered:
+        link = f"{SITE_ORIGIN}/{a['category']}/{a['slug']}/"
+        items.append(
+            f"""    <item>
+      <title>{html.escape(a['title'])}</title>
+      <link>{html.escape(link)}</link>
+      <guid isPermaLink="true">{html.escape(link)}</guid>
+      <pubDate>{format_rfc822(a['published_date'])}</pubDate>
+      <description>{html.escape(a['meta_description'])}</description>
+    </item>"""
+        )
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>EMFLS Studio Journal</title>
+    <link>{SITE_ORIGIN}/</link>
+    <description>Independent field guides covering photography lighting, editorial design systems, and studio workflow craft.</description>
+    <language>en-us</language>
+    <lastBuildDate>{format_rfc822(latest_date)}</lastBuildDate>
+    <atom:link href="{SITE_ORIGIN}/rss.xml" rel="self" type="application/rss+xml" />
+{chr(10).join(items)}
+  </channel>
+</rss>
+"""
+
+
 def main() -> int:
     articles = load_articles()
+    latest_date = max(a["updated_date"] for a in articles)
     style_text = (ROOT / "assets/style.css").read_text(encoding="utf-8")
 
-    # Clean stale category HTML directories before writing
     for cat in CATEGORIES:
         cat_dir = ROOT / cat
         cat_dir.mkdir(parents=True, exist_ok=True)
         (cat_dir / "index.html").write_text(build_category_page(cat, CATEGORIES[cat], articles), encoding="utf-8")
 
-    # Home
-    (ROOT / "index.html").write_text(build_home(articles), encoding="utf-8")
+    (ROOT / "index.html").write_text(build_home(articles, latest_date), encoding="utf-8")
 
-    # 18 Articles
     for article in articles:
         art_dir = ROOT / article["category"] / article["slug"]
         art_dir.mkdir(parents=True, exist_ok=True)
         (art_dir / "index.html").write_text(build_article_page(article, articles), encoding="utf-8")
 
-    # 5 Trust Pages
-    trust = build_trust_pages()
-    for slug, (title, desc, body) in trust.items():
+    trust = build_trust_pages(latest_date, len(articles))
+    for slug, (title, desc, body, ld) in trust.items():
         t_dir = ROOT / slug
         t_dir.mkdir(parents=True, exist_ok=True)
         html_doc = wrap_page(
@@ -609,13 +869,14 @@ def main() -> int:
             depth=1,
             body_html=body,
             active_rel=f"{slug}/",
+            og_image_rel="assets/images/og-home.webp",
+            json_ld=ld,
         )
         (t_dir / "index.html").write_text(html_doc, encoding="utf-8")
 
-    # Custom 404.html
-    (ROOT / "404.html").write_text(build_404(style_text), encoding="utf-8")
+    (ROOT / "404.html").write_text(build_404(style_text, articles), encoding="utf-8")
+    (ROOT / "rss.xml").write_text(build_rss(articles, latest_date), encoding="utf-8")
 
-    # Root support files
     (ROOT / ".nojekyll").write_text("", encoding="utf-8")
     (ROOT / "ads.txt").write_text("google.com, pub-8830524482034754, DIRECT, f08c47fec0942fa0\n", encoding="utf-8")
     (ROOT / "robots.txt").write_text(
@@ -630,17 +891,25 @@ def main() -> int:
             "category": a["category"],
             "category_label": CATEGORIES[a["category"]]["label"],
             "reading_minutes": a["reading_minutes"],
+            "published_date": a["published_date"],
             "summary": a["lead_summary"],
             "description": a["meta_description"],
         }
-        for a in articles
+        for a in sorted(articles, key=lambda x: (x["published_date"], x["slug"]), reverse=True)
     ]
     (ROOT / "search-index.json").write_text(json.dumps(search_index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    # Sitemap (27 canonical URLs)
-    urls = [""] + [f"{c}/" for c in CATEGORIES] + [f"{a['category']}/{a['slug']}/" for a in articles] + [f"{s}/" for s in trust]
+    url_entries: list[tuple[str, str]] = [("", latest_date)]
+    for c in CATEGORIES:
+        cat_latest = max(a["updated_date"] for a in articles if a["category"] == c)
+        url_entries.append((f"{c}/", cat_latest))
+    for a in articles:
+        url_entries.append((f"{a['category']}/{a['slug']}/", a["updated_date"]))
+    for s in trust:
+        url_entries.append((f"{s}/", latest_date))
+
     url_blocks = "\n".join(
-        f"  <url><loc>{SITE_ORIGIN}/{u}</loc><lastmod>{PUB_DATE}</lastmod></url>" for u in urls
+        f"  <url><loc>{SITE_ORIGIN}/{u}</loc><lastmod>{lm}</lastmod></url>" for u, lm in url_entries
     )
     sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -649,10 +918,10 @@ def main() -> int:
 """
     (ROOT / "sitemap.xml").write_text(sitemap_xml, encoding="utf-8")
     (ROOT / "README.md").write_text(
-        "# EMFLS Studio Journal\n\nStatic reference publication covering photography lighting, editorial design systems, and studio workflow craft.\n",
+        "# EMFLS Studio Journal\n\nIndependent static reference publication covering photography lighting, editorial design systems, and studio workflow craft.\n",
         encoding="utf-8",
     )
-    print(f"BUILT: 1 home + 3 categories + {len(articles)} articles + {len(trust)} trust pages = {len(urls)} canonical URLs (+ 404.html)")
+    print(f"BUILT: 1 home + 3 categories + {len(articles)} articles + {len(trust)} trust pages = {len(url_entries)} canonical URLs (+ 404.html & rss.xml)")
     return 0
 
 
