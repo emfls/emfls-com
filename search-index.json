@@ -1,5 +1,15 @@
 [
   {
+    "path": "studio/ground-loop-hum-audio-interface-isolation/",
+    "title": "Diagnosing Ground Loops, USB Isolators, and Balanced Line Interconnects in Desktop Audio",
+    "category": "studio",
+    "category_label": "Studio Workflow",
+    "reading_minutes": 10,
+    "published_date": "2026-11-24",
+    "summary": "Unwanted buzz and low-frequency hum in desktop studio monitors rarely stem from defective audio interfaces. Instead, multiple interconnected earth ground paths create closed loops that turn cable shields into induction antennas for mains current and high-frequency USB data packets. Converting unbalanced cables to balanced TRS interconnects and inserting galvanic digital isolation eliminate ground hum at the physical circuit level.",
+    "description": "Trace 50Hz and 60Hz mains hum, high-frequency USB packet buzz, and ground loop paths across studio monitors, USB audio interfaces, and balanced TRS lines."
+  },
+  {
     "path": "design/optical-alignment-icon-grid-metrics/",
     "title": "Optical Alignment, Bounding-Box Padding, and Visual Weight for System Icons",
     "category": "design",
