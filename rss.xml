@@ -5,8 +5,15 @@
     <link>https://www.emfls.com/</link>
     <description>Independent field guides covering photography lighting, editorial design systems, and studio workflow craft.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Nov 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 12:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.emfls.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CRI, TLCI, and TM-30 Metrics for Evaluating Continuous Studio LED Panels</title>
+      <link>https://www.emfls.com/lighting/color-rendering-index-cri-tlci-led-panels/</link>
+      <guid isPermaLink="true">https://www.emfls.com/lighting/color-rendering-index-cri-tlci-led-panels/</guid>
+      <pubDate>Wed, 25 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Evaluate continuous LED studio panels using CRI Ra, saturated red R9, television TLCI, and IES TM-30 color vector graphics to eliminate camera skin-tone shifts.</description>
+    </item>
     <item>
       <title>Diagnosing Ground Loops, USB Isolators, and Balanced Line Interconnects in Desktop Audio</title>
       <link>https://www.emfls.com/studio/ground-loop-hum-audio-interface-isolation/</link>

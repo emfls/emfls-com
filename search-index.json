@@ -1,5 +1,15 @@
 [
   {
+    "path": "lighting/color-rendering-index-cri-tlci-led-panels/",
+    "title": "CRI, TLCI, and TM-30 Metrics for Evaluating Continuous Studio LED Panels",
+    "category": "lighting",
+    "category_label": "Lighting & Optics",
+    "reading_minutes": 10,
+    "published_date": "2026-11-25",
+    "summary": "A continuous LED panel claiming a CRI of 95 can still render human skin tones sickly green or muddy orange on a digital camera sensor. Standard CRI averages only eight pastel color swatches, hiding severe deficiencies in deep saturated red (R9) and the notorious cyan gap at 480 nanometers. Auditing studio panels with TLCI and IES TM-30 fidelity and gamut vectors reveals true spectral accuracy before you hit record.",
+    "description": "Evaluate continuous LED studio panels using CRI Ra, saturated red R9, television TLCI, and IES TM-30 color vector graphics to eliminate camera skin-tone shifts."
+  },
+  {
     "path": "studio/ground-loop-hum-audio-interface-isolation/",
     "title": "Diagnosing Ground Loops, USB Isolators, and Balanced Line Interconnects in Desktop Audio",
     "category": "studio",
