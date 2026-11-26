@@ -5,8 +5,15 @@
     <link>https://www.emfls.com/</link>
     <description>Independent field guides covering photography lighting, editorial design systems, and studio workflow craft.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Nov 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2026 12:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.emfls.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion</title>
+      <link>https://www.emfls.com/design/variable-font-grade-dark-mode-optical-weight/</link>
+      <guid isPermaLink="true">https://www.emfls.com/design/variable-font-grade-dark-mode-optical-weight/</guid>
+      <pubDate>Thu, 26 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Use variable font Grade (GRAD) axes to eliminate optical irradiation in dark mode interfaces without altering letterform advance widths or triggering reflow.</description>
+    </item>
     <item>
       <title>CRI, TLCI, and TM-30 Metrics for Evaluating Continuous Studio LED Panels</title>
       <link>https://www.emfls.com/lighting/color-rendering-index-cri-tlci-led-panels/</link>

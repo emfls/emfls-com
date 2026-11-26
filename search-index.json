@@ -1,5 +1,15 @@
 [
   {
+    "path": "design/variable-font-grade-dark-mode-optical-weight/",
+    "title": "Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion",
+    "category": "design",
+    "category_label": "Design & Color",
+    "reading_minutes": 10,
+    "published_date": "2026-11-26",
+    "summary": "When light text is rendered on dark backgrounds, a well-documented optical phenomenon known as irradiation makes letterforms appear visibly heavier, bolder, and more crowded than identical glyphs on light backgrounds. Switching to a lighter font weight shifts character advance widths and triggers disruptive layout reflow. Variable font Grade (GRAD) axes solve this by trimming stroke thickness without moving a single letterform boundary.",
+    "description": "Use variable font Grade (GRAD) axes to eliminate optical irradiation in dark mode interfaces without altering letterform advance widths or triggering reflow."
+  },
+  {
     "path": "lighting/color-rendering-index-cri-tlci-led-panels/",
     "title": "CRI, TLCI, and TM-30 Metrics for Evaluating Continuous Studio LED Panels",
     "category": "lighting",
