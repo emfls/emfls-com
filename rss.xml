@@ -12,7 +12,7 @@
       <link>https://www.emfls.com/design/variable-font-grade-dark-mode-optical-weight/</link>
       <guid isPermaLink="true">https://www.emfls.com/design/variable-font-grade-dark-mode-optical-weight/</guid>
       <pubDate>Thu, 26 Nov 2026 12:00:00 +0000</pubDate>
-      <description>Use variable font Grade (GRAD) axes to eliminate optical irradiation in dark mode interfaces without altering letterform advance widths or triggering reflow.</description>
+      <description>Use the OpenType custom Grade (GRAD) axis in variable fonts like Roboto Flex to soften dark mode optical irradiation while keeping advance widths stable.</description>
     </item>
     <item>
       <title>CRI, TLCI, and TM-30 Metrics for Evaluating Continuous Studio LED Panels</title>
