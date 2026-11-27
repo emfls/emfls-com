@@ -5,8 +5,15 @@
     <link>https://www.emfls.com/</link>
     <description>Independent field guides covering photography lighting, editorial design systems, and studio workflow craft.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 26 Nov 2026 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2026 12:00:00 +0000</lastBuildDate>
     <atom:link href="https://www.emfls.com/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Routing AC Mains, DC Regulators, and High-Speed Signal Cables to Reduce Electromagnetic Interference</title>
+      <link>https://www.emfls.com/studio/cable-management-emi-separation-power-data/</link>
+      <guid isPermaLink="true">https://www.emfls.com/studio/cable-management-emi-separation-power-data/</guid>
+      <pubDate>Fri, 27 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Reduce studio interference with separate power and signal routes, 90-degree crossings, practical spacing, and a repeatable microphone-input noise test.</description>
+    </item>
     <item>
       <title>Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion</title>
       <link>https://www.emfls.com/design/variable-font-grade-dark-mode-optical-weight/</link>

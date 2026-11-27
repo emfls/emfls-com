@@ -1,5 +1,15 @@
 [
   {
+    "path": "studio/cable-management-emi-separation-power-data/",
+    "title": "Routing AC Mains, DC Regulators, and High-Speed Signal Cables to Reduce Electromagnetic Interference",
+    "category": "studio",
+    "category_label": "Studio Workflow",
+    "reading_minutes": 11,
+    "published_date": "2026-11-27",
+    "summary": "A shared cable sleeve makes a desk look tidy, but long parallel runs can let unshielded AC mains couple hum or buzz into nearby low-level analog cables. Run power and sensitive signals in separate paths. Where the paths must meet, crossing at 90 degrees minimizes mutual magnetic coupling compared with a long parallel run. Residual coupling still depends on the full loop area and the geometry of the current return paths.",
+    "description": "Reduce studio interference with separate power and signal routes, 90-degree crossings, practical spacing, and a repeatable microphone-input noise test."
+  },
+  {
     "path": "design/variable-font-grade-dark-mode-optical-weight/",
     "title": "Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion",
     "category": "design",
