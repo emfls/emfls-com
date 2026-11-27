@@ -55,7 +55,7 @@
         <div class="article-body">
           <p class="eyebrow">Typography, Color Spaces &amp; Vector Craft</p>
           <h1>Optical Alignment, Bounding-Box Padding, and Visual Weight for System Icons</h1>
-          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published <time datetime="2026-11-23">November 23, 2026</time> · 9 min read (1,680 words)</div>
+          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published <time datetime="2026-11-23">November 23, 2026</time> · 9 min read (2,159 words)</div>
           <figure class="hero-photo">
             <img src="../../assets/images/design-optical-alignment-icon-grid-metrics.webp" alt="Editorial studio photograph illustrating Optical Alignment, Bounding-Box Padding, and Visual Weight for System Icons" width="1200" height="800" loading="eager" decoding="async">
             <figcaption>Editorial visual reference for Optical Alignment, Bounding-Box Padding, and Visual Weight for System Icons. Technical floor geometry and worked values appear in the schematic and tables below.</figcaption>
@@ -212,20 +212,7 @@
 <li><strong>Display Scalability:</strong> Render the icon on standard 1x displays, 2x Retina screens, and low-resolution mobile devices. Confirm that vector paths snapped to 0.5px or 1.0px coordinates do not cause fuzzy anti-aliasing halos on non-integral boundaries.</li>
 </ul>
 
-<h2>Frequently Asked Questions About Icon Optical Metrics</h2>
-<div class="faq-section">
-<h3>Why does my vector export tool show uneven padding when optical alignment is applied?</h3>
-<p>When an icon is optically adjusted, its bounding box will no longer show identical numeric margins. For example, a play triangle may show 6.5px of left padding and 4.5px of right padding inside a 24px canvas. This asymmetry is completely normal and intentional. The bounding box measures physical pixel limits, while human vision perceives mass. Attempting to force numerical symmetry into the inspector panel negates the optical calibration.</p>
 
-<h3>Should optical adjustments be made inside the vector path or via CSS transforms?</h3>
-<p>Always bake optical adjustments directly into the vector SVG path data inside the master 24 × 24 coordinate space. If you attempt to compensate using CSS classes like <code>transform: translateX(1.5px)</code>, third-party consumers, native mobile applications (iOS Swift and Android Compose), and automated asset pipelines will fail to render the correction, leading to fragmented visual defects across platforms.</p>
-
-<h3>How do keylines apply to non-standard icon grid sizes like 16px or 32px?</h3>
-<p>Keylines scale proportionally across grid denominations. On a 16px grid, the target surface area is approximately 144 square pixels, with a 12 × 12 square keyline and a 13.6px diameter circular keyline. On a 32px grid, the target area scales to approximately 576 square pixels, with a 24 × 24 square keyline. The mathematical ratio between circle diameter and square width remains constant at approximately 1.13 to maintain identical optical volume.</p>
-
-<h3>Does subpixel rendering affect optical alignment on modern mobile screens?</h3>
-<p>Yes. On high-density screens (300+ PPI), the human eye rarely notices anti-aliasing blur on half-pixel coordinates. However, on desktop monitors running at 100% or 125% scaling, a path placed on a fractional pixel coordinate such as x = 11.5px can cause the vertical edge to span across two physical subpixel rows, resulting in noticeable edge softening. Where possible, tune icon coordinates to land on full integer grid units, or half-pixel units if strokes are positioned on center alignments.</p>
-</div>
           <section class="faq-section" aria-labelledby="faq-heading">
             <h2 id="faq-heading">Frequently Asked Questions</h2>
             <div class="faq-item">

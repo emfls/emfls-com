@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="../../assets/style.css">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion", "description": "Use the OpenType custom Grade (GRAD) axis in variable fonts like Roboto Flex to soften dark mode optical irradiation while keeping advance widths stable.", "image": "https://www.emfls.com/assets/images/design-variable-font-grade-dark-mode-optical-weight.webp", "datePublished": "2026-11-26", "dateModified": "2026-11-26", "author": {"@type": "Organization", "name": "EMFLS Editorial Desk", "url": "https://www.emfls.com/about/"}, "publisher": {"@type": "Organization", "name": "EMFLS Studio Journal", "url": "https://www.emfls.com/"}, "mainEntityOfPage": "https://www.emfls.com/design/variable-font-grade-dark-mode-optical-weight/"}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.emfls.com/"}, {"@type": "ListItem", "position": 2, "name": "Design & Color", "item": "https://www.emfls.com/design/"}, {"@type": "ListItem", "position": 3, "name": "Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion", "item": "https://www.emfls.com/design/variable-font-grade-dark-mode-optical-weight/"}]}</script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is GRAD a registered OpenType variation axis supported by Inter?", "acceptedAnswer": {"@type": "Answer", "text": "No. Under OpenType rules, uppercase tags like GRAD are custom (non-registered) axes. Standard Google Fonts Inter exposes only opsz and wght, so GRAD has no effect on Inter; use a verified GRAD-enabled font build such as Roboto Flex (-200 to 150) and verify the served asset retains the axis."}}, {"@type": "Question", "name": "What happens on fallback fonts or browsers without variable font support?", "acceptedAnswer": {"@type": "Answer", "text": "When a fallback font renders or a legacy browser lacks variable-font support, font-variation-settings is ignored and text renders at its standard CSS font-weight without broken layout, though fallback fonts do not receive dark-mode grade thinning."}}, {"@type": "Question", "name": "Can I use the Grade axis for hover accents without shifting navigation widths?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, when using a verified GRAD-capable typeface such as Roboto Flex. Applying a positive example grade like 'GRAD' 50 emphasizes strokes while keeping advance widths stable in that font; verify rendered widths in your target browser."}}, {"@type": "Question", "name": "Does font-variation-settings override standard font-weight on bold tags?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Declaring font-variation-settings overrides higher-level weight inheritance unless 'wght' is included. Bind both 'wght' and 'GRAD' to CSS custom properties so bold elements keep their intended weight."}}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is GRAD a registered OpenType variation axis supported by Inter?", "acceptedAnswer": {"@type": "Answer", "text": "No. Under OpenType rules, uppercase tags like GRAD are custom (non-registered) axes. Standard Google Fonts Inter exposes only opsz and wght, so GRAD has no effect on Inter; use a verified GRAD-enabled font build such as Roboto Flex (-200 to 150) and verify the served asset retains the axis."}}, {"@type": "Question", "name": "What happens on fallback fonts or browsers without variable font support?", "acceptedAnswer": {"@type": "Answer", "text": "If the selected font lacks GRAD, the browser ignores that axis alone and still applies any other supported axes in the same list. With this grade-only example, CSS continues to request 400 for body text and 700 for bold text, without grade compensation on that face. A browser that does not recognize font-variation-settings ignores the property and still uses font-weight."}}, {"@type": "Question", "name": "Can I use the Grade axis for hover accents without shifting navigation widths?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, when using a verified GRAD-capable typeface such as Roboto Flex. Applying a positive example grade like 'GRAD' 50 emphasizes strokes while keeping advance widths stable in that font; verify rendered widths in your target browser."}}, {"@type": "Question", "name": "Does font-variation-settings override standard font-weight on bold tags?", "acceptedAnswer": {"@type": "Answer", "text": "A supported 'wght' entry can override the weight used to render glyphs. If body resolves that entry to 'wght' 400, bold descendants inherit the computed list, even if they change the custom property that body used. Set only GRAD in font-variation-settings and use font-weight: 700 on strong and b to preserve bold. Font-style continues to control italic and oblique when the list sets only GRAD."}}]}</script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8830524482034754" crossorigin="anonymous"></script>
 </head>
 <body data-root="../../">
@@ -55,7 +55,7 @@
         <div class="article-body">
           <p class="eyebrow">Typography, Color Spaces &amp; Vector Craft</p>
           <h1>Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion</h1>
-          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published <time datetime="2026-11-26">November 26, 2026</time> · 10 min read (1,790 words)</div>
+          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published <time datetime="2026-11-26">November 26, 2026</time> · 10 min read (1,913 words)</div>
           <figure class="hero-photo">
             <img src="../../assets/images/design-variable-font-grade-dark-mode-optical-weight.webp" alt="Editorial studio photograph illustrating Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion" width="1200" height="800" loading="eager" decoding="async">
             <figcaption>Editorial visual reference for Variable Font Grade Axes: Counteracting Dark Mode Glow and Perceived Stroke Expansion. Technical floor geometry and worked values appear in the schematic and tables below.</figcaption>
@@ -170,9 +170,8 @@
 <h2>Calibrating Grade Axes in Production CSS (Using Roboto Flex)</h2>
 <p>Before writing CSS for <code>GRAD</code>, inspect your actual loaded font file's <code>fvar</code> table or official metadata to confirm the <code>GRAD</code> axis has not been stripped during subsetting. For example, official Google Fonts metadata for <strong>Roboto Flex</strong> exposes <code>GRAD</code> across <strong>-200 to 150</strong> (default <code>0</code>). By contrast, standard Google Fonts <strong>Inter</strong> exposes only <code>opsz</code> and <code>wght</code>—so declaring <code>font-variation-settings: 'GRAD' ...</code> on Inter has <em>no visual effect at all</em>. Never assume another typeface supports <code>GRAD</code> without inspecting the exact delivered WOFF2 asset first.</p>
 <p>In the Roboto Flex example below, <code>0</code> serves as the light-mode baseline and <code>-25</code> is an illustrative starting point for dark mode that teams should tune against their own display surfaces and contrast tokens (rather than treating <code>-25</code> as a universal constant):</p>
-<pre><code>/* Load a Roboto Flex build that explicitly retains the custom GRAD (-200..150) axis */
+<pre><code>/* Load Roboto Flex with GRAD (-200..150) and a font-weight range that covers 400–700. */
 :root {
-  --font-weight: 400;
   --font-grade: 0;
   --text-primary: #1e293b;
   --bg-primary: #f8fafc;
@@ -188,16 +187,17 @@
 
 body {
   font-family: 'Roboto Flex', system-ui, sans-serif;
-  font-weight: var(--font-weight);
-  font-variation-settings: 'wght' var(--font-weight), 'GRAD' var(--font-grade);
+  font-weight: 400;
+  font-variation-settings: 'GRAD' var(--font-grade);
   color: var(--text-primary);
   background-color: var(--bg-primary);
 }
 
 strong, b {
-  --font-weight: 700;
+  font-weight: 700;
 }</code></pre>
-<p>Notice two critical safeguards in that snippet: first, binding both <code>'wght'</code> and <code>'GRAD'</code> via custom properties prevents <code>font-variation-settings</code> from accidentally resetting bold child elements back to 400; second, if the webfont fails to load and the browser falls back to <code>system-ui</code> or <code>sans-serif</code>, <code>'GRAD'</code> is silently ignored and no stroke shift occurs on the fallback face. Pair these rules with our field guide on <a href="../modular-type-scale-readability/">modular type scales</a> to keep vertical rhythm consistent.</p>
+<p>The sample sets regular body text to <code>font-weight: 400</code> and <code>strong</code> and <code>b</code> to <code>font-weight: 700</code>. The inherited <code>font-variation-settings</code> list sets only <code>GRAD</code>, leaving weight and style to their own CSS properties. If the body sets <code>'wght'</code> with a custom property, descendants inherit the already-resolved value (for example, <code>'wght' 400</code>). Changing the custom property on a child leaves that computed list intact. On a face that supports <code>wght</code>, the inherited axis value takes precedence over <code>font-weight</code> when rendering the glyphs.</p>
+<p>When the selected font lacks <code>GRAD</code>, the browser ignores that axis alone. The declaration stays valid, and other supported axes in the same list still apply. With the grade-only list above, a fallback face without <code>GRAD</code> keeps its normal stroke grade, and CSS still requests the 400 and 700 weights. See <a href="https://www.w3.org/TR/css-fonts-4/#font-variation-settings-def">CSS Fonts Level 4, section 8.2</a> for unsupported axes and <a href="https://www.w3.org/TR/css-fonts-4/#feature-variation-precedence">section 7.2</a> for variation precedence. Pair these rules with our field guide on <a href="../modular-type-scale-readability/">modular type scales</a> to keep vertical rhythm consistent.</p>
 
 <h2>Verification Protocol: Confirming Visual Change and Metric Stability</h2>
 <p>Because browsers silently ignore unsupported variation axes, never ship a dark-mode <code>GRAD</code> rule on assumption alone. Run a four-step verification pass in your target browser build:</p>
@@ -216,20 +216,6 @@ strong, b {
 <li><strong>Elevated Dark Cards and Modals:</strong> Lighter slate surfaces (such as <code>#1e293b</code> or <code>#334155</code>) generate less halation than near-black canvases; step the negative grade back toward <code>0</code> so text does not become under-inked.</li>
 </ul>
 
-<h2>Frequently Asked Questions About Variable Font Grade</h2>
-<div class="faq-section">
-<h3>Is GRAD a registered OpenType variation axis supported by Inter?</h3>
-<p>No. Under the OpenType specification, uppercase tags like <code>GRAD</code> are custom (non-registered) axes rather than registered axes. Standard Google Fonts Inter exposes only <code>opsz</code> and <code>wght</code>, so applying <code>'GRAD'</code> to Inter produces no change. Use a verified <code>GRAD</code>-enabled asset such as Roboto Flex (range <code>-200</code> to <code>150</code>) and confirm the axis is preserved in the delivered font file.</p>
-
-<h3>What happens on fallback fonts or browsers without variable font support?</h3>
-<p>If a fallback system font loads instead of your <code>GRAD</code>-enabled webfont—or if a legacy browser does not support variable fonts—the <code>font-variation-settings</code> declaration is safely ignored. Text renders at the standard CSS <code>font-weight</code> without breaking layout, though fallback fonts do not receive the dark-mode stroke thinning.</p>
-
-<h3>Can I use the Grade axis for hover accents without shifting navigation widths?</h3>
-<p>Yes, provided the navigation uses a verified <code>GRAD</code>-capable typeface like Roboto Flex. Shifting from <code>'GRAD' 0</code> to a positive example value such as <code>'GRAD' 50</code> thickens stroke density for visual emphasis while keeping glyph advance widths stable inside that font—verify line widths in your target browser before shipping.</p>
-
-<h3>Does font-variation-settings override standard font-weight on bold tags?</h3>
-<p>Yes. Declaring <code>font-variation-settings</code> overrides higher-level CSS properties for any axes omitted from the string. Always pair <code>'wght' var(--font-weight)</code> alongside <code>'GRAD' var(--font-grade)</code> using CSS custom properties so <code>&lt;strong&gt;</code> and heading weights continue working properly.</p>
-</div>
 <h2>Integrating Grade with Automated Design Tokens and Build Pipelines</h2>
 <p>Modern design systems maintain central token files that compile into web, iOS, and Android variables. When adding custom Grade tokens, scope them strictly to the specific font family that owns that numerical scale—for example, <code>typography.robotoFlex.grade.light = 0</code> and <code>typography.robotoFlex.grade.dark = -25</code>—so engineers never apply one typeface's numeric grade range to an incompatible font family.</p>
 <p>When switching brand fonts during a redesign, add an automated CI check that inspects the target WOFF2 file's <code>fvar</code> table before shipping tokens referencing <code>GRAD</code>. If the new typeface lacks <code>GRAD</code>, fall back intentionally to calibrated off-white foreground colors that maintain WCAG AA contrast (&ge;4.5:1) rather than leaving silent no-op CSS rules in production.</p>
@@ -246,7 +232,7 @@ strong, b {
             </div>
             <div class="faq-item">
               <h3>What happens on fallback fonts or browsers without variable font support?</h3>
-              <p>When a fallback font renders or a legacy browser lacks variable-font support, font-variation-settings is ignored and text renders at its standard CSS font-weight without broken layout, though fallback fonts do not receive dark-mode grade thinning.</p>
+              <p>If the selected font lacks GRAD, the browser ignores that axis alone and still applies any other supported axes in the same list. With this grade-only example, CSS continues to request 400 for body text and 700 for bold text, without grade compensation on that face. A browser that does not recognize font-variation-settings ignores the property and still uses font-weight.</p>
             </div>
             <div class="faq-item">
               <h3>Can I use the Grade axis for hover accents without shifting navigation widths?</h3>
@@ -254,7 +240,7 @@ strong, b {
             </div>
             <div class="faq-item">
               <h3>Does font-variation-settings override standard font-weight on bold tags?</h3>
-              <p>Yes. Declaring font-variation-settings overrides higher-level weight inheritance unless &#x27;wght&#x27; is included. Bind both &#x27;wght&#x27; and &#x27;GRAD&#x27; to CSS custom properties so bold elements keep their intended weight.</p>
+              <p>A supported &#x27;wght&#x27; entry can override the weight used to render glyphs. If body resolves that entry to &#x27;wght&#x27; 400, bold descendants inherit the computed list, even if they change the custom property that body used. Set only GRAD in font-variation-settings and use font-weight: 700 on strong and b to preserve bold. Font-style continues to control italic and oblique when the list sets only GRAD.</p>
             </div>
           </section>
         </div>

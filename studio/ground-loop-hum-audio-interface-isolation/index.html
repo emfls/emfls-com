@@ -55,7 +55,7 @@
         <div class="article-body">
           <p class="eyebrow">Acoustics, Calibration &amp; Asset Architecture</p>
           <h1>Diagnosing Ground Loops, USB Isolators, and Balanced Line Interconnects in Desktop Audio</h1>
-          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published <time datetime="2026-11-24">November 24, 2026</time> · 10 min read (2,058 words)</div>
+          <div class="byline">By <strong>EMFLS Editorial Desk</strong> · Published <time datetime="2026-11-24">November 24, 2026</time> · 10 min read (1,951 words)</div>
           <figure class="hero-photo">
             <img src="../../assets/images/studio-ground-loop-hum-audio-interface-isolation.webp" alt="Editorial studio photograph illustrating Diagnosing Ground Loops, USB Isolators, and Balanced Line Interconnects in Desktop Audio" width="1200" height="800" loading="eager" decoding="async">
             <figcaption>Editorial visual reference for Diagnosing Ground Loops, USB Isolators, and Balanced Line Interconnects in Desktop Audio. Technical floor geometry and worked values appear in the schematic and tables below.</figcaption>
@@ -203,20 +203,6 @@
 <li><strong>Physical Separation:</strong> Keep unbalanced instrument and line cables physically separated from AC mains cables and computer power bricks. Where audio lines must cross power cables, route them at exact 90-degree right angles to minimize inductive electromagnetic coupling, a rule we also maintain in our workstation guidelines for <a href="../monitor-calibration-ambient-light/">studio monitor ambient calibration</a>.</li>
 </ul>
 
-<h2>Frequently Asked Questions About Desktop Studio Ground Loops</h2>
-<div class="faq-section">
-<h3>Can a power conditioner eliminate ground loop hum in my studio?</h3>
-<p>Generally, no. Standard rackmount power conditioners and surge protectors filter radio-frequency interference (RFI) and clamp voltage spikes on the AC line, but they do not isolate earth ground between connected devices. Because all equipment plugged into a power conditioner still shares a common copper ground bus, ground loops can circulate freely through audio cable shields. Resolving ground loops requires addressing the signal interconnection topology with balanced cables, audio transformers, or USB isolators rather than buying expensive power conditioners.</p>
-
-<h3>Why does the buzzing noise change pitch when I move my computer mouse?</h3>
-<p>Moving a mouse or scrolling a web page causes rapid CPU and GPU interrupt requests and power state transitions. The computer switched-mode power supply dynamically throttles current draw thousands of times per second. This rapid switching creates high-frequency voltage fluctuations along the motherboard ground plane. Because the USB cable shield connects directly to this ground plane, packet activity modulates onto the audio cable shield as audible chirping buzz.</p>
-
-<h3>Can I use TRS cables if my audio interface has balanced outputs but my monitors only have unbalanced inputs?</h3>
-<p>If your monitors only feature unbalanced RCA or TS inputs, using a standard TRS-to-TRS cable will not provide balanced common-mode rejection because the receiving amplifier is unbalanced. However, using a properly wired TRS-to-RCA cable (where the cold ring conductor is tied to the shield at the RCA end, or floating according to manufacturer guidelines) or inserting a passive direct box with an isolation transformer will break the ground loop and eliminate the noise.</p>
-
-<h3>Does optical digital audio (TOSLINK) suffer from ground loops?</h3>
-<p>No. Optical TOSLINK connections transmit digital audio signals purely via light pulses through plastic or glass optical fibers. Because there is zero electrical conductor between the transmitting and receiving equipment, optical connections provide 100% galvanic isolation, making ground loops physically impossible across that link.</p>
-</div>
 <section class="related-disciplines">
   <h2>Related Technical Disciplines and Studio Reference Guides</h2>
   <p>Studio electrical isolation and acoustic monitoring operate within a unified physical ecosystem. For complementary technical practices across our studio archives, explore our <a href="../../studio/small-room-acoustic-treatment/">small room acoustic treatment guide</a>, investigate our <a href="../../studio/microphone-distance-proximity-effect/">microphone proximity effect and distance techniques</a>, and review our <a href="../../design/whitespace-visual-hierarchy/">whitespace and visual hierarchy fundamentals</a>.</p>
